@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+/* ###### NavBarComponent ###### */
+.NavBarComponent {
+  /* border: solid; */
+  /* border-bottom: solid 1px #212529; */
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.96);
+  z-index: 2000;
+}
+
+/* ###### LogoComponent ####### */
+.LogoComponent {
+  border: solid 3px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  background-color: var(--btn-primary);
+  color: #ddd;
+  font-weight: 900;
+  box-shadow: var(--shadow-primary);
+  margin: auto 10px;
+  font-family: "Pacifico", cursive;
+}
+
+/* ###### NavLinkComponent ####### */
+.NavLinkComponent {
+  /* border: solid; */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ###### NavMenuComponent ###### */
+.NavMenuComponent {
+  position: relative;
+  display: flex;
+  /* flex-direction: column; */
+  /* border: solid; */
+  width: 300px;
+}
+.NavMenuComponent .dropdown-menu-ul {
+  top: 65px;
+  position: absolute;
+  right: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 10rem;
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: right;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 0 5px;
+}
+.NavMenuComponent .logout {
+  cursor: pointer;
+}
+
+/* ###### NavProfilePicture ###### */
+
+.NavProfilePicture,
+.ProfilePicture {
+  border: solid 2px;
+  display: inline-flex;
+  padding: 0px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  color: #ddd;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  margin: auto 3px;
+  margin-left: auto;
+}
+.ProfilePicture {
+  width: 40px;
+  height: 40px;
+}
+
+@media screen and (max-width: 324px) {
+  .NavBarComponent .button {
+    font-size: 0.8rem;
+  }
+}

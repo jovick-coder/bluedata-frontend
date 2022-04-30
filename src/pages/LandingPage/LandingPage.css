@@ -1,0 +1,489 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap");
+.LandingPage {
+  margin-top: 60px;
+  padding-top: 10px;
+}
+
+.business-section p {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #000000;
+}
+.business-section ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: space-evenly;
+  /* border: solid; */
+  max-width: 700px;
+  margin: 0 auto;
+}
+.business-section ul li {
+  /* border: solid; */
+  margin: 0 10px;
+  width: 150px;
+}
+.business-section ul li img {
+  /* border: solid; */
+  width: 100%;
+}
+
+@media screen and (max-width: 696px) {
+  .business-section ul {
+    flex-wrap: wrap;
+  }
+  .business-section ul li {
+    width: auto;
+  }
+}
+
+/*  */
+.Illustration-section {
+  position: relative;
+  /* border: solid; */
+  height: 350px;
+  /* margin-top: 50px; */
+}
+
+.Illustration-section .img-col,
+.Illustration-section .text-col {
+  position: absolute;
+  top: 30px;
+}
+
+.Illustration-section .text-col {
+  right: 0;
+  /* border: solid; */
+}
+.Illustration-section .img-col {
+  left: 0;
+  /* border: solid; */
+}
+.Illustration-section .img-col img {
+  width: 100%;
+}
+
+.text-col p,
+.form-col p {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  /* identical to box height */
+
+  text-transform: uppercase;
+
+  /* Pallet 4 / Primary */
+
+  color: #3734a9;
+}
+
+.text-col h1 {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  /* line-height: 56px; */
+  /* or 112% */
+
+  /* letter-spacing: -0.03em; */
+
+  color: #000000;
+}
+.text-col span {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  /* or 144% */
+
+  letter-spacing: -0.02em;
+
+  color: #757095;
+}
+
+/*  */
+
+.form-section {
+  padding: 30px;
+  background: #f3f7fa;
+  border-radius: 20px;
+  /* border: solid; */
+  display: flex;
+}
+.form-col {
+  display: flex;
+  /* border: solid; */
+  flex-direction: column;
+}
+.form-col .form-div {
+  margin: auto;
+  /* border: solid; */
+}
+.form-section .form-div input,
+.form-section .form-div button {
+  margin: 10px 0;
+}
+
+/*  */
+
+.Loyal-Customers-section {
+  position: relative;
+  /* border: solid; */
+  height: 350px;
+  /* margin-top: 50px; */
+}
+
+.Loyal-Customers-section .img-col,
+.Loyal-Customers-section .text-col {
+  position: absolute;
+  top: 30px;
+}
+
+.Loyal-Customers-section .img-col {
+  right: 0;
+  /* border: solid; */
+}
+.Loyal-Customers-section .text-col {
+  left: 0;
+  /* border: solid; */
+}
+.Loyal-Customers-section .img-col img {
+  width: 100%;
+}
+
+/* dfghjkdsxzjksaadxasbnjsx */
+/*  */
+.clients-section {
+  position: relative;
+  /* border: solid; */
+  height: 500px;
+  /* margin-top: 50px; */
+}
+
+.clients-section .img-col,
+.clients-section .text-col {
+  position: absolute;
+  top: 30px;
+}
+
+.clients-section .text-col {
+  right: 0;
+  /* border: solid; */
+}
+.clients-section .img-col {
+  left: 0;
+  /* border: solid; */
+}
+.clients-section .img-col img {
+  width: 100%;
+}
+
+.clients-section .name {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 30px;
+  /* identical to box height, or 188% */
+
+  letter-spacing: -0.03em;
+
+  color: #000000;
+}
+.clients-section .org {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  /* identical to box height, or 171% */
+
+  letter-spacing: -0.02em;
+
+  color: #757095;
+}
+/*  */
+
+.residence {
+  background: #ffffff;
+  /* Pallet 1 / Grey */
+
+  border: 1px solid #dee1e6;
+  box-sizing: border-box;
+  box-shadow: 0px 24px 34px rgba(0, 0, 0, 0.03);
+  border-radius: 15px;
+  padding: 20px;
+}
+.residence span {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 32px;
+  /* or 145% */
+
+  letter-spacing: -0.02em;
+
+  color: #757095;
+}
+
+/*  */
+.payments-section {
+  position: relative;
+  /* border: solid; */
+  height: 470px;
+  overflow: hidden;
+  /* margin-top: 50px; */
+}
+
+.payments-section .img-col,
+.payments-section .text-col {
+  position: absolute;
+  top: 30px;
+}
+
+.payments-section .text-col {
+  left: 0;
+  height: 100%;
+  /* border: solid; */
+}
+.payments-section .img-col {
+  right: 0;
+  /* border: solid; */
+}
+.payments-section .img-col img {
+  width: 100%;
+  /* border: solid; */
+}
+/*  */
+
+.why-us {
+  background-color: #f3f7fa;
+  /* border: solid; */
+  padding: 10px 20px;
+  border-radius: 20px;
+  position: relative;
+}
+.mark {
+  position: absolute;
+  top: -50px;
+}
+
+.why-us .wy-card p {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 33px;
+  /* identical to box height */
+
+  color: #000000;
+}
+.why-us span {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  /* line-height: 30px; */
+  /* or 167% */
+
+  /* letter-spacing: -0.02em; */
+
+  color: #757095;
+}
+.why-us .wy-card {
+  border-radius: 20px;
+  background-color: #fff;
+  /* bor */
+  margin: 20px;
+  padding: 20px;
+}
+
+.round-ball {
+  /* position: absolute; */
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+
+  background: #d9f1fd;
+  margin-right: 5px;
+}
+/*  */
+.contact-us-section {
+  background-color: #3734a9;
+}
+.contact-us-section p,
+.contact-us-section span,
+.contact-us-section h1 {
+  color: #ffffff !important;
+}
+.form-col {
+  display: flex;
+  /* border: solid; */
+  flex-direction: column;
+}
+.form-col .form-div {
+  margin: auto;
+  /* border: solid; */
+}
+.contact-us-section .form-div input {
+  background-color: rgba(242, 243, 244, 1);
+}
+.contact-us-section .form-div input,
+.contact-us-section .form-div button {
+  margin: 10px 0;
+}
+
+/*  */
+.FooterComponent {
+  background-color: #1b1c31;
+  color: #d9f1fd;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.footer-container .about {
+  width: 40%;
+  min-width: 300px;
+}
+
+/*  */
+
+@media screen and (max-width: 767px) {
+  .Loyal-Customers-section,
+  .Illustration-section,
+  .clients-section,
+  .payments-section {
+    height: auto;
+  }
+  .Loyal-Customers-section .img-col,
+  .Loyal-Customers-section .text-col,
+  .Illustration-section .img-col,
+  .Illustration-section .text-col,
+  .clients-section .img-col,
+  .clients-section .text-col,
+  .payments-section .img-col,
+  .payments-section .text-col {
+    position: static;
+    top: 30px;
+  }
+  .LandingPage .text-col h1 {
+    font-size: 30px;
+  }
+  .LandingPage .text-col p {
+    font-size: 18px;
+  }
+  .LandingPage .text-col span {
+    font-size: 15px;
+  }
+  /*  */
+  .residence {
+    border-radius: 15px;
+    padding: 10px 0;
+    flex-direction: column;
+  }
+  .residence .text-col,
+  .residence .btn-div {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .residence .btn-div button {
+    margin: 0 auto;
+  }
+  .residence span {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 32px;
+    /* or 145% */
+
+    letter-spacing: -0.02em;
+
+    color: #757095;
+    /* border: solid; */
+  }
+
+  /*  */
+  .why-us {
+    background-color: #f3f7fa;
+    /* border: solid; */
+    padding: 5px;
+    border-radius: 20px;
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+  }
+  .mark {
+    position: absolute;
+    top: -50px;
+    display: none;
+  }
+
+  .why-us .wy-card p {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    color: #000000;
+  }
+  .why-us span {
+    font-family: "Manrope";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    /* line-height: 30px; */
+    /* or 167% */
+
+    /* letter-spacing: -0.02em; */
+
+    color: #757095;
+  }
+  .why-us .wy-card {
+    border-radius: 20px;
+    background-color: #fff;
+    /* bor */
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .round-ball {
+    /* position: absolute; */
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: #d9f1fd;
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .LandingPage.container-lg {
+    padding: 0 !important;
+  }
+  .LandingPage .text-col,
+  .Illustration-section .text-col {
+    text-align: center;
+  }
+  .LandingPage .text-col h1 {
+    font-size: 25px;
+  }
+}

@@ -1,0 +1,166 @@
+.HeroSectionComponent {
+  position: relative;
+  /* border: solid; */
+  height: 380px;
+}
+.HeroSectionComponent .image-col,
+.HeroSectionComponent .text-col {
+  position: absolute;
+  top: 30px;
+}
+.HeroSectionComponent .image-col {
+  right: 25px;
+}
+.HeroSectionComponent .text-col {
+  left: 80px;
+  /* top: 60px; */
+}
+.HeroSectionComponent .image-col img {
+  width: 100%;
+  /* border: solid; */
+}
+
+.HeroSectionComponent .text-col h1,
+.HeroSectionComponent .text-col p {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  color: #000000;
+}
+.HeroSectionComponent .text-col h1 {
+  font-weight: 800;
+  font-size: 40px;
+  color: #000000;
+}
+.HeroSectionComponent .text-col p {
+  font-weight: 400;
+  font-size: 20px;
+  color: #64607d;
+  padding-right: 30px;
+}
+
+@media screen and (min-width: 1195px) {
+  .HeroSectionComponent {
+    border: solid;
+  }
+  .HeroSectionComponent .image-col img {
+    width: 80%;
+    /* max-width: 500px; */
+    /* border: solid; */
+  }
+  .HeroSectionComponent .image-col,
+  .HeroSectionComponent .text-col {
+    top: 20px;
+  }
+  .HeroSectionComponent .text-col {
+    left: 80px;
+    top: 60px;
+    border: solid;
+    max-width: 700px;
+    padding-right: 30px;
+  }
+}
+@media screen and (max-width: 931px) {
+  /* .HeroSectionComponent {
+    border: solid red;
+  } */
+  .HeroSectionComponent .text-col {
+    left: 50px;
+  }
+  .HeroSectionComponent .text-col h1 {
+    font-weight: 800;
+    font-size: 30px;
+    color: #000000;
+  }
+  .HeroSectionComponent .image-col {
+    right: 10px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .HeroSectionComponent {
+    /* border: solid red; */
+    /* display: flex;
+    flex-direction: row;*/
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .HeroSectionComponent .text-col {
+    position: static;
+    left: 50px;
+    z-index: 1;
+    background-color: rgba(221, 221, 221, 0.371);
+    width: 400px;
+    border-radius: 0 100px 0 0;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    height: 280px;
+    padding: 10px;
+  }
+  .HeroSectionComponent .text-col h1 {
+    font-weight: 800;
+    font-size: 25px;
+    color: #000000;
+  }
+  .HeroSectionComponent .text-col p {
+    /* font-weight: 800; */
+    font-size: 18px;
+    /* color: #000000; */
+  }
+  .HeroSectionComponent .image-col {
+    /* position: static; */
+    /* right: 10px; */
+    width: 550px;
+    top: 0;
+    right: -66px;
+    /* border: solid; */
+    /* display: none; */
+    z-index: 0;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .HeroSectionComponent .image-col img {
+    width: 500px;
+    margin-top: 30px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .HeroSectionComponent {
+    /* border: solid red; */
+    height: auto;
+    overflow: hidden;
+  }
+  /* .HeroSectionComponent .text-col h1 {
+    font-size: 25px;
+  }
+  .HeroSectionComponent .text-col p {
+    font-size: 18px;
+  } */
+  .HeroSectionComponent .text-col {
+    margin: 0 auto;
+    border-radius: 0;
+    margin-top: 20px;
+    width: 500px;
+    height: 400px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .HeroSectionComponent .image-col {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    /* border: solid; */
+    z-index: 0;
+    overflow: visible;
+    height: 400px;
+    /* border: saddlebrown solid; */
+  }
+  .HeroSectionComponent .image-col img {
+    position: absolute;
+    right: -245px;
+    /* border: solid; */
+    width: 666px;
+  }
+}
