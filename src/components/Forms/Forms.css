@@ -1,0 +1,4 @@
+.SignInForm .btn {
+  background-color: var(--btn-primary);
+  color: #fff;
+}

@@ -3,13 +3,17 @@ import "./NavBarComponent.css";
 import profilePicture from "../../assets/images/profilePicture.jpg";
 import { BsCaretDownFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import { SignInForm } from "../Forms/FormsComponent";
 
 function NavBarComponent({ isLoggedIn, setIsLoggedIn }) {
   function handelLogin() {
     // confirm("Logout?") navigate("/");
     // window.confirm("login?") && setIsLoggedIn(true);
+
     window.document.querySelector(".LoginComponent").style.border = "solid red";
   }
+  const [loginCardIsOpen, setLoginCardIsOpen] = useState(false);
+  const [signInCardIsOpen, setSignInCardIsOpen] = useState(false);
   return (
     <div className="NavBarComponent">
       <div className="container mx-auto d-flex justify-content-between ">
@@ -17,7 +21,7 @@ function NavBarComponent({ isLoggedIn, setIsLoggedIn }) {
         {isLoggedIn ? (
           <NavMenuComponent setIsLoggedIn={setIsLoggedIn} />
         ) : (
-          <div className="d-flex">
+          <div className="d-flex drop-down-div">
             {/* <Link className="my-auto mx-3" to="/">
               Home
             </Link>
@@ -26,16 +30,49 @@ function NavBarComponent({ isLoggedIn, setIsLoggedIn }) {
             </Link> */}
             <button
               className="button my-auto mx-3"
-              onClick={() => handelLogin()}
+              // onClick={() => handelLogin()}
+              onClick={() => {
+                if (signInCardIsOpen) {
+                  setSignInCardIsOpen(false);
+                }
+                setLoginCardIsOpen(!loginCardIsOpen);
+              }}
             >
               Sign in
             </button>
             <button
               className="button my-auto mx-3"
-              onClick={() => handelLogin()}
+              onClick={() => {
+                if (loginCardIsOpen) {
+                  setLoginCardIsOpen(false);
+                }
+
+                setSignInCardIsOpen(!signInCardIsOpen);
+              }}
             >
               Sign up
             </button>
+
+            <div
+              className={`drop-down-card `}
+              style={
+                !signInCardIsOpen
+                  ? { width: "0", height: 0, border: "none" }
+                  : null
+              }
+            >
+              <SignInForm />
+            </div>
+            <div
+              className={`drop-down-card `}
+              style={
+                !loginCardIsOpen
+                  ? { width: "0", height: 0, border: "none" }
+                  : null
+              }
+            >
+              Sign Up
+            </div>
           </div>
         )}
       </div>

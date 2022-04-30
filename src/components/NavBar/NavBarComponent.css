@@ -10,6 +10,35 @@
   z-index: 2000;
 }
 
+.drop-down-div {
+  position: relative;
+  /* border: solid; */
+}
+.drop-down-div .drop-down-card {
+  position: absolute;
+  border: solid rgba(221, 221, 221, 0.426);
+  top: 60px;
+  right: 0;
+  box-shadow: var(--shadow-primary);
+  background-color: #fff;
+  width: 300px;
+  height: 300px;
+  border-radius: 50px 0;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  /* width: 0; */
+  /* visibility: hidden; */
+  overflow: hidden;
+  /* border: none; */
+  padding: 0 20px;
+  transition: all ease-in 0.4s;
+  border: solid;
+}
+.drop-down-card .LogoComponent {
+  margin: 10px 98px;
+}
+
 /* ###### LogoComponent ####### */
 .LogoComponent {
   border: solid 3px;

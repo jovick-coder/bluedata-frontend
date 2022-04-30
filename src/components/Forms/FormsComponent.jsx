@@ -1,5 +1,8 @@
 import React from "react";
+import { LogoComponent } from "../NavBar/NavBarComponent";
 // import MojoAuth from "mojoauth-web-sdk";
+
+import "./Forms.css";
 function Forms() {
   // const [payload, setPayload] = React.useState(null);
   // {
@@ -120,5 +123,16 @@ export function LoginForm() {
         </button>
       </form>
     </>
+  );
+}
+
+export function SignInForm() {
+  return (
+    <div className="SignInForm">
+      <LogoComponent />
+      <h2 className="text-center fs-4">Welcome to Telecom Merchant</h2>
+      <input type="text" className="form-control my-3" placeholder="Email" />
+      <button className="btn w-100">Sign in without password</button>
+    </div>
   );
 }
