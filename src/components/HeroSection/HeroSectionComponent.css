@@ -42,7 +42,7 @@
 
 @media screen and (min-width: 1195px) {
   .HeroSectionComponent {
-    border: solid;
+    /* border: solid; */
   }
   .HeroSectionComponent .image-col img {
     width: 80%;
@@ -56,7 +56,7 @@
   .HeroSectionComponent .text-col {
     left: 80px;
     top: 60px;
-    border: solid;
+    /* border: solid; */
     max-width: 700px;
     padding-right: 30px;
   }
