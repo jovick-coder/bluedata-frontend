@@ -2,10 +2,17 @@
   --btn-primary: #14b8dc;
   --shadow-primary: 0px 16px 50px 0px rgba(0, 0, 0, 0.1),
     0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --color-secondary: #f3f7fa;
+  --color-transparent: rgba(221, 221, 221, 0.371);
+  --color-dark: #1b1c31;
+  --color-primary: #fff;
+  --color-blue: #3734a9;
+  --text-color-primary: #000000;
+  --text-color-light: #757095;
 }
 .button {
-  background: var(--btn-primary);
-  color: #ffffff;
+  background-color: var(--btn-primary);
+  color: var(--color-primary);
   box-shadow: var(--shadow-primary);
   display: inline-block;
   font-weight: 400;

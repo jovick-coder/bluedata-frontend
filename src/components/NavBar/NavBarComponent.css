@@ -6,7 +6,8 @@
   width: 100%;
   position: fixed;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.96);
+  /* background-color: rgba(255, 255, 255, 0.96); */
+  background-color: var(--color-transparent);
   z-index: 2000;
 }
 
@@ -20,7 +21,8 @@
   top: 60px;
   right: 0;
   box-shadow: var(--shadow-primary);
-  background-color: #fff;
+  /* background-  color: var(--color-primary); */
+  background-color: var(--color-secondary);
   width: 300px;
   height: 300px;
   border-radius: 50px 0;
@@ -33,10 +35,10 @@
   /* border: none; */
   padding: 0 20px;
   transition: all ease-in 0.4s;
-  border: solid;
+  /* border: solid; */
 }
 .drop-down-card .LogoComponent {
-  margin: 10px 98px;
+  margin: 10px auto;
 }
 
 /* ###### LogoComponent ####### */
@@ -86,7 +88,7 @@
   color: #212529;
   text-align: right;
   list-style: none;
-  background-color: #fff;
+  background-color: var(--color-secondary);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0 0 0 5px;

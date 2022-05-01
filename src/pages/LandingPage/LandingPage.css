@@ -2,11 +2,11 @@
 .LandingPage {
   margin-top: 60px;
   padding-top: 10px;
+  font-family: "Manrope";
+  font-style: normal;
 }
 
 .business-section p {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 400;
   font-size: 22px;
   line-height: 30px;
@@ -14,7 +14,7 @@
 
   text-align: center;
 
-  color: #000000;
+  color: var(--text-color-primary);
 }
 .business-section ul {
   display: flex;
@@ -73,8 +73,6 @@
 
 .text-col p,
 .form-col p {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 800;
   font-size: 18px;
   line-height: 25px;
@@ -84,12 +82,10 @@
 
   /* Pallet 4 / Primary */
 
-  color: #3734a9;
+  color: var(--color-blue);
 }
 
 .text-col h1 {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 700;
   font-size: 40px;
   /* line-height: 56px; */
@@ -97,11 +93,9 @@
 
   /* letter-spacing: -0.03em; */
 
-  color: #000000;
+  color: var(--text-color-primary);
 }
 .text-col span {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
@@ -109,14 +103,14 @@
 
   letter-spacing: -0.02em;
 
-  color: #757095;
+  color: var(--text-color-light);
 }
 
 /*  */
 
 .form-section {
   padding: 30px;
-  background: #f3f7fa;
+  background: var(--color-secondary);
   border-radius: 20px;
   /* border: solid; */
   display: flex;
@@ -133,6 +127,10 @@
 .form-section .form-div input,
 .form-section .form-div button {
   margin: 10px 0;
+}
+
+.form-col .LogoComponent {
+  margin: 10px auto;
 }
 
 /*  */
@@ -190,8 +188,6 @@
 }
 
 .clients-section .name {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 800;
   font-size: 16px;
   line-height: 30px;
@@ -199,11 +195,9 @@
 
   letter-spacing: -0.03em;
 
-  color: #000000;
+  color: var(--text-color-primary);
 }
 .clients-section .org {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
@@ -211,7 +205,7 @@
 
   letter-spacing: -0.02em;
 
-  color: #757095;
+  color: var(--text-color-light);
 }
 /*  */
 
@@ -226,8 +220,6 @@
   padding: 20px;
 }
 .residence span {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 400;
   font-size: 22px;
   line-height: 32px;
@@ -235,7 +227,7 @@
 
   letter-spacing: -0.02em;
 
-  color: #757095;
+  color: var(--text-color-light);
 }
 
 /*  */
@@ -269,7 +261,7 @@
 /*  */
 
 .why-us {
-  background-color: #f3f7fa;
+  background-color: var(--color-secondary);
   /* border: solid; */
   padding: 10px 20px;
   border-radius: 20px;
@@ -281,18 +273,14 @@
 }
 
 .why-us .wy-card p {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 800;
   font-size: 24px;
   line-height: 33px;
   /* identical to box height */
 
-  color: #000000;
+  color: var(--text-color-primary);
 }
 .why-us span {
-  font-family: "Manrope";
-  font-style: normal;
   font-weight: 400;
   font-size: 18px;
   /* line-height: 30px; */
@@ -300,11 +288,11 @@
 
   /* letter-spacing: -0.02em; */
 
-  color: #757095;
+  color: var(--text-color-light);
 }
 .why-us .wy-card {
   border-radius: 20px;
-  background-color: #fff;
+  background-color: var(--color-primary);
   /* bor */
   margin: 20px;
   padding: 20px;
@@ -322,12 +310,12 @@
 }
 /*  */
 .contact-us-section {
-  background-color: #3734a9;
+  background-color: var(--color-blue);
 }
 .contact-us-section p,
 .contact-us-section span,
 .contact-us-section h1 {
-  color: #ffffff !important;
+  color: var(--color-primary);
 }
 .form-col {
   display: flex;
@@ -338,9 +326,9 @@
   margin: auto;
   /* border: solid; */
 }
-.contact-us-section .form-div input {
+/* .contact-us-section .form-div input {
   background-color: rgba(242, 243, 244, 1);
-}
+} */
 .contact-us-section .form-div input,
 .contact-us-section .form-div button {
   margin: 10px 0;
@@ -348,8 +336,9 @@
 
 /*  */
 .FooterComponent {
-  background-color: #1b1c31;
+  background-color: var(--color-dark);
   color: #d9f1fd;
+  /* color: var(--text-color-light); */
 }
 .footer-container {
   display: flex;
@@ -404,75 +393,21 @@
   .residence .btn-div button {
     margin: 0 auto;
   }
-  .residence span {
-    font-family: "Manrope";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 32px;
-    /* or 145% */
-
-    letter-spacing: -0.02em;
-
-    color: #757095;
-    /* border: solid; */
-  }
 
   /*  */
+
   .why-us {
-    background-color: #f3f7fa;
-    /* border: solid; */
     padding: 5px;
-    border-radius: 20px;
-    position: relative;
     margin-top: 30px;
     width: 100%;
   }
   .mark {
-    position: absolute;
-    top: -50px;
     display: none;
   }
 
-  .why-us .wy-card p {
-    font-family: "Manrope";
-    font-style: normal;
-    font-weight: 800;
-    font-size: 24px;
-    line-height: 33px;
-    /* identical to box height */
-
-    color: #000000;
-  }
-  .why-us span {
-    font-family: "Manrope";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    /* line-height: 30px; */
-    /* or 167% */
-
-    /* letter-spacing: -0.02em; */
-
-    color: #757095;
-  }
   .why-us .wy-card {
-    border-radius: 20px;
-    background-color: #fff;
-    /* bor */
     margin: 5px;
     padding: 10px;
-  }
-
-  .round-ball {
-    /* position: absolute; */
-    width: 58px;
-    height: 58px;
-
-    border-radius: 50%;
-
-    background: #d9f1fd;
-    margin-right: 5px;
   }
 }
 @media screen and (max-width: 425px) {

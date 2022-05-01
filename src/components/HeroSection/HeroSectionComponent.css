@@ -24,19 +24,17 @@
 .HeroSectionComponent .text-col p {
   font-family: "Manrope";
   font-style: normal;
-  font-weight: 800;
-  font-size: 40px;
-  color: #000000;
 }
 .HeroSectionComponent .text-col h1 {
   font-weight: 800;
   font-size: 40px;
-  color: #000000;
+  color: var(--text-color-primary);
 }
 .HeroSectionComponent .text-col p {
   font-weight: 400;
   font-size: 20px;
-  color: #64607d;
+  /* color: #64607d; */
+  color: var(--text-color-light);
   padding-right: 30px;
 }
 
@@ -71,7 +69,6 @@
   .HeroSectionComponent .text-col h1 {
     font-weight: 800;
     font-size: 30px;
-    color: #000000;
   }
   .HeroSectionComponent .image-col {
     right: 10px;
@@ -89,7 +86,7 @@
     position: static;
     left: 50px;
     z-index: 1;
-    background-color: rgba(221, 221, 221, 0.371);
+    background-color: var(--color-transparent);
     width: 400px;
     border-radius: 0 100px 0 0;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
@@ -99,12 +96,11 @@
   .HeroSectionComponent .text-col h1 {
     font-weight: 800;
     font-size: 25px;
-    color: #000000;
   }
   .HeroSectionComponent .text-col p {
     /* font-weight: 800; */
     font-size: 18px;
-    /* color: #000000; */
+    /* color: var(--text-color-primary) */
   }
   .HeroSectionComponent .image-col {
     /* position: static; */

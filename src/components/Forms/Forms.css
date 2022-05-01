@@ -1,4 +1,8 @@
+.SignInForm {
+  display: flex;
+  flex-direction: column;
+}
 .SignInForm .btn {
   background-color: var(--btn-primary);
-  color: #fff;
+  color: var(--color-primary);
 }
