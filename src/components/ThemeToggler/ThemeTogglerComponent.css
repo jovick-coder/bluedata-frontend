@@ -1,0 +1,26 @@
+.toggle-theme {
+  position: fixed;
+  right: 0;
+  top: 80px;
+  z-index: 3;
+  color: var(--text-color-primary);
+  background-color: var(--color-secondary);
+  border-radius: 30px 0 0 30px;
+  padding: 5px 3px 5px 10px;
+  border: var(--text-color) solid;
+  box-shadow: 1px 1px 5px black;
+}
+
+.toggle-theme:hover {
+  width: 100px;
+  display: flex;
+  align-items: center;
+}
+.toggle-theme:hover::after {
+  content: " Night";
+  padding-left: 3px;
+}
+
+[data-theme="dark"] .toggle-theme:hover::after {
+  content: "Day";
+}

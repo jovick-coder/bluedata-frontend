@@ -210,7 +210,7 @@
 /*  */
 
 .residence {
-  background: #ffffff;
+  background: var(--color-secondary);
   /* Pallet 1 / Grey */
 
   border: 1px solid #dee1e6;

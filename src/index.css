@@ -1,4 +1,5 @@
 :root {
+  --background: #ffffff;
   --btn-primary: #14b8dc;
   --shadow-primary: 0px 16px 50px 0px rgba(0, 0, 0, 0.1),
     0px 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -9,6 +10,19 @@
   --color-blue: #3734a9;
   --text-color-primary: #000000;
   --text-color-light: #757095;
+}
+[data-theme="dark"] {
+  --background: #000000;
+  /* --btn-primary: #66d8f2; */
+  --shadow-primary: 1px 1px 2px -5px rgb(255, 255, 255);
+  /* 0px 10px 15px -3px rgba(255, 243, 243, 0.282); */
+  --color-secondary: #2f494f;
+  --color-transparent: rgba(221, 221, 221, 0.371);
+  --color-dark: #1b1c31;
+  --color-primary: rgb(10, 10, 10);
+  --color-blue: #08064b;
+  --text-color-primary: #e1e1e1;
+  --text-color-light: #bdbdbd;
 }
 .button {
   background-color: var(--btn-primary);
