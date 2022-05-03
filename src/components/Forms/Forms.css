@@ -4,5 +4,8 @@
 }
 .SignInForm .btn {
   background-color: var(--btn-primary);
-  color: var(--color-primary);
+  color: var(--btn-color-primary);
+}
+.SignInForm h2 {
+  color: var(--text-color-light);
 }
