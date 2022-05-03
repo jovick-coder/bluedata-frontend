@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeroSectionComponent from "../../components/HeroSection/HeroSectionComponent";
 import "./LandingPage.css";
 import businessImage from "../../assets/images/business-logos/Group.svg";
@@ -19,8 +19,14 @@ import {
   LoginForm,
   SignInForm,
 } from "../../components/Forms/FormsComponent";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function LandingPage() {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
   return (
     <>
       {" "}
@@ -35,18 +41,18 @@ function LandingPage() {
         </div>
 
         <div className="row Illustration-section mt-5">
-          <div className="col-md-6 img-col">
+          <div className="col-md-6 img-col" data-aos="fade-right">
             <img src={Illustration} alt="" />
           </div>
-          <div className="col-md-6 text-col">
+          <div className="col-md-6 text-col" data-aos="fade-left">
             <p>Our Feature </p>
             <h1>Safe Payment Swift Payment Easy Accesibility Affordable </h1>
             <button className="button ">Get Started</button>
           </div>
         </div>
 
-        <div className="row form-section mt-5">
-          <div className="col-md-6 text-col">
+        <div className="row form-section mt-5" data-aos="fade-up">
+          <div className="col-md-6 text-col" data-aos="zoom-in">
             <p>Our Feature </p>
             <h1>Make payments quickly from anywhere</h1>
             <span>
@@ -55,7 +61,7 @@ function LandingPage() {
               tended active enable to.
             </span>
           </div>
-          <div className="col-md-6 form-col">
+          <div className="col-md-6 form-col" data-aos="zoom-in">
             <div className="form-div">
               {/* <p>Get Started for Free </p>
               <form action="">
@@ -84,7 +90,7 @@ function LandingPage() {
         </div>
 
         <div className="row Loyal-Customers-section mt-5">
-          <div className="col-md-6 text-col">
+          <div className="col-md-6 text-col" data-aos="fade-right">
             <p>Our Feature </p>
             <h1>All payments are possible with your favorite web browser. </h1>
             <span>
@@ -95,20 +101,20 @@ function LandingPage() {
             <br />
             <button className="button ">Get Started</button>
           </div>
-          <div className="col-md-6 img-col">
+          <div className="col-md-6 img-col" data-aos="fade-left">
             <img src={cards} alt="" />
           </div>
         </div>
 
         <div className="row clients-section mt-5">
-          <div className="col-md-6 img-col">
+          <div className="col-md-6 img-col" data-aos="fade-right">
             <div className="">
               <p>Testimonials</p>
               <h1>Check what our clients are saying</h1>
             </div>
             <img src={clients} alt="" />
           </div>
-          <div className="col-md-6 text-col">
+          <div className="col-md-6 text-col" data-aos="zoom-in">
             <img src={top} alt="" />
             {/* <p>Our Feature </p> */}
             <h1>
@@ -135,7 +141,7 @@ function LandingPage() {
         </div>
 
         {/*  */}
-        <div className="row mt-5 residence">
+        <div className="row mt-5 residence" data-aos="zoom-up">
           <div className="col-10 text-col">
             <span>
               And residence for met the estimable disposing. Mean if he they
@@ -149,10 +155,10 @@ function LandingPage() {
         {/*  */}
 
         <div className="row payments-section mt-5">
-          <div className="col-md-6 img-col">
+          <div className="col-md-6 img-col" data-aos="fade-left">
             <img src={linkToAccount} alt="" />
           </div>
-          <div className="col-md-6 text-col d-flex ">
+          <div className="col-md-6 text-col d-flex " data-aos="fade-right">
             <div className="my-auto ">
               <p>Our Feature </p>
               <h1>All payments are linked to your Financy account</h1>
@@ -169,7 +175,7 @@ function LandingPage() {
 
         {/*  */}
 
-        <div className="why-us">
+        <div className="why-us" data-aos="zoom-in">
           <img src={mark} className="mark" alt="" />
           <div className="text-col">
             <p className="text-center">Why Financy</p>
@@ -177,7 +183,7 @@ function LandingPage() {
           </div>
           <div className="row">
             <div className="col-md-6">
-              <div className="wy-card d-flex">
+              <div className="wy-card d-flex" data-aos="fade-right">
                 <div>
                   {" "}
                   <div className="round-ball"></div>
@@ -192,7 +198,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="wy-card d-flex">
+              <div className="wy-card d-flex" data-aos="fade-left">
                 <div>
                   {" "}
                   <div className="round-ball"></div>
@@ -209,7 +215,7 @@ function LandingPage() {
           </div>
           <div className="row">
             <div className="col-md-6">
-              <div className="wy-card d-flex">
+              <div className="wy-card d-flex" data-aos="fade-right">
                 <div>
                   {" "}
                   <div className="round-ball"></div>
@@ -224,7 +230,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="wy-card d-flex">
+              <div className="wy-card d-flex" data-aos="fade-left">
                 <div>
                   {" "}
                   <div className="round-ball"></div>
@@ -241,10 +247,10 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <div className="contact-us-section p-4 mt-5">
+      <div className="contact-us-section p-4 mt-5" data-aos="zoom-in">
         <div className=" container-lg mt-5">
           <div className="row ">
-            <div className="col-md-6 text-col">
+            <div className="col-md-6 text-col" data-aos="fade-right">
               <p>Our Feature </p>
               <h1>Make payments quickly from anywhere</h1>
               <span>
@@ -256,7 +262,7 @@ function LandingPage() {
               <script src="https://www.powr.io/powr.js?platform=react"></script> */}
             </div>
             <div className="col-md-6 form-col">
-              <div className="form-div">
+              <div className="form-div" data-aos="fade-left">
                 <p>Get Started for Free </p>
                 <ContactUsForm />
               </div>
@@ -264,7 +270,9 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <FooterComponent />
+      <div className="" data-aos="zoom-in">
+        <FooterComponent />
+      </div>
     </>
   );
 }
