@@ -10,6 +10,7 @@ import NavBarComponent from "./components/NavBar/NavBarComponent.jsx";
 import { useContext, useState } from "react";
 import { ThemesContext, ThemesProvider } from "./context/themesContext";
 import ThemeTogglerComponent from "./components/ThemeToggler/ThemeTogglerComponent";
+import LoginPage from "./pages/Loginpage/LoginPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,8 +22,9 @@ function App() {
       <ThemeTogglerComponent />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-
-        {/* <Route path="/404" element={<NotFound />} />
+        <Route path="/login" element={<LoginPage />} />
+        {/* 
+    <Route path="/404" element={<NotFound />} />
               <Route path="*" element={<Navigate replace to="/404" />} /> */}
       </Routes>
     </div>
