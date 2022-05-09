@@ -5,7 +5,7 @@ import { UserContext } from "../../context/userContext";
 import "./HomePage.css";
 
 function HomePage() {
-  const { logOut, userInformation } = useContext(UserContext);
+  const { logOut, userInformation, apiUrl } = useContext(UserContext);
   const [userAccountInformation, setUserAccountInformation] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function HomePage() {
 
   async function getUserAccountInfo() {
     try {
-      const resp = await axios.get("http://localhost:5000/api/account", {
+      const resp = await axios.get(`${apiUrl}/account`, {
         headers: {
           authorization: token,
         },

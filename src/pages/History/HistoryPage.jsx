@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./HistoryPage.css";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
+import { UserContext } from "../../context/userContext";
 
 function HistoryPage() {
   const [userHistories, setUserHistories] = useState([]);
@@ -10,10 +11,11 @@ function HistoryPage() {
     getUserHistory();
   });
   const token = localStorage.getItem("telecomMerchantToken");
+  const { apiUrl } = useContext(UserContext);
 
   async function getUserHistory() {
     try {
-      const resp = await axios.get(" http://localhost:5000/api/history", {
+      const resp = await axios.get(`${apiUrl}/history`, {
         headers: {
           authorization: token,
         },

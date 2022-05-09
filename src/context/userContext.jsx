@@ -11,6 +11,9 @@ export function UserProvider({ children }) {
   const [userInformation, setUserInformation] = useState([]);
 
   const token = localStorage.getItem("telecomMerchantToken");
+
+  const apiUrl = "http://localhost:5000/api";
+
   useEffect(() => {
     if (!token || token === "") {
       setLoggedIn(false);
@@ -58,8 +61,8 @@ export function UserProvider({ children }) {
       });
 
       // here example how to wait axios all fetch
-      let userInfoUrl = `http://localhost:5000/api/userInfo/${decode.uId}`;
-      let userAccountUrl = ` http://localhost:5000/api/account`;
+      let userInfoUrl = `${apiUrl}/userInfo/${decode.uId}`;
+      let userAccountUrl = ` ${apiUrl}/account`;
       let userInfoRequest = axiosInstance.get(userInfoUrl);
       let userAccountRequest = axiosInstance.get(userAccountUrl);
       let [userInfoResponse, userAccountResponse] = await axios.all([
@@ -95,7 +98,7 @@ export function UserProvider({ children }) {
         userInformation,
         logOut,
         userAccountInformation,
-
+        apiUrl,
         token,
       }}
     >

@@ -100,14 +100,14 @@ export function ContactUsForm() {
   );
 }
 export function LoginForm() {
-  const url = "http://localhost:5000/api/user/login";
   const navigate = useNavigate();
 
-  const { setLoggedIn } = useContext(UserContext);
+  const { setLoggedIn, apiUrl } = useContext(UserContext);
   const [loginError, setLoginError] = useState({
     error: false,
     message: "",
   });
+  const url = `${apiUrl}/user/login`;
   const handelSubmit = async (e) => {
     e.preventDefault();
     const formElement = e.target;
