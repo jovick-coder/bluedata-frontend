@@ -1,6 +1,12 @@
-import React from "react";
-import { LogoComponent } from "../NavBar/NavBarComponent";
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
+import GoogleLogin from "react-google-login";
+// import FacebookStrategy from 'passport-facebook'.sta
+// import { LogoComponent } from "../NavBar/NavBarComponent";
 // import MojoAuth from "mojoauth-web-sdk";
+// import "./https://accounts.google.com/gsi/client";
 
 import "./Forms.css";
 function Forms() {
@@ -94,33 +100,67 @@ export function ContactUsForm() {
   );
 }
 export function LoginForm() {
-  const handelSubmit = (e) => {
+  const url = "http://localhost:5000/api/user/login";
+  const navigate = useNavigate();
+
+  const { setLoggedIn } = useContext(UserContext);
+  const [loginError, setLoginError] = useState({
+    error: false,
+    message: "",
+  });
+  const handelSubmit = async (e) => {
     e.preventDefault();
     const formElement = e.target;
-    // console.dir(e.target[0]);
+
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
+      setLoginError({ error: true, message: "Email is empty" });
       return;
     }
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
+      setLoginError({ error: true, message: "password is empty" });
       return;
     }
+    setLoginError({ error: false, message: "" });
     formElement[1].style.border = "solid #ddd 1px";
-    console.log({
+    formElement[2].innerText = "Loading...";
+    formElement[2].setAttribute("disabled", true);
+    const sendBody = {
       email: formElement[0].value,
-      message: formElement[1].value,
-    });
+      password: formElement[1].value,
+    };
+    try {
+      const resp = await axios.post(url, sendBody);
+      localStorage.setItem("telecomMerchantToken", resp.data.token);
+      setLoggedIn(true);
+      // getUserInfo();
+      navigate("/dashboard/home");
+    } catch (error) {
+      // console.log("Error->", error.response.data);
+      setLoginError({ error: true, message: error.response.data.message });
+      formElement[2].innerText = "GET STARED";
+      formElement[2].removeAttribute("disabled");
+      formElement[2].style.border = "solid red 1px";
+    }
   };
   return (
     <>
       <form action="" onSubmit={(e) => handelSubmit(e)}>
-        <input type="text" className="form-control" />
-        <input type="text" className="form-control" />
+        {loginError.error ? (
+          <div className="alert alert-danger">{loginError.message}</div>
+        ) : null}
+        <input type="email" className="form-control" placeholder="Email" />
+        <input
+          type="password"
+          className="form-control"
+          placeholder="password"
+        />
         <button type="submit" className="button w-100">
           GET STARED
         </button>
+        <GoogleLoginButton />
       </form>
     </>
   );
@@ -129,10 +169,52 @@ export function LoginForm() {
 export function SignInForm() {
   return (
     <div className="SignInForm">
-      <LogoComponent />
-      <h2 className="text-center fs-4">Welcome to Telecom Merchant</h2>
-      <input type="text" className="form-control my-3" placeholder="Email" />
+      {/* <LogoComponent /> */}
+      <h2 className="text-center fs-5 mt-0">Welcome to Telecom Merchant</h2>
+      <input type="text" className="form-control" placeholder="Email" />
+      <input type="text" className="form-control my-1" placeholder="Email" />
       <button className="btn w-100">Sign in without password</button>
     </div>
   );
 }
+
+export function GoogleLoginButton() {
+  function responseSuccessGoogle(response) {
+    console.log(response);
+  }
+  function responseFailureGoogle(response) {
+    console.log(response);
+  }
+  //   gapi.client.init({
+  //     apiKey: API_KEY,
+  //     clientId: CLIENT_ID,
+  //     discoveryDocs: DISCOVERY_DOCS,
+  //     scope: SCOPES,
+  //     ux_mode: 'redirect'
+  //  }).then(function () {
+  //      ....
+  //  });
+  return (
+    // <>
+    //   <Script
+    //     src="https://accounts.google.com/gsi/client"
+    //     id="gsi-client"
+    //     async
+    //     defer
+    //   />
+    // </>
+    <GoogleLogin
+      clientId="90192338760-5po42gepdlg6akb893k0t0h2hn1tg54o.apps.googleusercontent.com"
+      buttonText="Login With Google"
+      onSuccess={responseSuccessGoogle}
+      onFailure={responseFailureGoogle}
+      cookiePolicy={"single_host_origin"}
+    />
+  );
+}
+
+// export function FaceBookLoginButton() {
+//   // 2182381928591895
+
+//   return FaceBookS;
+// }
