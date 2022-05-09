@@ -1,0 +1,59 @@
+.HistoryPage ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.HistoryPage ul li button {
+  border: solid green;
+  /* z-index: 10px; */
+  cursor: pointer;
+  position: relative;
+}
+.HistoryPage ul li button .delete {
+  /* z-index: -10; */
+  cursor: progress;
+  /* width: 0; */
+  /* position: absolute; */
+}
+.HistoryPage ul li {
+  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+.HistoryPage ul li.dr {
+  border-left: red solid;
+}
+.HistoryPage ul li.dr .figure {
+  color: red;
+}
+.HistoryPage ul li.dr .figure::before {
+  content: "- \20A6";
+  color: red;
+}
+.HistoryPage ul li.cr {
+  border-left: rgb(0, 255, 8) solid;
+}
+.HistoryPage ul li.cr .figure {
+  color: rgb(0, 255, 8);
+}
+.HistoryPage ul li.cr .figure::before {
+  content: "+ \20A6";
+  color: rgb(0, 255, 8);
+}
+
+.HistoryPage ul li.cr .button::before,
+.HistoryPage ul li.dr .button::before {
+  content: "\1F5D1";
+  color: red;
+}
+.HistoryPage .notFound {
+  color: var(--text-color-light);
+  text-align: center;
+  font-size: 25px;
+  margin: 20px 0;
+}
