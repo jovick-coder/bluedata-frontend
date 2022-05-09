@@ -9,7 +9,7 @@ function HistoryPage() {
   const [userHistories, setUserHistories] = useState([]);
   useEffect(() => {
     getUserHistory();
-  });
+  }, []);
   const token = localStorage.getItem("telecomMerchantToken");
   const { apiUrl } = useContext(UserContext);
 
@@ -22,7 +22,7 @@ function HistoryPage() {
       });
 
       // console.log(resp.data);
-      setUserHistories(resp.data.data);
+      setUserHistories(resp.data.data.reverse());
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -49,7 +49,7 @@ function HistoryPage() {
     if (!window.confirm(deleteMessage)) {
       return;
     }
-    console.log(historyId);
+    // console.log(historyId);
     try {
       // console.log(resp.data);
     } catch (err) {

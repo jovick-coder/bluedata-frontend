@@ -12,7 +12,8 @@ export function UserProvider({ children }) {
 
   const token = localStorage.getItem("telecomMerchantToken");
 
-  const apiUrl = "http://localhost:5000/api";
+  // const apiUrl = "http://localhost:5000/api";
+  const apiUrl = "https://blue-data-api.herokuapp.com/api";
 
   useEffect(() => {
     if (!token || token === "") {
@@ -44,37 +45,47 @@ export function UserProvider({ children }) {
     const decode = JSON.parse(atob(tokenArray[1]));
 
     try {
-      // const resp = await axios.get(" http://localhost:5000/api/history", {
-      //   headers: {
-      //     authorization: token,
-      //   },
-      // });
+      const data = {
+        requestUserInfo: decode.uId,
+      };
 
-      // // console.log(resp.data);
-      // setUserHistories(resp.data.data);
-      // return;
-
-      const axiosInstance = axios.create({
+      // console.log(data);
+      const resp = await axios.post(`${apiUrl}/userInfo/`, data, {
         headers: {
-          Authorization: token,
+          authorization: token,
         },
       });
 
-      // here example how to wait axios all fetch
-      let userInfoUrl = `${apiUrl}/userInfo/${decode.uId}`;
-      let userAccountUrl = ` ${apiUrl}/account`;
-      let userInfoRequest = axiosInstance.get(userInfoUrl);
-      let userAccountRequest = axiosInstance.get(userAccountUrl);
-      let [userInfoResponse, userAccountResponse] = await axios.all([
-        userInfoRequest,
-        userAccountRequest,
-      ]);
-
+      // console.log(resp.data);
       let temp_userInformation = [...userInformation];
 
-      temp_userInformation = userInfoResponse.data.data;
+      temp_userInformation = resp.data.data;
 
       setUserInformation(temp_userInformation);
+      // setUserHistories(resp.data.data);
+      return;
+
+      // const axiosInstance = axios.create({
+      //   headers: {
+      //     Authorization: token,
+      //   },
+      // });
+
+      // // here example how to wait axios all fetch
+      // let userInfoUrl = `${apiUrl}/userInfo/${decode.uId}`;
+      // let userAccountUrl = ` ${apiUrl}/account`;
+      // let userInfoRequest = axiosInstance.get(userInfoUrl);
+      // let userAccountRequest = axiosInstance.get(userAccountUrl);
+      // let [userInfoResponse, userAccountResponse] = await axios.all([
+      //   userInfoRequest,
+      //   userAccountRequest,
+      // ]);
+
+      // let temp_userInformation = [...userInformation];
+
+      // temp_userInformation = userInfoResponse.data.data;
+
+      // setUserInformation(temp_userInformation);
 
       // let temp_userAccountInformation = [...userAccountInformation];
 
@@ -83,7 +94,7 @@ export function UserProvider({ children }) {
       // let temp_userAccountInformation = [...userAccountInformation];
 
       // temp_userAccountInformation = ;
-      setUserAccountInformation(userAccountResponse.data.data);
+      // setUserAccountInformation(userAccountResponse.data.data);
     } catch (err) {
       // Handle Error Here
       console.error(err);

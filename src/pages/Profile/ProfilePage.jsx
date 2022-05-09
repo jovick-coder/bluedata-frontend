@@ -24,7 +24,7 @@ function ProfilePage() {
   }
   function getDate(date) {
     const dateArray = date.split("T");
-    console.log(dateArray);
+    // console.log(dateArray);
     return dateArray[0];
   }
   return (
