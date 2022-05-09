@@ -1,0 +1,11 @@
+.profilePictureCol {
+  /* border: solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profilePictureCol .ProfilePicture {
+  width: 100px;
+  height: 100px;
+}
