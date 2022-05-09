@@ -1,0 +1,27 @@
+.ErrorPage {
+  background-color: var(--primary-color);
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  padding-top: 100px;
+  text-align: center;
+  color: var(--text-color-primary);
+}
+.ErrorPage .image-404-div {
+  width: 100%;
+  /* border: solid red 2px; */
+  /* margin-top: 20px; */
+}
+.ErrorPage .image-404-div img {
+  width: 50vw;
+  min-width: 300px;
+  /* border: solid; */
+  /* height: 1; */
+}
+.ErrorPage .error-message {
+  font-size: 5vw;
+  text-align: center;
+  margin-top: 30px;
+  color: var(--btn-primary);
+  /* border: solid; */
+}
