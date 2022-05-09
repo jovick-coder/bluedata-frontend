@@ -1,0 +1,38 @@
+.HomePage {
+  /* border: solid red; */
+  color: var(--text-color-primary);
+}
+.amount-col .main-card {
+  /* border: solid; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.amount-col .amount-figure {
+  font-size: 25px;
+}
+.amount-col .amount-figure::before {
+  content: "\20A6";
+}
+.amount-col .label {
+  font-weight: 700;
+  font-size: 15px;
+}
+.HomePage .action button {
+  height: 70px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: var(--shadow-primary);
+  margin: 10px 0;
+  border: solid #ddd;
+}
+@media screen and (min-width: 576px) {
+  .main-card {
+    /* border: solid red; */
+  }
+  .HomePage .action button {
+    height: 150px;
+    width: 100%;
+  }
+}
