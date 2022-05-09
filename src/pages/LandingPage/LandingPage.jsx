@@ -17,7 +17,6 @@ import linkToAccount from "../../assets/images/link-to-account.svg";
 import {
   ContactUsForm,
   LoginForm,
-  SignInForm,
 } from "../../components/Forms/FormsComponent";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -83,8 +82,8 @@ function LandingPage() {
               }} */}
               {/* </script> */}
               {/* <Forms /> */}
-              {/* <LoginForm /> */}
-              <SignInForm />
+              <LoginForm />
+              {/* <SignInForm /> */}
             </div>
           </div>
         </div>
