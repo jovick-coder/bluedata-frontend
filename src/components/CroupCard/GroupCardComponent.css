@@ -1,0 +1,10 @@
+.main-card {
+  background-color: var(--color-primary);
+  height: auto;
+  width: 100%;
+  padding: 20px 10px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-primary);
+  margin-bottom: 30px;
+  color: var(--text-color-primary);
+}
