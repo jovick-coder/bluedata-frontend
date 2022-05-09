@@ -1,10 +1,17 @@
-import React, { createContext, useState } from "react";
-import App from "../App";
+import React, { createContext, useEffect, useState } from "react";
 
 export const ThemesContext = createContext();
 
 export function ThemesProvider({ children }) {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("");
+
+  useEffect(() => {
+    const currentTheme = localStorage.getItem("telecomMerchantTheme");
+    if (!currentTheme || currentTheme === "") {
+      return;
+    }
+    setTheme(currentTheme);
+  }, [theme]);
   return (
     <ThemesContext.Provider value={[theme, setTheme]}>
       {children}

@@ -16,9 +16,11 @@ function ThemeTogglerComponent() {
   const switchMode = () => {
     // check current theme and change to the opposite
     if (theme === "dark") {
+      localStorage.setItem("telecomMerchantTheme", "light");
       setTheme("light");
       return;
     }
+    localStorage.setItem("telecomMerchantTheme", "dark");
     setTheme("dark");
   };
   return (
