@@ -8,7 +8,7 @@ import {
   BsFillDoorOpenFill,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginForm } from "../Forms/FormsComponent";
+import { LoginForm, SignUpForm } from "../Forms/FormsComponent";
 import { UserContext } from "../../context/userContext";
 import { navLinkObject } from "./dashboradNavList";
 function NavBarComponent() {
@@ -69,7 +69,7 @@ function NavBarComponent() {
               }
             >
               <div className="mt-5">
-                <LoginForm />
+                <SignUpForm />
               </div>
             </div>
             <div
@@ -80,7 +80,9 @@ function NavBarComponent() {
                   : null
               }
             >
-              Sign Up
+              <div className="mt-5">
+                <LoginForm />
+              </div>
             </div>
           </div>
         )}

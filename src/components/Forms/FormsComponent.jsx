@@ -103,7 +103,7 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   const { setLoggedIn, apiUrl } = useContext(UserContext);
-  const [loginError, setLoginError] = useState({
+  const [formError, setFormError] = useState({
     error: false,
     message: "",
   });
@@ -114,16 +114,16 @@ export function LoginForm() {
 
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
-      setLoginError({ error: true, message: "Email is empty" });
+      setFormError({ error: true, message: "Email is empty" });
       return;
     }
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
-      setLoginError({ error: true, message: "password is empty" });
+      setFormError({ error: true, message: "password is empty" });
       return;
     }
-    setLoginError({ error: false, message: "" });
+    setFormError({ error: false, message: "" });
     formElement[1].style.border = "solid #ddd 1px";
     formElement[2].innerText = "Loading...";
     formElement[2].setAttribute("disabled", true);
@@ -139,8 +139,8 @@ export function LoginForm() {
       navigate("/dashboard/home");
     } catch (error) {
       // console.log("Error->", error.response.data);
-      setLoginError({ error: true, message: error.response.data.message });
-      formElement[2].innerText = "GET STARED";
+      setFormError({ error: true, message: error.response.data.message });
+      formElement[2].innerText = "Sign In";
       formElement[2].removeAttribute("disabled");
       formElement[2].style.border = "solid red 1px";
     }
@@ -148,8 +148,9 @@ export function LoginForm() {
   return (
     <>
       <form action="" onSubmit={(e) => handelSubmit(e)}>
-        {loginError.error ? (
-          <div className="alert alert-danger">{loginError.message}</div>
+        <h2 className="text-center fs-5 mt-0">Welcome to Telecom Merchant</h2>
+        {formError.error ? (
+          <div className="alert alert-danger">{formError.message}</div>
         ) : null}
         <input type="email" className="form-control" placeholder="Email" />
         <input
@@ -158,22 +159,87 @@ export function LoginForm() {
           placeholder="password"
         />
         <button type="submit" className="button w-100">
-          GET STARED
+          Sign In
         </button>
-        <GoogleLoginButton />
+        {/* <GoogleLoginButton /> */}
       </form>
     </>
   );
 }
 
-export function SignInForm() {
+export function SignUpForm() {
+  const [formError, setFormError] = useState({
+    error: false,
+    message: "",
+  });
+  const { apiUrl } = useContext(UserContext);
+
+  const url = `${apiUrl}/user/register`;
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+    const formElement = e.target;
+
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setFormError({ error: true, message: "Email is empty" });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+    if (formElement[1].value === "") {
+      formElement[1].style.border = "solid red 1px";
+      setFormError({ error: true, message: "Number is empty" });
+      return;
+    }
+    formElement[1].style.border = "solid #ddd 1px";
+    if (formElement[2].value === "") {
+      formElement[2].style.border = "solid red 1px";
+      setFormError({ error: true, message: "Password is empty" });
+      return;
+    }
+    setFormError({ error: false, message: "" });
+    formElement[2].style.border = "solid #ddd 1px";
+    formElement[3].innerText = "Loading...";
+    formElement[3].setAttribute("disabled", true);
+    const sendBody = {
+      email: formElement[0].value,
+      phoneNumber: formElement[1].value,
+      password: formElement[2].value,
+      userName: "userName",
+    };
+    console.log(sendBody);
+    try {
+      const resp = await axios.post(url, sendBody);
+      console.log(resp.data);
+      // localStorage.setItem("telecomMerchantToken", resp.data.token);
+      // setLoggedIn(true);
+      // getUserInfo();
+      // navigate("/dashboard/home");
+    } catch (error) {
+      // console.log("Error->", error.response.data);
+      setFormError({ error: true, message: error.response.data.message });
+      formElement[3].innerText = "GET STARED";
+      formElement[3].removeAttribute("disabled");
+      formElement[3].style.border = "solid red 1px";
+    }
+  };
+
   return (
     <div className="SignInForm">
       {/* <LogoComponent /> */}
-      <h2 className="text-center fs-5 mt-0">Welcome to Telecom Merchant</h2>
-      <input type="text" className="form-control" placeholder="Email" />
-      <input type="text" className="form-control my-1" placeholder="Email" />
-      <button className="btn w-100">Sign in without password</button>
+      <form action="" onSubmit={(e) => handelSubmit(e)}>
+        <h2 className="text-center fs-5 mt-0">Welcome to Telecom Merchant</h2>
+        {formError.error ? (
+          <div className="alert alert-danger">{formError.message}</div>
+        ) : null}
+        <input type="email" className="form-control" placeholder="Email" />
+        <input type="num" className="form-control" placeholder="Number" />
+        <input
+          type="password"
+          className="form-control my-1"
+          placeholder="create a password"
+        />
+        <button className="btn w-100">GET STARED</button>
+      </form>
     </div>
   );
 }
