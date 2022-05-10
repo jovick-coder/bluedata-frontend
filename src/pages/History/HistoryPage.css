@@ -4,7 +4,7 @@
   list-style: none;
 }
 .HistoryPage ul li button {
-  border: solid green;
+  /* border: solid green; */
   /* z-index: 10px; */
   cursor: pointer;
   position: relative;

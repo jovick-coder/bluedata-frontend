@@ -1,0 +1,27 @@
+.NotificationPage ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.NotificationPage ul li button {
+  /* border: solid green; */
+  /* z-index: 10px; */
+  cursor: pointer;
+  position: relative;
+}
+.NotificationPage ul li button .delete {
+  /* z-index: -10; */
+  cursor: progress;
+  /* width: 0; */
+  /* position: absolute; */
+}
+.NotificationPage ul li {
+  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
