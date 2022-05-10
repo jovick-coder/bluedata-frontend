@@ -41,7 +41,7 @@ function FoundAccountPage() {
     formElement[2].setAttribute("disabled", true);
     const sendBody = {
       method: formElement[0].value,
-      amount: formElement[1].value,
+      amount: parseInt(formElement[1].value),
     };
     // console.log(sendBody, token);
     try {
