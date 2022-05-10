@@ -11,6 +11,8 @@ import HomePage from "./pages/Home/HomePage";
 import ErrorPage from "./pages/error_page/error_page.component";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import HistoryPage from "./pages/History/HistoryPage";
+import NotificationPage from "./pages/Notification/NotificationPage";
+import FoundAccountPage from "./pages/FoundAccount/FoundAccountPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,6 +29,8 @@ function App() {
           <Route path="home" element={<HomePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="history" element={<HistoryPage />} />
+          <Route path="notification" element={<NotificationPage />} />
+          <Route path="found-account" element={<FoundAccountPage />} />
         </Route>
 
         <Route path="/404" element={<ErrorPage />} />
