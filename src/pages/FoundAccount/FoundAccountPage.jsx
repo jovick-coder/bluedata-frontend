@@ -13,6 +13,10 @@ function FoundAccountPage() {
     error: false,
     message: "",
   });
+  const [formMessage, setFormMessage] = useState({
+    ok: false,
+    message: "",
+  });
 
   const url = `${apiUrl}/account`;
 
@@ -33,8 +37,8 @@ function FoundAccountPage() {
     }
     setFormError({ error: false, message: "" });
     formElement[1].style.border = "solid #ddd 1px";
-    // formElement[2].innerText = "Sending...";
-    // formElement[2].setAttribute("disabled", true);
+    formElement[2].innerText = "Sending...";
+    formElement[2].setAttribute("disabled", true);
     const sendBody = {
       method: formElement[0].value,
       amount: formElement[1].value,
@@ -52,11 +56,13 @@ function FoundAccountPage() {
         },
       });
 
-      console.log(resp);
-      // localStorage.setItem("telecomMerchantToken", resp.data.token);
-      // setLoggedIn(true);
-      // getUserInfo();
-      // navigate("/dashboard/home");
+      // console.log(resp.data.ok);
+      if (resp.data.ok) {
+        setFormMessage({ ok: true, message: "Transaction SuccessFul" });
+        formElement[2].innerText = "Submit";
+        formElement[2].removeAttribute("disabled");
+        formElement[2].style.border = "solid red 1px";
+      }
     } catch (error) {
       // console.log("Error->", error.response.data);
       setFormError({ error: true, message: error.response.data.message });
@@ -97,6 +103,9 @@ function FoundAccountPage() {
           <form className="form" onSubmit={(e) => handelSubmit(e)}>
             {formError.error ? (
               <div className="alert alert-danger">{formError.message}</div>
+            ) : null}
+            {formMessage.ok ? (
+              <div className="alert alert-success">{formMessage.message}</div>
             ) : null}
             <select name="" className="form-select my-2" id="">
               <option value="">Select a method</option>
