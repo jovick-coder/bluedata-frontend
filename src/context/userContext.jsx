@@ -45,12 +45,8 @@ export function UserProvider({ children }) {
     const decode = JSON.parse(atob(tokenArray[1]));
 
     try {
-      const data = {
-        requestUserInfo: decode.uId,
-      };
-
       // console.log(data);
-      const resp = await axios.post(`${apiUrl}/userInfo/`, data, {
+      const resp = await axios.get(`${apiUrl}/userInfo/${decode.uId}`, {
         headers: {
           authorization: token,
         },
