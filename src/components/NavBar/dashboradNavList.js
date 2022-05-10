@@ -1,4 +1,10 @@
-import { BsFillHddStackFill, BsHouseFill, BsPerson } from "react-icons/bs";
+import {
+  BsBellFill,
+  BsCoin,
+  BsFillHddStackFill,
+  BsHouseFill,
+  BsPerson,
+} from "react-icons/bs";
 
 export const navLinkObject = [
   {
@@ -15,5 +21,15 @@ export const navLinkObject = [
     name: "History",
     icon: <BsFillHddStackFill />,
     path: "/dashboard/history",
+  },
+  {
+    name: "Notification",
+    icon: <BsBellFill />,
+    path: "/dashboard/notification",
+  },
+  {
+    name: "Found Account",
+    icon: <BsCoin />,
+    path: "/dashboard/Found-account",
   },
 ];
