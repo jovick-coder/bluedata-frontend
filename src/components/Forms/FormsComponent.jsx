@@ -167,7 +167,7 @@ export function LoginForm() {
   );
 }
 
-export function SignUpForm() {
+export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
   const [formError, setFormError] = useState({
     error: false,
     message: "",
@@ -209,7 +209,10 @@ export function SignUpForm() {
     console.log(sendBody);
     try {
       const resp = await axios.post(url, sendBody);
-      console.log(resp.data);
+      formElement[3].innerText = "Successful";
+      setSignInCardIsOpen(false);
+      setLoginCardIsOpen(true);
+      // console.log(resp.data);
       // localStorage.setItem("telecomMerchantToken", resp.data.token);
       // setLoggedIn(true);
       // getUserInfo();

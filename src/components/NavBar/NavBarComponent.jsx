@@ -69,7 +69,10 @@ function NavBarComponent() {
               }
             >
               <div className="mt-5">
-                <SignUpForm />
+                <SignUpForm
+                  setSignInCardIsOpen={setSignInCardIsOpen}
+                  setLoginCardIsOpen={setLoginCardIsOpen}
+                />
               </div>
             </div>
             <div
