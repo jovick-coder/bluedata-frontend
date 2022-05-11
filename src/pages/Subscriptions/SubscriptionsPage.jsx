@@ -21,37 +21,37 @@ function SubscriptionsPage() {
   useEffect(() => {
     if (network === "MTN") {
       setDataPlan([
-        { plan: "500MB @150", value: "500MB" },
-        { plan: "1GB @300", value: "1GB" },
-        { plan: "2GB @600", value: "2GB" },
-        { plan: "3GB @1200", value: "3GB" },
+        { plan: "MTN 500MB @150", value: "500MB" },
+        { plan: "MTN 1GB @300", value: "1GB" },
+        { plan: "MTN 2GB @600", value: "2GB" },
+        { plan: "MTN 3GB @1200", value: "3GB" },
       ]);
       return;
     }
     if (network === "GLO") {
       setDataPlan([
-        { plan: "500MB @200", value: "500MB" },
-        { plan: "1GB @400", value: "1GB" },
-        { plan: "2GB @800", value: "2GB" },
-        { plan: "3GB @1400", value: "3GB" },
+        { plan: "GLO 500MB @200", value: "500MB" },
+        { plan: "GLO 1GB @400", value: "1GB" },
+        { plan: "GLO 2GB @800", value: "2GB" },
+        { plan: "GLO 3GB @1400", value: "3GB" },
       ]);
       return;
     }
     if (network === "Artel") {
       setDataPlan([
-        { plan: "500MB @500", value: "500MB" },
-        { plan: "1GB @1000", value: "1GB" },
-        { plan: "2GB @2000", value: "2GB" },
-        { plan: "3GB @3000", value: "3GB" },
+        { plan: "Artel 500MB @500", value: "500MB" },
+        { plan: "Artel 1GB @1000", value: "1GB" },
+        { plan: "Artel 2GB @2000", value: "2GB" },
+        { plan: "Artel 3GB @3000", value: "3GB" },
       ]);
       return;
     }
     if (network === "9Mobile") {
       setDataPlan([
-        { plan: "500MB @550", value: "500MB" },
-        { plan: "1GB @1200", value: "1GB" },
-        { plan: "2GB @2400", value: "2GB" },
-        { plan: "3GB @3600", value: "3GB" },
+        { plan: "9Mobile 500MB @550", value: "500MB" },
+        { plan: "9Mobile 1GB @1200", value: "1GB" },
+        { plan: "9Mobile 2GB @2400", value: "2GB" },
+        { plan: "9Mobile 3GB @3600", value: "3GB" },
       ]);
       return;
     }
@@ -120,6 +120,11 @@ function SubscriptionsPage() {
                 <option value={plan.value}>{plan.plan}</option>
               ))}
             </select>
+            <input
+              type="number"
+              className="form-control my-2"
+              placeholder="Number"
+            />
             <input
               type="number"
               className="form-control my-2"
