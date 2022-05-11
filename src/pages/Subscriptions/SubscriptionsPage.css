@@ -1,0 +1,25 @@
+.NetworkLogo {
+  /* border: solid red; */
+  justify-content: space-around;
+}
+.NetworkLogo img {
+  /* border: solid red; */
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .NetworkLogo img {
+    /* border: solid red; */
+    width: 80px;
+    height: 80px;
+  }
+}
+@media screen and (max-width: 430px) {
+  .NetworkLogo img {
+    /* border: solid green; */
+    width: 50px;
+    height: 50px;
+  }
+}
