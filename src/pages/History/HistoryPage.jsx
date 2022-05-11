@@ -6,6 +6,10 @@ import axios from "axios";
 import { UserContext } from "../../context/userContext";
 
 function HistoryPage() {
+  const [formMessage, setFormMessage] = useState({
+    ok: false,
+    message: "",
+  });
   const [userHistories, setUserHistories] = useState([]);
   useEffect(() => {
     getUserHistory();
@@ -36,13 +40,16 @@ function HistoryPage() {
 
   async function deleteHistory(id) {
     // e.preventDefault();
-    // const historyId = e.target.parentElement.getAttribute("data-id");
     const historyId = id;
     let deleteMessage;
+    let FormMessage;
 
     if (id === "*") {
       deleteMessage = "All History Will be Deleted!!!";
+
+      FormMessage = "All History SuccessFully Deleted";
     } else {
+      FormMessage = "History SuccessFully Deleted";
       deleteMessage = "This History Will be Deleted!!!";
     }
 
@@ -51,6 +58,19 @@ function HistoryPage() {
     }
     // console.log(historyId);
     try {
+      const resp = await axios.delete(`${apiUrl}/history/${historyId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+
+      // console.log(resp.data);
+      if (resp.data.ok) {
+        setFormMessage({ ok: true, message: FormMessage });
+        getUserHistory();
+      }
+      // setUserHistories(resp.data.data.reverse());
+
       // console.log(resp.data);
     } catch (err) {
       // Handle Error Here
@@ -71,6 +91,9 @@ function HistoryPage() {
           </button>
         </div>
         <hr />
+        {formMessage.ok ? (
+          <div className="alert alert-success">{formMessage.message}</div>
+        ) : null}
         <ul>
           {userHistories.length === 0 ? (
             <div className="notFound">No History Found</div>
