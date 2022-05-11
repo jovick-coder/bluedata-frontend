@@ -4,6 +4,7 @@ import {
   BsFillHddStackFill,
   BsHouseFill,
   BsPerson,
+  BsSimFill,
 } from "react-icons/bs";
 
 export const navLinkObject = [
@@ -31,5 +32,10 @@ export const navLinkObject = [
     name: "Found Account",
     icon: <BsCoin />,
     path: "/dashboard/Found-account",
+  },
+  {
+    name: "Buy Subscriptions",
+    icon: <BsSimFill />,
+    path: "/dashboard/Subscriptions",
   },
 ];
