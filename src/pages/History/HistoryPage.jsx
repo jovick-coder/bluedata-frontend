@@ -16,6 +16,26 @@ function HistoryPage() {
   }, []);
   const token = localStorage.getItem("telecomMerchantToken");
   const { apiUrl } = useContext(UserContext);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFormMessage({
+        ok: false,
+        message: "",
+      });
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [formMessage.ok]);
+
+  // function resetFormMessage() {
+  //   if (formMessage.ok) {
+  //     setTimeout(function () {
+  //       setFormMessage({
+  //         ok: false,
+  //         message: "",
+  //       });
+  //     }, 2000);
+  //   }
+  // }
 
   async function getUserHistory() {
     try {
@@ -69,6 +89,7 @@ function HistoryPage() {
       if (resp.data.ok) {
         setFormMessage({ ok: true, message: FormMessage });
         getUserHistory();
+        // resetFormMessage();
       }
       // setUserHistories(resp.data.data.reverse());
 
