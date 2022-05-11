@@ -54,6 +54,7 @@ function HistoryPage() {
     }
 
     if (!window.confirm(deleteMessage)) {
+      setFormMessage({ ok: false, message: "" });
       return;
     }
     // console.log(historyId);
