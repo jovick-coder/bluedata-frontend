@@ -26,17 +26,6 @@ function HistoryPage() {
     return () => clearTimeout(timer);
   }, [formMessage.ok]);
 
-  // function resetFormMessage() {
-  //   if (formMessage.ok) {
-  //     setTimeout(function () {
-  //       setFormMessage({
-  //         ok: false,
-  //         message: "",
-  //       });
-  //     }, 2000);
-  //   }
-  // }
-
   async function getUserHistory() {
     try {
       const resp = await axios.get(`${apiUrl}/history`, {
@@ -89,7 +78,6 @@ function HistoryPage() {
       if (resp.data.ok) {
         setFormMessage({ ok: true, message: FormMessage });
         getUserHistory();
-        // resetFormMessage();
       }
       // setUserHistories(resp.data.data.reverse());
 
