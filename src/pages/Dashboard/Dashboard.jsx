@@ -31,7 +31,7 @@ function Dashboard() {
           />
         </div>
         <main className="main-dashboard-page ps-1">
-          <Outlet />
+          <Outlet loggedIn={loggedIn} />
         </main>
       </div>
     </div>
@@ -39,18 +39,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-export function User() {
-  return (
-    <div className="">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate a,
-      repellat optio assumenda commodi saepe sint nostrum possimus, quasi
-      voluptates nemo eum nesciunt, officiis quisquam vitae hic maxime deleniti
-      blanditiis!
-    </div>
-  );
-}
-
-// export function DashboardSideNav() {
-//   return <div>DashboardSideNav</div>;
-// }
