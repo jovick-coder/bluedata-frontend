@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import { UserContext } from "../../context/userContext";
-import { BsEyeFill, BsFillTrashFill } from "react-icons/bs";
+import { BsEyeFill } from "react-icons/bs";
 import "./NotificationPage.css";
 function NotificationPage() {
   const [notification, setNotification] = useState([]);
