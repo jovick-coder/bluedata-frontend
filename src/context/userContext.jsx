@@ -9,6 +9,7 @@ export function UserProvider({ children }) {
   const [userAccountInformation, setUserAccountInformation] = useState([]);
 
   const [userInformation, setUserInformation] = useState([]);
+  // const [, setUserAccountInformation] = useState([]);
 
   const token = localStorage.getItem("telecomMerchantToken");
 
@@ -25,7 +26,7 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     getUserInfo();
-  });
+  }, []);
 
   const navigate = useNavigate();
   function logOut() {
@@ -43,6 +44,7 @@ export function UserProvider({ children }) {
     const tokenArray = token.split(".");
     // console.log(tokenArray);
     const decode = JSON.parse(atob(tokenArray[1]));
+    // console.log();
 
     try {
       // console.log(data);
@@ -53,11 +55,12 @@ export function UserProvider({ children }) {
       });
 
       // console.log(resp.data);
-      let temp_userInformation = [...userInformation];
+      // let temp_userInformation = [...userInformation];
 
-      temp_userInformation = resp.data.data;
+      // temp_userInformation = resp.data.data;
 
-      setUserInformation(temp_userInformation);
+      // setUserInformation(temp_userInformation);
+      setUserInformation(resp.data.data);
       // setUserHistories(resp.data.data);
       return;
 
@@ -97,6 +100,23 @@ export function UserProvider({ children }) {
     }
   }
 
+  // get account information
+  async function getUserAccountInfo() {
+    try {
+      const resp = await axios.get(`${apiUrl}/account`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      // console.log(token);
+      // console.log(resp.data);
+      setUserAccountInformation(resp.data.data);
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -104,9 +124,11 @@ export function UserProvider({ children }) {
         setLoggedIn,
         userInformation,
         logOut,
+        getUserAccountInfo,
         userAccountInformation,
         apiUrl,
         token,
+        getUserInfo,
       }}
     >
       {children}
