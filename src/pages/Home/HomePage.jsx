@@ -5,30 +5,21 @@ import { UserContext } from "../../context/userContext";
 import "./HomePage.css";
 
 function HomePage() {
-  const { logOut, userInformation, apiUrl } = useContext(UserContext);
-  const [userAccountInformation, setUserAccountInformation] = useState([]);
+  const {
+    logOut,
+    userInformation,
+    apiUrl,
+    getUserInfo,
+    userAccountInformation,
+    getUserAccountInfo,
+  } = useContext(UserContext);
 
   useEffect(() => {
     getUserAccountInfo();
+    // getUserInfo();
   }, []);
 
   const token = localStorage.getItem("telecomMerchantToken");
-
-  async function getUserAccountInfo() {
-    try {
-      const resp = await axios.get(`${apiUrl}/account`, {
-        headers: {
-          authorization: token,
-        },
-      });
-
-      // console.log(resp.data);
-      setUserAccountInformation(resp.data.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  }
 
   return (
     <div className="HomePage">
