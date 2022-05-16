@@ -124,21 +124,25 @@ function SubscriptionsPage() {
                 src={mtnLogo}
                 alt={"MTN Logo"}
                 onClick={() => selectNetwork("MTN")}
+                className={network === "MTN" ? "active" : null}
               />
               <img
                 src={gloLogo}
                 alt={"glo Logo"}
                 onClick={() => selectNetwork("GLO")}
+                className={network === "GLO" ? "active" : null}
               />
               <img
                 src={airtelLogo}
                 alt={"airtel Logo"}
                 onClick={() => selectNetwork("Artel")}
+                className={network === "Artel" ? "active" : null}
               />
               <img
                 src={mobileLogo}
                 alt={"mobile Logo"}
                 onClick={() => selectNetwork("9Mobile")}
+                className={network === "9Mobile" ? "active" : null}
               />
             </div>
 
