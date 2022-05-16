@@ -4,6 +4,7 @@ import { ProfilePicture } from "../../components/NavBar/NavBarComponent";
 import "./ProfilePage.css";
 import { UserContext } from "../../context/userContext";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
   const [isUpdateProfile, setIseUpdateProfile] = useState(false);
@@ -68,6 +69,8 @@ export function Profile({
         <div className="my-3 fs-3 text-center fw-900">
           <u>User Profile</u>
         </div>
+        {/* <SwitchAccountButton privilege={privilege} /> */}
+
         <div className="row">
           <div className="col-md-6 my-2 px-2">
             <b>User Name</b>
@@ -154,6 +157,81 @@ export function Profile({
     </div>
   );
 }
+
+// export function SwitchAccountButton({ privilege }) {
+//   const navigate = useNavigate();
+//   const { apiUrl, userInformation } = useContext(UserContext);
+//   const { email } = userInformation;
+//   async function switchAccount(from, to) {
+//     const password = window.prompt("Enter your Password");
+
+//     if (window.prompt("Enter your Password") === "") {
+//       alert(" Empty password");
+//       return;
+//     }
+
+//     if (!window.prompt("Enter your Password")) {
+//       return;
+//     }
+//     const url = `${apiUrl}/user/login`;
+
+//     console.log(password, email);
+//     const sendBody = {
+//       email: email,
+//       password: password,
+//     };
+//     try {
+//       const resp = await axios.post(url, sendBody);
+//       if (resp.data.ok) {
+//         if (to === 2) {
+//           navigate("/adminDashboard/home");
+//           return;
+//         }
+//         if (to === 1) {
+//           navigate("/Dashboard/home");
+//           return;
+//         }
+//       }
+//     } catch (error) {
+//       console.log("Error->", error.response.data);
+//     }
+//   }
+//   return (
+//     <>
+//       {privilege != 1 && privilege != 2 ? (
+//         <>
+//           {" "}
+//           Switch Account
+//           <div className="d-flex justify-content-center my-3">
+//             {privilege === 4 || 3 ? (
+//               <>
+//                 <button
+//                   className="button btn-sm m-auto"
+//                   onClick={() => switchAccount(privilege, 1)}
+//                 >
+//                   User
+//                 </button>
+//                 <button
+//                   className="button btn-sm m-auto"
+//                   onClick={() => switchAccount(privilege, 2)}
+//                 >
+//                   Admin
+//                 </button>
+//                 {privilege === 4 ? (
+//                   <>
+//                     <button className="button btn-sm m-auto">
+//                       Super Admin
+//                     </button>
+//                   </>
+//                 ) : null}
+//               </>
+//             ) : null}
+//           </div>
+//         </>
+//       ) : null}
+//     </>
+//   );
+// }
 
 export function UpdateProfile({
   userInformation,
