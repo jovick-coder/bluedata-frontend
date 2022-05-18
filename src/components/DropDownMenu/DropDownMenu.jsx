@@ -20,3 +20,61 @@ function ActionDropDownMenu({ children }) {
 }
 
 export default ActionDropDownMenu;
+
+export function UserActionDropDown({ accountType, accountPrivilege }) {
+  function UpgradeType(accountPrivilege) {
+    const privilege = accountPrivilege + 1;
+    if (privilege === 1) {
+      return "User";
+    }
+    if (privilege === 2) {
+      return "Reseller";
+    }
+    if (privilege === 3) {
+      return "Admin";
+    }
+    if (privilege === 4) {
+      return "Super Admin";
+    }
+  }
+  return (
+    <ActionDropDownMenu>
+      <li>
+        <span
+          class="dropdown-item"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Delete this {accountType} Account
+        </span>
+      </li>
+      <li>
+        <span
+          class="dropdown-item"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Suspend this {accountType} Account
+        </span>
+      </li>
+      <li>
+        <span
+          class="dropdown-item"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Up Grade {accountType} to {UpgradeType(accountPrivilege)}
+        </span>
+      </li>
+      <li>
+        <span
+          class="dropdown-item"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Up Grade User Account
+        </span>
+      </li>
+    </ActionDropDownMenu>
+  );
+}
