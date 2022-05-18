@@ -4,14 +4,14 @@ function ModalComponent({ btnText, modalTitle, children }) {
   return (
     <>
       {/* <!-- Button trigger modal --> */}
-      <button
+      {/* <button
         type="button"
         className="button"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
       >
         {btnText}
-      </button>
+      </button> */}
 
       {/* <!-- Modal --> */}
       <div
@@ -34,6 +34,7 @@ function ModalComponent({ btnText, modalTitle, children }) {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                id="closeModal"
               ></button>
             </div>
             <div className="modal-body">{children}</div>
