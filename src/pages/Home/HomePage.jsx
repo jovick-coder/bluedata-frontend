@@ -16,7 +16,7 @@ function HomePage() {
 
   useEffect(() => {
     getUserAccountInfo();
-    // getUserInfo();
+    getUserInfo();
   }, []);
 
   const token = localStorage.getItem("telecomMerchantToken");
