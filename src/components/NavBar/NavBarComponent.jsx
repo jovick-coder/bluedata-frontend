@@ -10,7 +10,11 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { LoginForm, SignUpForm } from "../Forms/FormsComponent";
 import { UserContext } from "../../context/userContext";
-import { navLinkObject } from "./dashboradNavList";
+import {
+  userNavLinkObject,
+  adminNavLinkObject,
+  superAdminNavLinkObject,
+} from "./dashboradNavList";
 function NavBarComponent() {
   // function handelLogin() {
   //   // confirm("Logout?") navigate("/");
@@ -26,7 +30,9 @@ function NavBarComponent() {
       <div className="container mx-auto d-flex justify-content-between ">
         <LogoComponent />
         {loggedIn ? (
-          <NavMenuComponent setLoggedIn={setLoggedIn} />
+          <>
+            <NavMenuComponent setLoggedIn={setLoggedIn} />
+          </>
         ) : (
           <div className="d-flex drop-down-div">
             {/* <Link className="my-auto mx-3" to="/">
@@ -169,12 +175,14 @@ export const ProfilePicture = ({ className }) => {
 };
 
 export const DashboardSideNav = ({ sideNavOpen, setSideNavOpen }) => {
+  // const {  } = useContext(UserContext);
   // const [sideNavOpen, setSideNavOpen] = useState(false);
   function navToggle() {
     setSideNavOpen(!sideNavOpen);
   }
 
-  const { logOut } = useContext(UserContext);
+  const { logOut, userInformation } = useContext(UserContext);
+  const { privilege } = userInformation;
   return (
     <>
       {/* <div className="btn btn-primary"> open</div> */}
@@ -187,26 +195,37 @@ export const DashboardSideNav = ({ sideNavOpen, setSideNavOpen }) => {
         {sideNavOpen ? <BsArrowLeftSquareFill /> : <BsArrowRightSquareFill />}
       </div>
       <ul>
-        {navLinkObject.map((link, i) => {
-          const { name, icon, path } = link;
+        {userNavLinkObject.map((link, i) => {
+          const { name, icon, path, userPrivilege } = link;
+          // console.log("userPrivilege");
           return (
-            <li key={i}>
-              <Link to={path}>
-                <div className="side-nav-icon">{icon}</div>
-                <span className="nav-link-name">{name}</span>
-              </Link>
-            </li>
+            <>
+              {privilege >= userPrivilege ? (
+                <li key={i}>
+                  <Link to={path}>
+                    <div className="side-nav-icon">{icon}</div>
+                    <span className="nav-link-name">{name}</span>
+                  </Link>
+                </li>
+              ) : null}
+            </>
           );
         })}
+        <li>
+          <Link
+            to="#"
+            onClick={() => {
+              logOut();
+            }}
+          >
+            <div className="side-nav-icon text-danger">
+              {" "}
+              <BsFillDoorOpenFill />
+            </div>
+            <span className="nav-link-name text-danger">LogOut</span>
+          </Link>
+        </li>
       </ul>
-      <div
-        className="side-nav-icon toggle text-danger"
-        onClick={() => {
-          logOut();
-        }}
-      >
-        <BsFillDoorOpenFill />
-      </div>
     </>
   );
 };
