@@ -18,6 +18,7 @@ import USerListPage from "./pages/UserList/USerListPage";
 import CustomersListPage from "./pages/CustomersListPage/CustomersListPage";
 import AdminListPage from "./pages/AdminListPage/AdminListPage";
 import ResellersListPage from "./pages/ResellersListPage/ResellersListPage";
+import PopUpMessageComponent from "./components/PopUpMessage/PopUpMessageComponent";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,6 +28,7 @@ function App() {
     <div className="App" data-theme={theme} s>
       <NavBarComponent isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <ThemeTogglerComponent />
+      <PopUpMessageComponent />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
