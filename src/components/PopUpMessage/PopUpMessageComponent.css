@@ -1,0 +1,25 @@
+.PopUpMessageComponent {
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  /* bottom: 0; */
+  /* flex-wrap: wrap; */
+  padding: 10px 20px;
+  margin: 10px 0;
+  min-width: 250px;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  /* overflow: hidden; */
+  background-color: #fff;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.5);
+  z-index: 100000;
+}
+
+.PopUpMessageComponent.error {
+  border-left: solid red 5px;
+}
+.PopUpMessageComponent.success {
+  border-left: solid rgb(17, 199, 0) 5px;
+}
