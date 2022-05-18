@@ -1,0 +1,7 @@
+.MapListComponents table {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+.MapListComponents table thead {
+  background-color: var(--background-primary);
+}

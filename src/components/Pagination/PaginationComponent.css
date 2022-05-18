@@ -1,0 +1,57 @@
+.PaginationComponent ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.PaginationComponent ul li.btn {
+  border: 1px solid #ddd;
+  height: 40px;
+  margin: auto 0;
+
+  display: flex;
+  align-items: center;
+}
+.PaginationComponent ul li {
+  padding: 3px 5px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+.PaginationComponent ul li.btn:hover {
+  background-color: #0d6dfd8e;
+  color: var(--text-primary);
+}
+.PaginationComponent ul li.btn:focus,
+.PaginationComponent ul li.btn:active {
+  background-color: #0d6dfd8e;
+  color: var(--text-primary);
+}
+.PaginationComponent .btn {
+  border-radius: 0;
+}
+
+.PaginationComponent ul {
+  height: 50px;
+  overflow: hidden;
+}
+.PaginationComponent .LoadingComponent {
+  height: 50px;
+}
+
+.PaginationComponent .select-div {
+  width: 500px;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 767px) {
+  .PaginationComponent .select-div {
+    margin: 0 auto;
+  }
+  .PaginationComponent ul {
+    margin: 0 auto;
+  }
+  .PaginationComponent ul li {
+    padding: 10px;
+    cursor: pointer;
+  }
+}

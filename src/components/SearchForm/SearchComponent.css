@@ -1,0 +1,22 @@
+.SearchComponent {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+.SearchComponent .card {
+  overflow: hidden;
+  height: 100px;
+  padding: 0;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
+.SearchComponent .card .LoadingComponent {
+  height: 80px;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .SearchComponent .search-input-row {
+    flex-direction: column-reverse;
+  }
+}
