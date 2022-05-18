@@ -9,6 +9,8 @@ import GoogleLogin from "react-google-login";
 // import "./https://accounts.google.com/gsi/client";
 
 import "./Forms.css";
+import ModalComponent from "../Modal/ModalComponent";
+import { PopUpMessageContext } from "../../context/PopUpMessageContext";
 function Forms() {
   // const [payload, setPayload] = React.useState(null);
   // {
@@ -100,6 +102,8 @@ export function ContactUsForm() {
   );
 }
 export function LoginForm() {
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+
   const navigate = useNavigate();
 
   const { setLoggedIn, apiUrl } = useContext(UserContext);
@@ -114,16 +118,24 @@ export function LoginForm() {
 
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Email is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Email is empty",
+      });
+      // setFormError({ error: true, message: "Email is empty" });
       return;
     }
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
-      setFormError({ error: true, message: "password is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Password is empty",
+      });
+      // setFormError({ error: true, message: "password is empty" });
       return;
     }
-    setFormError({ error: false, message: "" });
+    // setFormError({ error: false, message: "" });
     formElement[1].style.border = "solid #ddd 1px";
     formElement[2].innerText = "Loading...";
     formElement[2].setAttribute("disabled", true);
@@ -134,12 +146,21 @@ export function LoginForm() {
     try {
       const resp = await axios.post(url, sendBody);
       localStorage.setItem("telecomMerchantToken", resp.data.token);
-      setLoggedIn(true);
-      // getUserInfo();
-      navigate("/dashboard/home");
+      if (resp.data.ok) {
+        setPopUpMessage({
+          messageType: "success",
+          message: "Welcome Back",
+        });
+        setLoggedIn(true);
+        navigate("/dashboard/home");
+      }
     } catch (error) {
       // console.log("Error->", error.response.data);
-      setFormError({ error: true, message: error.response.data.message });
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      // setFormError({ error: true, message:  });
       formElement[2].innerText = "Sign In";
       formElement[2].removeAttribute("disabled");
       formElement[2].style.border = "solid red 1px";
@@ -152,7 +173,7 @@ export function LoginForm() {
         {formError.error ? (
           <div className="alert alert-danger">{formError.message}</div>
         ) : null}
-        <input type="email" className="form-control" placeholder="Email" />
+        <input type="text" className="form-control" placeholder="Email" />
         <input
           type="password"
           className="form-control"
@@ -167,7 +188,32 @@ export function LoginForm() {
   );
 }
 
+export function AuthorizeAction() {
+  const { authorizeAction } = useContext(UserContext);
+
+  return (
+    <ModalComponent btnText="UpGreed User" modalTitle="Authorize Action">
+      <form
+        action=""
+        onSubmit={(e) => {
+          e.preventDefault();
+          authorizeAction(e);
+        }}
+      >
+        <input
+          type="password"
+          className="form-control"
+          placeholder="password"
+        />
+        <button className="button mt-3">Authorize Action</button>
+      </form>
+    </ModalComponent>
+  );
+}
+
 export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+
   const [formError, setFormError] = useState({
     error: false,
     message: "",
@@ -181,22 +227,34 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
 
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Email is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Email is empty",
+      });
+      // setFormError({ error: true, message: "" });
       return;
     }
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Number is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Number is empty",
+      });
+      // setFormError({ error: true, message: "" });
       return;
     }
     formElement[1].style.border = "solid #ddd 1px";
     if (formElement[2].value === "") {
       formElement[2].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Password is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Password is empty",
+      });
+      // setFormError({ error: true, message: "" });
       return;
     }
-    setFormError({ error: false, message: "" });
+    // setFormError({ error: false, message: "" });
     formElement[2].style.border = "solid #ddd 1px";
     formElement[3].innerText = "Loading...";
     formElement[3].setAttribute("disabled", true);
@@ -212,14 +270,13 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
       formElement[3].innerText = "Successful";
       setSignInCardIsOpen(false);
       setLoginCardIsOpen(true);
-      // console.log(resp.data);
-      // localStorage.setItem("telecomMerchantToken", resp.data.token);
-      // setLoggedIn(true);
-      // getUserInfo();
-      // navigate("/dashboard/home");
     } catch (error) {
       // console.log("Error->", error.response.data);
-      setFormError({ error: true, message: error.response.data.message });
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      // setFormError({ error: true, message:  });
       formElement[3].innerText = "GET STARED";
       formElement[3].removeAttribute("disabled");
       formElement[3].style.border = "solid red 1px";
@@ -234,7 +291,7 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
         {formError.error ? (
           <div className="alert alert-danger">{formError.message}</div>
         ) : null}
-        <input type="email" className="form-control" placeholder="Email" />
+        <input type="text" className="form-control" placeholder="Email" />
         <input type="num" className="form-control" placeholder="Number" />
         <input
           type="password"
