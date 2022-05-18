@@ -7,7 +7,7 @@ function CustomersListPage() {
   const token = localStorage.getItem("telecomMerchantToken");
   const tokenArray = token.split(".");
   const decode = JSON.parse(atob(tokenArray[1]));
-  if (decode.privilege < 3) {
+  if (decode.privilege < 2) {
     return (
       <div className="mt-5 text-center ">
         <GroupCard>
