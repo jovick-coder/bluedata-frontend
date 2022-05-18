@@ -3,9 +3,11 @@ import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import "./FoundAccountPage.css";
 import { UserContext } from "../../context/userContext";
 import axios from "axios";
+import { PopUpMessageContext } from "../../context/PopUpMessageContext";
 
 function FoundAccountPage() {
   const { apiUrl } = useContext(UserContext);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
   const token = localStorage.getItem("telecomMerchantToken");
 
   // const [] = useState();
@@ -26,13 +28,21 @@ function FoundAccountPage() {
 
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Method is not selected" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Method is not selected",
+      });
+      // setFormError({ error: true, message: "Method is not selected" });
       return;
     }
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Amount is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Amount is empty",
+      });
+      // setFormError({ error: true, message: "Amount is empty" });
       return;
     }
     setFormError({ error: false, message: "" });
@@ -58,14 +68,22 @@ function FoundAccountPage() {
 
       // console.log(resp.data.ok);
       if (resp.data.ok) {
-        setFormMessage({ ok: true, message: "Transaction SuccessFul" });
+        setPopUpMessage({
+          messageType: "success",
+          message: "Transaction SuccessFul",
+        });
+        // setFormMessage({ ok: true, message: "" });
         formElement[2].innerText = "Submit";
         formElement[2].removeAttribute("disabled");
         formElement[2].style.border = "solid red 1px";
       }
     } catch (error) {
       // console.log("Error->", error.response.data);
-      setFormError({ error: true, message: error.response.data.message });
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      // setFormError({ error: true, message:  });
       formElement[2].innerText = "Submit";
       formElement[2].removeAttribute("disabled");
       formElement[2].style.border = "solid red 1px";
@@ -91,11 +109,6 @@ function FoundAccountPage() {
       <GroupCard>
         <div className="header d-flex justify-content-between">
           <h3>Found Account</h3>
-          {/* <button className="button  btn-sm">
-            {" "}
-            {/* <BsEyeFill className="me-2" /> * / }
-            Mark all has seen
-          </button> */}
         </div>
         <hr />
 

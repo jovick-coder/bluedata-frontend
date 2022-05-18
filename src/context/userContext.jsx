@@ -1,10 +1,14 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoaderBorderComponent } from "../components/Spinner/SpinnerComponent";
+import { PopUpMessageContext } from "./PopUpMessageContext";
 
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [userAccountInformation, setUserAccountInformation] = useState([]);
 
@@ -13,8 +17,8 @@ export function UserProvider({ children }) {
 
   const token = localStorage.getItem("telecomMerchantToken");
 
-  // const apiUrl = "http://localhost:5000/api";
-  const apiUrl = "https://blue-data-api.herokuapp.com/api";
+  const apiUrl = "http://localhost:5000/api";
+  // const apiUrl = "https://blue-data-api.herokuapp.com/api";
 
   useEffect(() => {
     if (!token || token === "") {
@@ -117,6 +121,47 @@ export function UserProvider({ children }) {
     }
   }
 
+  // get account information
+  async function authorizeAction(e) {
+    // e.preventDefault();
+    e.preventDefault();
+    const formElement = e.target;
+
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Password is empty",
+      });
+      // setFormError({ error: true, message: "Email is empty" });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+
+    formElement[1].innerText = `Loading...`;
+    formElement[1].setAttribute("disabled", true);
+    const sendBody = {
+      email: userInformation.email,
+      password: formElement[0].value,
+    };
+    try {
+      const resp = await axios.post(`${apiUrl}/user/auth`, sendBody);
+      console.log(resp.data.ok);
+      if (resp.data.ok) {
+        formElement[1].removeAttribute("disabled");
+        formElement[1].innerText = `Authorize Action`;
+        formElement[0].value = "";
+        window.document.getElementById("closeModal").click();
+      }
+    } catch (error) {
+      console.log("Error->", error.response.data);
+      // setFormError({ error: true, message: error.response.data.message });
+      formElement[1].innerText = "Try Agin";
+      formElement[1].removeAttribute("disabled");
+      formElement[1].style.border = "solid red 1px";
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -129,6 +174,7 @@ export function UserProvider({ children }) {
         apiUrl,
         token,
         getUserInfo,
+        authorizeAction,
       }}
     >
       {children}

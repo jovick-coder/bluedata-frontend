@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import mtnLogo from ".././../assets/mtn.png";
 import gloLogo from ".././../assets/glo.jpeg";
 import airtelLogo from ".././../assets/airtel.png";
 import mobileLogo from ".././../assets/9mobile.png";
 import "./SubscriptionsPage.css";
+import { PopUpMessageContext } from "../../context/PopUpMessageContext";
 
 function SubscriptionsPage() {
-  const [formError, setFormError] = useState({
-    error: false,
-    message: "",
-  });
-  const [formMessage, setFormMessage] = useState({
-    ok: false,
-    message: "",
-  });
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
   const [network, setNetwork] = useState("");
   const [dataPlan, setDataPlan] = useState([]);
 
@@ -56,7 +50,11 @@ function SubscriptionsPage() {
       return;
     }
     if (network !== "") {
-      setFormError({ error: true, message: "Invalid Network" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Invalid Network",
+      });
+      // setFormError({ error: true, message: "I" });
     }
   }, [network]);
 
@@ -70,22 +68,34 @@ function SubscriptionsPage() {
 
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Network is not selected" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Network is not selected",
+      });
+      // setFormError({ error: true, message: "" });
       return;
     }
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Number is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Number is empty",
+      });
+      // setFormError({ error: true, message: "" });
       return;
     }
     formElement[1].style.border = "solid #ddd 1px";
     if (formElement[2].value === "") {
       formElement[2].style.border = "solid red 1px";
-      setFormError({ error: true, message: "Amount is empty" });
+      setPopUpMessage({
+        messageType: "error",
+        message: "Amount is empty",
+      });
+      // setFormError({ error: true, message: "" });
       return;
     }
-    setFormError({ error: false, message: "" });
+    // setFormError({ error: false, message: "" });
     formElement[2].style.border = "solid #ddd 1px";
     const sendBody = {
       plan: formElement[0].value,
@@ -108,17 +118,6 @@ function SubscriptionsPage() {
 
         <div className="form-div">
           <form className="form" onSubmit={(e) => handelSubmit(e)}>
-            {formError.error ? (
-              <div className="alert alert-danger">{formError.message}</div>
-            ) : null}
-            {formMessage.ok ? (
-              <div className="alert alert-success">{formMessage.message}</div>
-            ) : null}
-
-            {/* <NetworkLogo
-              selectNetwork={selectNetwork}
-              setNetwork={setNetwork}
-            /> */}
             <div className="d-flex NetworkLogo">
               <img
                 src={mtnLogo}
