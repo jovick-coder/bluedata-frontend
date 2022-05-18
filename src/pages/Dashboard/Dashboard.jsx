@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { DashboardSideNav } from "../../components/NavBar/NavBarComponent";
 import "./Dashboard.css";
 import { UserContext } from "../../context/userContext";
+import { AuthorizeAction } from "../../components/Forms/FormsComponent";
 
 function Dashboard() {
   const { loggedIn } = useContext(UserContext);
@@ -22,7 +23,7 @@ function Dashboard() {
         style={{ display: "none" }}
         onChange={() => null}
       />
-
+      <AuthorizeAction />
       <div className="page-body-wrapper">
         <div className="side-nav">
           <DashboardSideNav
@@ -31,7 +32,7 @@ function Dashboard() {
           />
         </div>
         <main className="main-dashboard-page ps-1">
-          <Outlet loggedIn={loggedIn} />
+          <Outlet />
         </main>
       </div>
     </div>
