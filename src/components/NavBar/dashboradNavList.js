@@ -1,4 +1,5 @@
 import {
+  BsAward,
   BsBellFill,
   BsCoin,
   BsFillHddStackFill,
@@ -6,6 +7,7 @@ import {
   BsPeople,
   BsPerson,
   BsPersonBadge,
+  BsPersonBoundingBox,
   BsPersonCheck,
   BsPersonPlus,
   BsPersonX,
@@ -69,7 +71,7 @@ export const userNavLinkObject = [
   },
   {
     name: "Admins List",
-    icon: <BsPeople />,
+    icon: <BsPersonBoundingBox />,
     path: "/dashboard/admin-list",
     userPrivilege: 4,
   },
