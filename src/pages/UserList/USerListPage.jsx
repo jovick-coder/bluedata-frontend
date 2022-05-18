@@ -3,12 +3,9 @@ import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import { UserContext } from "../../context/userContext";
 import axios from "axios";
-import ActionDropDownMenu from "../../components/DropDownMenu/DropDownMenu";
-import ModalComponent from "../../components/Modal/ModalComponent";
-import {
-  LoaderBorderComponent,
-  LoaderGrowComponent,
-} from "../../components/Spinner/SpinnerComponent";
+import { UserActionDropDown } from "../../components/DropDownMenu/DropDownMenu";
+import { AuthorizeAction } from "../../components/Forms/FormsComponent";
+import "./UserListPage.css";
 
 function USerListPage() {
   const [requestedUsers, setRequestedUsers] = useState("*");
@@ -78,18 +75,14 @@ function USerListPage() {
     }
   }
   return (
-    <div>
+    <div className="mt-5">
       <GroupCard>
-        <h1 className="heder">List Of Users</h1>
-        {/* 
-        {users.forEach((user) => {
-          return <div key={user._id}>{user.fullName}</div>;
-        })} */}
-        <ModalComponent
-          btnText="UpGreed User"
-          modalTitle="Authorize Action"
-        ></ModalComponent>
-        <ul>
+        <div className="header d-flex justify-content-between">
+          <h3>Users List</h3>
+        </div>
+        <hr />
+
+        <ul className="userList">
           {users.length === 0 ? (
             <div className="notFound">No User Found</div>
           ) : (
@@ -106,20 +99,18 @@ function USerListPage() {
                       <span className="w-100 me-4">
                         <sup className="d-flex mt-2 mb-0">
                           {/* <div className="figure me-2">{amount}</div> */}
-                          <div className="date">{getDate(joinDate)}</div>
+                          <b> Account Created: </b>
+                          <div className="date ms-2">{getDate(joinDate)}</div>
                         </sup>
                         <hr className="my-0" />
                         <b>Name</b> {fullName} <br />
                         <b>Account type </b>
                         {checkType(privilege)}
                       </span>
-                      <ActionDropDownMenu>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            Action222
-                          </a>
-                        </li>
-                      </ActionDropDownMenu>
+                      <UserActionDropDown
+                        accountType={checkType(privilege)}
+                        accountPrivilege={privilege}
+                      />
                     </li>
                   ) : null}
                   {/* ); */}
