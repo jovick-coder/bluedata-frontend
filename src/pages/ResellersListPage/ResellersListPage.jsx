@@ -6,6 +6,7 @@ import axios from "axios";
 import ActionDropDownMenu, {
   UserActionDropDown,
 } from "../../components/DropDownMenu/DropDownMenu";
+import { UnAuthorizeAccess } from "../error_page/error_page.component";
 
 function ResellersListPage() {
   const [requestedUsers, setRequestedUsers] = useState("*");
@@ -40,20 +41,7 @@ function ResellersListPage() {
 
   const userPrivilege = decode.privilege;
   if (userPrivilege < 3) {
-    return (
-      <div className="mt-5 text-center ">
-        <GroupCard>
-          <div className=" fs-1 text-danger">
-            <BsFillExclamationTriangleFill />
-          </div>
-          You dont have Access to this page. <br /> if you thing you should
-          access this page try login out and login in aging <br />
-          Contact the Admin if it repeats for privilege check <br />
-          Thanks. <br />
-          Developer
-        </GroupCard>
-      </div>
-    );
+    return <UnAuthorizeAccess />;
   }
   function getDate(date) {
     const dateArray = date.split("T");

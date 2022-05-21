@@ -6,6 +6,8 @@ import axios from "axios";
 import { UserActionDropDown } from "../../components/DropDownMenu/DropDownMenu";
 import { AuthorizeAction } from "../../components/Forms/FormsComponent";
 import "./UserListPage.css";
+import MapListComponents from "../../components/MapList/MapListComponents";
+import { UnAuthorizeAccess } from "../error_page/error_page.component";
 
 function USerListPage() {
   const [requestedUsers, setRequestedUsers] = useState("*");
@@ -40,20 +42,7 @@ function USerListPage() {
 
   const userPrivilege = decode.privilege;
   if (userPrivilege < 3) {
-    return (
-      <div className="mt-5 text-center ">
-        <GroupCard>
-          <div className=" fs-1 text-danger">
-            <BsFillExclamationTriangleFill />
-          </div>
-          You dont have Access to this page. <br /> if you thing you should
-          access this page try login out and login in aging <br />
-          Contact the Admin if it repeats for privilege check <br />
-          Thanks. <br />
-          Developer
-        </GroupCard>
-      </div>
-    );
+    return <UnAuthorizeAccess />;
   }
   function getDate(date) {
     const dateArray = date.split("T");
@@ -82,7 +71,7 @@ function USerListPage() {
         </div>
         <hr />
 
-        <ul className="userList">
+        {/* <ul className="userList">
           {users.length === 0 ? (
             <div className="notFound">No User Found</div>
           ) : (
@@ -98,7 +87,7 @@ function USerListPage() {
                     >
                       <span className="w-100 me-4">
                         <sup className="d-flex mt-2 mb-0">
-                          {/* <div className="figure me-2">{amount}</div> */}
+                          {/* <div className="figure me-2">{amount}</div> * /}
                           <b> Account Created: </b>
                           <div className="date ms-2">{getDate(joinDate)}</div>
                         </sup>
@@ -113,12 +102,14 @@ function USerListPage() {
                       />
                     </li>
                   ) : null}
-                  {/* ); */}
+                  {/* ); * /}
                 </>
               );
             })
           )}
-        </ul>
+        </ul> */}
+
+        <MapListComponents users={users} />
       </GroupCard>
     </div>
   );
