@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import errorImage from "../../assets/images/page_not_found.svg";
 import { UserContext } from "../../context/userContext";
+import { BsFillExclamationTriangleFill } from "react-icons/bs";
+import GroupCard from "../../components/CroupCard/GroupCardComponent";
 
 const ErrorPage = () => {
   const { loggedIn } = useContext(UserContext);
@@ -30,3 +32,20 @@ const ErrorPage = () => {
 };
 
 export default ErrorPage;
+
+export function UnAuthorizeAccess() {
+  return (
+    <div className="mt-5 text-center ">
+      <GroupCard>
+        <div className=" fs-1 text-danger">
+          <BsFillExclamationTriangleFill />
+        </div>
+        You dont have Access to this page. <br /> if you thing you should access
+        this page try login out and login in aging <br />
+        Contact the Admin if it repeats for privilege check <br />
+        Thanks. <br />
+        Developer
+      </GroupCard>
+    </div>
+  );
+}
