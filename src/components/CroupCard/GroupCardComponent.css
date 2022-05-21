@@ -1,4 +1,5 @@
-.main-card {
+.main-card,
+.DashboardCard,.DashboardActionCard {
   background-color: var(--color-primary);
   height: auto;
   width: 100%;
@@ -7,4 +8,88 @@
   box-shadow: var(--shadow-primary);
   margin-bottom: 30px;
   color: var(--text-color-primary);
+}
+
+.DashboardCard {
+  display: flex;
+  height: 80px;
+  padding: 0;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  /* flex-wrap: wrap; */
+}
+
+.DashboardCard .icon-div {
+  /* background-color: var(--btn-primary); */
+   background: #48abf7 !important;
+  background: -webkit-linear-gradient(
+    legacy-direction(-45deg),
+    #0a5a97,
+    #48abf7
+  ) !important;
+  background: linear-gradient(-45deg, #0a5a97, #48abf7) !important;
+  /* padding: 20px; */
+  color: var(--btn-color-primary);
+  /* margin-left: 10px; */
+  border-radius: 10px 0 0 10px;
+  width: 20%;
+  height: 100%;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.DashboardCard .label-div {
+  /* font-size: 35px; */
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  font-weight: bolder;
+}
+.DashboardCard .figure-div {
+  font-weight: 300;
+  font-size: 25px;
+}
+.figure-div .n::before {
+  content: "\20A6";
+  margin-right: 4px;
+}
+
+.DashboardActionCard{
+  padding: 0;
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #0a5a97, #48abf7) !important;
+
+}
+.DashboardActionCard .icon-div{
+  padding: 0;
+  /* border: #0a5a97 solid; */
+  position: absolute;
+  font-size: 150px;
+  top: -100px;
+  left: -30px;
+  color: rgba(255, 255, 255, 0.498);
+  z-index: 1;
+  visibility: .0;
+}
+
+.DashboardActionCard .label-div{
+  z-index: 5;
+  position: absolute;
+  color: var(--btn-color-primary);
+  /* border: solid; */
+  font-size: 20px;
+  font-weight: 900;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 20px;
+  align-items: center;
 }
