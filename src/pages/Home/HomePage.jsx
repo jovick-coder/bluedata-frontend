@@ -19,6 +19,7 @@ import { GiTwoCoins } from "react-icons/gi";
 import { UnAuthorizeAccess } from "../error_page/error_page.component";
 import { actionList } from "./actionList";
 import { Link } from "react-router-dom";
+import { AdminContext } from "../../context/adminContext";
 
 function HomePage() {
   const {
@@ -28,7 +29,10 @@ function HomePage() {
     getUserInfo,
     userAccountInformation,
     getUserAccountInfo,
+    token,
+    userPrivilege,
   } = useContext(UserContext);
+  const { users, admins, resellers } = useContext(AdminContext);
 
   useEffect(() => {
     getUserAccountInfo();
@@ -37,11 +41,7 @@ function HomePage() {
   const { privilege } = userInformation;
   // const token = localStorage.getItem("telecomMerchantToken");
   // Check privilege before showing page content
-  const token = localStorage.getItem("telecomMerchantToken");
-  const tokenArray = token.split(".");
-  const decode = JSON.parse(atob(tokenArray[1]));
 
-  const userPrivilege = decode.privilege;
   if (userPrivilege < 1) {
     return <UnAuthorizeAccess />;
   }
@@ -79,14 +79,14 @@ function HomePage() {
               <DashboardCard
                 label={"Total Users"}
                 icon={<BsPeople />}
-                figure={"0"}
+                figure={users.length}
               />
             </div>
             <div className="col-md-4 px-1">
               <DashboardCard
                 label={"Total Resellers"}
                 icon={<BsPersonPlus />}
-                figure={"0"}
+                figure={resellers.length}
               />
             </div>
           </>
@@ -97,7 +97,7 @@ function HomePage() {
               <DashboardCard
                 label={"Total Admin"}
                 icon={<BsPersonBoundingBox />}
-                figure={"0"}
+                figure={admins.length}
               />
             </div>
           </>
