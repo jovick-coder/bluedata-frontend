@@ -16,6 +16,12 @@ export function UserProvider({ children }) {
   // const [, setUserAccountInformation] = useState([]);
 
   const token = localStorage.getItem("telecomMerchantToken");
+  const tokenArray = token.split(".");
+  const decode = JSON.parse(atob(tokenArray[1]));
+
+  const userPrivilege = decode.privilege;
+
+  // const token = localStorage.getItem("telecomMerchantToken");
 
   const apiUrl = "http://localhost:5000/api";
   // const apiUrl = "https://blue-data-api.herokuapp.com/api";
@@ -175,6 +181,8 @@ export function UserProvider({ children }) {
         token,
         getUserInfo,
         authorizeAction,
+        token,
+        userPrivilege,
       }}
     >
       {children}
