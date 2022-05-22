@@ -8,39 +8,24 @@ import { AuthorizeAction } from "../../components/Forms/FormsComponent";
 import "./UserListPage.css";
 import MapListComponents from "../../components/MapList/MapListComponents";
 import { UnAuthorizeAccess } from "../error_page/error_page.component";
+import { AdminContext } from "../../context/adminContext";
 
 function USerListPage() {
   const [requestedUsers, setRequestedUsers] = useState("*");
-  const [users, setUsers] = useState([]);
+  const [usersList, setUsersList] = useState([]);
 
-  const { apiUrl } = useContext(UserContext);
+  const { userPrivilege } = useContext(UserContext);
+  const { users } = useContext(AdminContext);
 
   useEffect(() => {
-    getUsers();
-  }, []);
-  // get account information
-  async function getUsers() {
-    try {
-      const resp = await axios.get(`${apiUrl}/userInfo/1`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      // console.log(token);
-      // console.log(resp.data);
-      setUsers(resp.data.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  }
-  // console.log(users);
-  // Check privilege before showing page content
-  const token = localStorage.getItem("telecomMerchantToken");
-  const tokenArray = token.split(".");
-  const decode = JSON.parse(atob(tokenArray[1]));
+    let temp_usersList = [...usersList];
 
-  const userPrivilege = decode.privilege;
+    temp_usersList = users;
+
+    setUsersList(temp_usersList);
+  }, []);
+
+  // Check privilege before showing page content
   if (userPrivilege < 3) {
     return <UnAuthorizeAccess />;
   }
@@ -109,7 +94,7 @@ function USerListPage() {
           )}
         </ul> */}
 
-        <MapListComponents users={users} />
+        <MapListComponents users={usersList} />
       </GroupCard>
     </div>
   );

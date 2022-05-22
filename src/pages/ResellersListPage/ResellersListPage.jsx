@@ -7,39 +7,46 @@ import ActionDropDownMenu, {
   UserActionDropDown,
 } from "../../components/DropDownMenu/DropDownMenu";
 import { UnAuthorizeAccess } from "../error_page/error_page.component";
+import { AdminContext } from "../../context/adminContext";
 
 function ResellersListPage() {
   const [requestedUsers, setRequestedUsers] = useState("*");
-  const [users, setUsers] = useState([]);
+  const [resellersList, setResellersList] = useState([]);
 
-  const { apiUrl } = useContext(UserContext);
+  const { apiUrl, token, userPrivilege } = useContext(UserContext);
+
+  const { resellers } = useContext(AdminContext);
 
   useEffect(() => {
-    getUsers();
-  }, []);
-  // get account information
-  async function getUsers() {
-    try {
-      const resp = await axios.get(`${apiUrl}/userInfo/2`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      // console.log(token);
-      // console.log(resp.data);
-      setUsers(resp.data.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  }
-  // console.log(users);
-  // Check privilege before showing page content
-  const token = localStorage.getItem("telecomMerchantToken");
-  const tokenArray = token.split(".");
-  const decode = JSON.parse(atob(tokenArray[1]));
+    let temp_resellersList = [...resellersList];
 
-  const userPrivilege = decode.privilege;
+    temp_resellersList = resellers;
+
+    setResellersList(temp_resellersList);
+  }, []);
+
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
+  // // get account information
+  // async function getUsers() {
+  //   try {
+  //     const resp = await axios.get(`${apiUrl}/userInfo/2`, {
+  //       headers: {
+  //         authorization: token,
+  //       },
+  //     });
+  //     // console.log(token);
+  //     // console.log(resp.data);
+  //     setUsers(resp.data.data);
+  //   } catch (err) {
+  //     // Handle Error Here
+  //     console.error(err);
+  //   }
+  // }
+  // // console.log(users);
+  // Check privilege before showing page content
+
   if (userPrivilege < 3) {
     return <UnAuthorizeAccess />;
   }
@@ -71,10 +78,10 @@ function ResellersListPage() {
         <hr />
 
         <ul className="userList">
-          {users.length === 0 ? (
+          {resellersList.length === 0 ? (
             <div className="notFound">No Reseller Found</div>
           ) : (
-            users.map((user) => {
+            resellersList.map((user) => {
               const { joinDate, _id, fullName, privilege } = user;
               return (
                 <>

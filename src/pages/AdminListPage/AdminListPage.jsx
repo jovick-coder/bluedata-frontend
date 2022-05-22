@@ -7,39 +7,45 @@ import ActionDropDownMenu, {
   UserActionDropDown,
 } from "../../components/DropDownMenu/DropDownMenu";
 import { UnAuthorizeAccess } from "../error_page/error_page.component";
+import { AdminContext } from "../../context/adminContext";
 
 function AdminListPage() {
   const [requestedUsers, setRequestedUsers] = useState("*");
-  const [users, setUsers] = useState([]);
+  const [adminList, setAdminList] = useState([]);
 
-  const { apiUrl } = useContext(UserContext);
+  const { apiUrl, token, userPrivilege } = useContext(UserContext);
+
+  const { admins } = useContext(AdminContext);
 
   useEffect(() => {
-    getUsers();
+    let temp_adminList = [...adminList];
+
+    temp_adminList = admins;
+
+    setAdminList(temp_adminList);
   }, []);
-  // get account information
-  async function getUsers() {
-    try {
-      const resp = await axios.get(`${apiUrl}/userInfo/3`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      // console.log(token);
-      // console.log(resp.data);
-      setUsers(resp.data.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  }
+
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
+  // // get account information
+  // async function getUsers() {
+  //   try {
+  //     const resp = await axios.get(`${apiUrl}/userInfo/3`, {
+  //       headers: {
+  //         authorization: token,
+  //       },
+  //     });
+  //     // console.log(token);
+  //     // console.log(resp.data);
+  //     setUsers(resp.data.data);
+  //   } catch (err) {
+  //     // Handle Error Here
+  //     console.error(err);
+  //   }
+  // }
   // console.log(users);
   // Check privilege before showing page content
-  const token = localStorage.getItem("telecomMerchantToken");
-  const tokenArray = token.split(".");
-  const decode = JSON.parse(atob(tokenArray[1]));
-
-  const userPrivilege = decode.privilege;
   if (userPrivilege < 3) {
     return <UnAuthorizeAccess />;
   }
@@ -71,10 +77,10 @@ function AdminListPage() {
         <hr />
 
         <ul className="userList">
-          {users.length === 0 ? (
+          {adminList.length === 0 ? (
             <div className="notFound">No User Found</div>
           ) : (
-            users.map((user) => {
+            adminList.map((user) => {
               const { joinDate, _id, fullName, privilege } = user;
               return (
                 <>
