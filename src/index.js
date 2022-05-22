@@ -9,6 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemesProvider } from "./context/themesContext";
 import { UserProvider } from "./context/userContext";
 import { PopUpMessageProvider } from "./context/PopUpMessageContext";
+import { AdminProvider } from "./context/adminContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,7 +17,9 @@ ReactDOM.render(
       <ThemesProvider>
         <BrowserRouter>
           <UserProvider>
-            <App />
+            <AdminProvider>
+              <App />
+            </AdminProvider>
           </UserProvider>
         </BrowserRouter>
       </ThemesProvider>
