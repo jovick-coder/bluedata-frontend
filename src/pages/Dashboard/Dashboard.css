@@ -89,7 +89,7 @@ footer {
 .page-body-wrapper main {
   width: 100%;
   /* margin-left: 200px; */
-  height: auto;
+  min-height: 100vh;
   /* border: red solid; */
 }
 
