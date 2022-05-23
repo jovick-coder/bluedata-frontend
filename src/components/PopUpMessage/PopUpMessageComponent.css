@@ -1,5 +1,5 @@
 .PopUpMessageComponent {
-  position: absolute;
+  position: fixed;
   top: 80px;
   right: 10px;
   /* bottom: 0; */
