@@ -30,41 +30,43 @@ function HomePage() {
     userAccountInformation,
     getUserAccountInfo,
     token,
-    userPrivilege,
+    getUserPrivilege,
   } = useContext(UserContext);
-  const { users, admins, resellers } = useContext(AdminContext);
+  const { users, admins, resellers, getAllInfo } = useContext(AdminContext);
 
   useEffect(() => {
+    // const { token, userPrivilege } = getToken();
     getUserAccountInfo();
     getUserInfo();
+    getAllInfo();
   }, []);
   const { privilege } = userInformation;
   // const token = localStorage.getItem("telecomMerchantToken");
   // Check privilege before showing page content
 
-  if (userPrivilege < 1) {
+  if (getUserPrivilege() < 1) {
     return <UnAuthorizeAccess />;
   }
   return (
     <div className="HomePage">
-      <div className="header my-4 d-flex justify-content-between">
-        Welcome
-        {userInformation.userName}
-        <button className="btn-danger btn-sm" onClick={() => logOut()}>
+      <div className="header my-4  d-flex justify-content-between">
+        <div className="welcome ms-4"> Welcome {userInformation.userName}</div>
+        <button className="btn-danger btn me-4 btn-sm" onClick={() => logOut()}>
           LogOut
         </button>
       </div>
-      <div className="row ">
-        <div className="col-md-4 px-1">
+      <hr />
+      <div className="d-flex flex-wrap ">
+        <div className="px-1">
           <DashboardCard
             label={"Wallet Balance"}
             icon={<BsWallet />}
             figure={<div className="n">{userAccountInformation.amount}</div>}
           />
         </div>
-        {userPrivilege > 1 ? (
+        {getUserPrivilege() > 1 ? (
           <>
-            <div className="col-md-4 px-1">
+            <div className="px-1">
               <DashboardCard
                 label={"Total Customers"}
                 icon={<BsPersonCheck />}
@@ -73,16 +75,16 @@ function HomePage() {
             </div>
           </>
         ) : null}
-        {userPrivilege > 2 ? (
+        {getUserPrivilege() > 2 ? (
           <>
-            <div className="col-md-4 px-1">
+            <div className="px-1">
               <DashboardCard
                 label={"Total Users"}
                 icon={<BsPeople />}
                 figure={users.length}
               />
             </div>
-            <div className="col-md-4 px-1">
+            <div className="px-1">
               <DashboardCard
                 label={"Total Resellers"}
                 icon={<BsPersonPlus />}
@@ -91,9 +93,9 @@ function HomePage() {
             </div>
           </>
         ) : null}
-        {userPrivilege > 3 ? (
+        {getUserPrivilege() > 3 ? (
           <>
-            <div className="col-md-4 px-1">
+            <div className="px-1">
               <DashboardCard
                 label={"Total Admin"}
                 icon={<BsPersonBoundingBox />}
@@ -109,7 +111,7 @@ function HomePage() {
           // console.log("userPrivilege");
           return (
             <>
-              {privilege >= userPrivilege ? (
+              {getUserPrivilege() >= userPrivilege ? (
                 <div className="col-6 col-md-3 px-1" key={i}>
                   <Link to={path}>
                     <DashboardActionCard label={label} icon={icon} />
