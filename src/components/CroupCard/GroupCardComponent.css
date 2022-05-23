@@ -13,12 +13,13 @@
 .DashboardCard {
   display: flex;
   height: 80px;
-  padding: 0;
-  max-width: 300px;
+  padding: 0 5px 0 0 ;
+  width: 150px;
   margin-left: auto;
   margin-right: auto;
   /* flex-wrap: wrap; */
 }
+
 
 .DashboardCard .icon-div {
   /* background-color: var(--btn-primary); */
@@ -33,15 +34,15 @@
   color: var(--btn-color-primary);
   /* margin-left: 10px; */
   border-radius: 10px 0 0 10px;
-  width: 20%;
+  width: 40px;
   height: 100%;
-  font-size: 35px;
+  font-size: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .DashboardCard .label-div {
-  /* font-size: 35px; */
+  font-size: 15px;
  
   display: flex;
   flex-direction: column;
@@ -53,10 +54,40 @@
 .DashboardCard .figure-div {
   font-weight: 300;
   font-size: 25px;
+  width: 110px;
+  text-align: center;
+
+}
+.DashboardCard .figure-div .n {
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 .figure-div .n::before {
   content: "\20A6";
   margin-right: 4px;
+}
+
+@media screen and (max-width:375px) {
+  .DashboardCard {
+    height: auto;
+    padding: 0 0px 0 0 ;
+    width: 115px;
+    margin-left: auto;
+    margin-right: auto; 
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+  }
+.DashboardCard .icon-div {
+  height: 30px;
+width: 100%;
+border-radius: 10px 10px 0 0;
+}
+.DashboardCard .label-div {
+width: 100%;
+font-size: 14px;
+
+}
+  
 }
 
 .DashboardActionCard{
@@ -71,9 +102,9 @@
   padding: 0;
   /* border: #0a5a97 solid; */
   position: absolute;
-  font-size: 150px;
-  top: -100px;
-  left: -30px;
+  font-size: 100px;
+  top: -50px;
+  left: -15px;
   color: rgba(255, 255, 255, 0.498);
   z-index: 1;
   visibility: .0;
