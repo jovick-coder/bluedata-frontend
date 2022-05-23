@@ -1,14 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import { ProfilePicture } from "../../components/NavBar/NavBarComponent";
 import "./ProfilePage.css";
 import { UserContext } from "../../context/userContext";
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
+import { PopUpMessageContext } from "../../context/PopUpMessageContext";
 
 function ProfilePage() {
   const [isUpdateProfile, setIseUpdateProfile] = useState(false);
-  const { userInformation } = useContext(UserContext);
+  const { userInformation, getUserInfo } = useContext(UserContext);
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   return (
     <>
       {isUpdateProfile ? (
@@ -16,12 +20,14 @@ function ProfilePage() {
           userInformation={userInformation}
           isUpdateProfile={isUpdateProfile}
           setIseUpdateProfile={setIseUpdateProfile}
+          getUserInfo={getUserInfo}
         />
       ) : (
         <Profile
           userInformation={userInformation}
           isUpdateProfile={isUpdateProfile}
           setIseUpdateProfile={setIseUpdateProfile}
+          getUserInfo={getUserInfo}
         />
       )}
     </>
@@ -34,9 +40,14 @@ export function Profile({
   userInformation,
   isUpdateProfile,
   setIseUpdateProfile,
+  getUserInfo,
 }) {
   const { email, fullName, joinDate, phoneNumber, privilege, userName } =
     userInformation;
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   function checkPrivilege(privilege) {
     if (privilege === 1) {
       return "User";
@@ -237,36 +248,94 @@ export function UpdateProfile({
   userInformation,
   isUpdateProfile,
   setIseUpdateProfile,
+  // getUserInfo,
 }) {
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+  const { token, getUserInfo } = useContext(UserContext);
   const { email, fullName, phoneNumber, userName } = userInformation;
-  const [formMessage, setFormMessage] = useState({
-    ok: false,
-    message: "",
-  });
-
+  let [updateEmail, setUpdateEmail] = useState("");
+  let [updateFullName, setUpdateFullName] = useState("");
+  let [updatePhoneNumber, setUpdatePhoneNumber] = useState("");
+  let [updateUserName, setUpdateUserName] = useState("");
   const { apiUrl } = useContext(UserContext);
-  const url = `${apiUrl}/user/login`;
+  const url = `${apiUrl}/userInfo`;
   const handelSubmit = async (e) => {
     e.preventDefault();
     const formElement = e.target;
 
-    const sendBody = {
-      email: formElement[0].value,
-      password: formElement[1].value,
-    };
-    try {
-      // const resp = await axios.put(url, sendBody);
+    if (updateEmail === "") {
+      updateEmail = email;
+    }
+    if (updateFullName === "") {
+      updateFullName = fullName;
+    }
+    if (updatePhoneNumber === "") {
+      updatePhoneNumber = phoneNumber;
+    }
+    if (updateUserName === "") {
+      updateUserName = userName;
+    }
 
-      setFormMessage({ ok: true, message: "Update SuccessFul" });
+    const sendBody = {
+      email: updateEmail,
+      fullName: updateFullName,
+      phoneNumber: updatePhoneNumber,
+      userName: updateUserName,
+    };
+
+    console.log(sendBody);
+    formElement[4].innerText = "Updating Profile...";
+    formElement[4].setAttribute("disabled", true);
+    try {
+      const axiosInstance = axios.create({
+        headers: {
+          Authorization: token,
+        },
+      });
+      const resp = await axiosInstance.put(url, sendBody);
+
+      // setFormMessage({ ok: true, message: "Update SuccessFul" });
+
+      if (!resp.data.ok) {
+        console.log(resp);
+        formElement[4].innerText = "Update Profile";
+        formElement[4].removeAttribute("disabled");
+        formElement[4].style.border = "solid red 1px";
+        setPopUpMessage({
+          messageType: "error",
+          message: "Error Updating Profile",
+        });
+      }
+      if (resp.data.ok) {
+        setPopUpMessage({
+          messageType: "success",
+          message: "Profile updated",
+        });
+        getUserInfo();
+        setUpdateEmail("");
+        setUpdateFullName("");
+        setUpdatePhoneNumber("");
+        setUpdateUserName("");
+        formElement[4].innerText = "Updating Profile";
+        formElement[4].removeAttribute("disabled");
+        formElement[4].style.border = "none";
+      }
       // if (resp.data.ok) {
       //   formElement[4].innerText = "Submit";
       //   formElement[4].removeAttribute("disabled");
       //   formElement[4].style.border = "solid red 1px";
       // }
     } catch (error) {
-      // console.log("Error->", error.response.data);
-      setFormMessage({ error: true, message: error.response.data.message });
-      formElement[4].innerText = "Update";
+      console.log("Error->", error.response.data);
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      // setFormMessage({ error: true, message: error.response.data.message });
+      formElement[4].innerText = "Update Profile";
       formElement[4].removeAttribute("disabled");
       formElement[4].style.border = "solid red 1px";
     }
@@ -296,9 +365,6 @@ export function UpdateProfile({
           * fill only the fields you want to update
         </div>
         <form action="" onSubmit={(e) => handelSubmit(e)}>
-          {formMessage.ok ? (
-            <div className="alert alert-success">{formMessage.message}</div>
-          ) : null}
           <div className="row">
             <div className="col-md-6 my-2 px-2">
               <b>User Name</b>
@@ -306,6 +372,10 @@ export function UpdateProfile({
                 type="text"
                 className="form-control"
                 placeholder={userName}
+                value={updateUserName}
+                onChange={(e) => {
+                  setUpdateUserName(e.target.value);
+                }}
               />
             </div>
             <div className="col-md-6 my-2 px-2">
@@ -314,13 +384,25 @@ export function UpdateProfile({
                 type="text"
                 className="form-control"
                 placeholder={fullName}
+                value={updateFullName}
+                onChange={(e) => {
+                  setUpdateFullName(e.target.value);
+                }}
               />
             </div>
           </div>
           <div className="row">
             <div className="col-md-6 my-2 px-2">
               <b>Email</b>
-              <input type="text" className="form-control" placeholder={email} />
+              <input
+                type="text"
+                className="form-control"
+                placeholder={email}
+                value={updateEmail}
+                onChange={(e) => {
+                  setUpdateEmail(e.target.value);
+                }}
+              />
             </div>
             <div className="col-md-6 my-2 px-2">
               <b>PhoneNumber</b>
@@ -328,6 +410,10 @@ export function UpdateProfile({
                 type="number"
                 className="form-control"
                 placeholder={phoneNumber}
+                value={updatePhoneNumber}
+                onChange={(e) => {
+                  setUpdatePhoneNumber(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -337,7 +423,7 @@ export function UpdateProfile({
               className="button my-3 mx-auto"
               // onClick={() => setIseUpdateProfile(!isUpdateProfile)}
             >
-              Update
+              Update Profile
             </button>
           </div>
         </form>
