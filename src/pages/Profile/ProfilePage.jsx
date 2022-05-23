@@ -266,6 +266,19 @@ export function UpdateProfile({
     e.preventDefault();
     const formElement = e.target;
 
+    if (
+      updateEmail === "" &&
+      updateFullName === "" &&
+      updatePhoneNumber === "" &&
+      updateUserName === ""
+    ) {
+      setPopUpMessage({
+        messageType: "error",
+        message: "No Data to be Updated",
+      });
+      return;
+    }
+
     if (updateEmail === "") {
       updateEmail = email;
     }
