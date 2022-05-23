@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import LoadingComponent from "../Loading/LoadingComponent";
+import React, { useEffect, useState } from "react";
+// import LoadingComponent from "../Loading/LoadingComponent";
+import { LoaderBorderComponent } from "../Spinner/SpinnerComponent";
 import "./PaginationComponent.css";
 
 function PaginationComponent({
-  allFlights,
+  users,
   itemPerPage,
   currentPage,
   setCurrentPage,
@@ -18,8 +19,11 @@ function PaginationComponent({
   const handlePageNumberCLick = (e) => {
     setCurrentPage(Number(e.target.id));
   };
-  for (let i = 0; i < Math.ceil(allFlights.data.length / itemPerPage); i++) {
+  // console.log(Math.ceil(users.length / itemPerPage));
+  for (let i = 0; i < Math.ceil(users.length / itemPerPage); i++) {
     pages.push(i);
+
+    // console.log(i);
   }
 
   const renderPageNumbers = pages.map((number) => {
@@ -29,7 +33,7 @@ function PaginationComponent({
           key={number}
           id={number}
           onClick={handlePageNumberCLick}
-          className={currentPage === number ? "btn btn-primary" : "btn"}
+          className={currentPage === number ? "button" : "btn"}
           title={`Page ${number}`}
         >
           {number}
@@ -82,32 +86,35 @@ function PaginationComponent({
       </>
     );
   }
+  useEffect(() => {
+    console.log(pages);
+    console.log(users);
+  }, [users]);
 
   return (
     <div className="d-flex flex-wrap justify-content-between PaginationComponent">
       <ul>
         <li>
           <button
-            className="btn btn-primary"
+            className="button"
             onClick={() => handelPrevBtn()}
             disabled={currentPage === pages[1] ? true : false}
           >
             {"<-"}
           </button>
         </li>
-        {allFlights.loading ? (
-          <LoadingComponent />
-        ) : (
-          <>
-            {" "}
-            {pageDecrementBtn}
-            {renderPageNumbers}
-            {pageIncrementBtn}
-          </>
-        )}
+        {/* {users.loading ? (
+          <LoaderBorderComponent />
+        ) : ( */}
+        <>
+          {pageDecrementBtn}
+          {renderPageNumbers}
+          {pageIncrementBtn}
+        </>
+        {/* )} */}
         <li>
           <button
-            className="btn btn-primary"
+            className="button"
             onClick={() => handelNextBtn()}
             disabled={currentPage === pages[pages.length - 1] ? true : false}
           >
@@ -124,18 +131,11 @@ function PaginationComponent({
             setItemPerPage(e.target.value);
           }}
         >
-          {allFlights.loading ? (
-            <option> Loading...</option>
-          ) : (
-            <>
-              {" "}
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-              <option value="50">50</option>
-            </>
-          )}
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
         </select>
       </div>
     </div>

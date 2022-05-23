@@ -18,13 +18,13 @@
   color: var(--text-primary);
 }
 .PaginationComponent ul li.btn:hover {
-  background-color: #0d6dfd8e;
-  color: var(--text-primary);
+  background-color: rgb(20, 184, 220);
+  color: var(--btn-color-primary);
 }
 .PaginationComponent ul li.btn:focus,
 .PaginationComponent ul li.btn:active {
-  background-color: #0d6dfd8e;
-  color: var(--text-primary);
+  background-color: rgb(20, 184, 220);
+  color: var(--btn-color-primary);
 }
 .PaginationComponent .btn {
   border-radius: 0;
@@ -42,7 +42,12 @@
   width: 500px;
   max-width: 400px;
 }
-
+.PaginationComponent li.button {
+  /* border: red solid; */
+  border-radius: 0;
+  height: 40px;
+  margin: auto 0;
+}
 @media screen and (max-width: 767px) {
   .PaginationComponent .select-div {
     margin: 0 auto;

@@ -1,99 +1,70 @@
 import React, { useState } from "react";
 import { MdOutlineFlightLand, MdOutlineFlightTakeoff } from "react-icons/md";
-import LoadingComponent from "../Loading/LoadingComponent";
+import { UserActionDropDown } from "../DropDownMenu/DropDownMenu";
+// import LoadingComponent from "../Loading/LoadingComponent";
 import PaginationComponent from "../Pagination/PaginationComponent";
+import { LoaderBorderComponent } from "../Spinner/SpinnerComponent";
 import "./MapListComponents.css";
-function MapListComponents({ allFlights }) {
-  // console.log(convertToDate(1649334180));
-  function convertToDate(unixTime) {
-    // console.log(unixTime);
-    var dateTIme = Date(unixTime * 1000);
-    let dateTimeArray = dateTIme.split(" ");
-    const date = `  ${dateTimeArray[0]}-${dateTimeArray[2]}-${dateTimeArray[1]}-${dateTimeArray[3]}`;
-    const time = ` ${dateTimeArray[4]}-${dateTimeArray[5]}`;
-    return [date, time];
-  }
+function MapListComponents({ users }) {
+  // // console.log(convertToDate(1649334180));
+  // function convertToDate(unixTime) {
+  //   // console.log(unixTime);
+  //   var dateTIme = Date(unixTime * 1000);
+  //   let dateTimeArray = dateTIme.split(" ");
+  //   const date = `  ${dateTimeArray[0]}-${dateTimeArray[2]}-${dateTimeArray[1]}-${dateTimeArray[3]}`;
+  //   const time = ` ${dateTimeArray[4]}-${dateTimeArray[5]}`;
+  //   return [date, time];
+  // }
 
+  // let listIndexNumber = [...users];
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(10);
 
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = allFlights.data.slice(indexOfFirstItem, indexOfLastItem);
-
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+  // console.log(currentItems);
   return (
     <div className="MapListComponents">
-      {allFlights.loading ? (
-        <LoadingComponent />
-      ) : (
-        <>
-          <div className="table-responsive">
-            <table className="table">
-              <thead className="">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">icao24 address </th>
-                  <th scope="col">
-                    <MdOutlineFlightTakeoff className="" />
-                    DepartureAirport
-                  </th>
-
-                  <th
-                    scope="col"
-                    style={{ minWidth: "200px", textAlign: "center" }}
-                  >
-                    firstSeen
-                  </th>
-                  <th scope="col">
-                    {" "}
-                    <MdOutlineFlightLand className="" />
-                    ArrivalAirport
-                  </th>
-                  <th
-                    scope="col"
-                    style={{ minWidth: "200px", textAlign: "center" }}
-                  >
-                    lastSeen
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((flight, index) => {
-                  const {
-                    icao24,
-                    estDepartureAirport,
-                    firstSeen,
-                    estArrivalAirport,
-                    lastSeen,
-                  } = flight;
-                  return (
-                    <tr key={index}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{icao24}</td>
-                      <td>
-                        {estDepartureAirport ? estDepartureAirport : "..."}
-                      </td>
-                      <td>
-                        {convertToDate(firstSeen)[0] +
-                          "/ " +
-                          convertToDate(firstSeen)[1]}
-                      </td>
-                      <td>{estArrivalAirport ? estArrivalAirport : "..."}</td>
-                      <td>
-                        {convertToDate(lastSeen)[0] +
-                          "/ " +
-                          convertToDate(lastSeen)[1]}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
+      {/* {users ? (
+        <LoaderBorderComponent />
+      ) : ( */}
+      <>
+        <div className="table-responsive">
+          <table className="table">
+            <thead className="">
+              <tr>
+                <th> # </th>
+                <th> Name </th>
+                <th> Email </th>
+                <th> Number </th>
+                <th> User Name </th>
+                <th> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.map((user, index) => {
+                return (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{user.fullName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phoneNumber}</td>
+                    <td>{user.userName}</td>
+                    {/* <td>{user.userName}</td> */}
+                    <td>
+                      <UserActionDropDown />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </>
+      {/* )} */}
       <PaginationComponent
-        allFlights={allFlights}
+        users={users}
         currentPage={currentPage}
         itemPerPage={itemPerPage}
         setCurrentPage={setCurrentPage}
