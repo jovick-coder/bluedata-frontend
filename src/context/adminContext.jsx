@@ -9,12 +9,13 @@ export function AdminProvider({ children }) {
   const [resellers, setResellers] = useState([]);
   const [admins, setAdmins] = useState([]);
 
-  useEffect(() => {
-    getAllInfo();
-  }, []);
-  const { apiUrl, userPrivilege, token } = useContext(UserContext);
+  const { apiUrl, token } = useContext(UserContext);
 
   async function getAllInfo() {
+    const tokenArray = token.split(".");
+    const decode = JSON.parse(atob(tokenArray[1]));
+
+    const userPrivilege = decode.privilege;
     const axiosInstance = axios.create({
       headers: {
         Authorization: token,
@@ -45,7 +46,7 @@ export function AdminProvider({ children }) {
   }
 
   return (
-    <AdminContext.Provider value={{ users, resellers, admins }}>
+    <AdminContext.Provider value={{ users, resellers, admins, getAllInfo }}>
       {children}
     </AdminContext.Provider>
   );
