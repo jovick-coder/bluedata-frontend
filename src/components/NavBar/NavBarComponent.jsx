@@ -4,8 +4,11 @@ import profilePicture from "../../assets/images/profilePicture.jpg";
 import {
   BsArrowLeftSquareFill,
   BsArrowRightSquareFill,
+  BsBell,
   BsCaretDownFill,
   BsFillDoorOpenFill,
+  BsHouse,
+  BsPerson,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginForm, SignUpForm } from "../Forms/FormsComponent";
@@ -30,9 +33,12 @@ function NavBarComponent() {
       <div className="container mx-auto d-flex justify-content-between ">
         <LogoComponent />
         {loggedIn ? (
-          <>
-            <NavMenuComponent setLoggedIn={setLoggedIn} />
-          </>
+          <div className="d-flex">
+            <NavMenuComponent setLoggedIn={setLoggedIn} />{" "}
+            {/* <button className="button h-75 my-auto ms-2">
+              <Link to={"./dashboard/home"}>Home</Link>
+            </button> */}
+          </div>
         ) : (
           <div className="d-flex drop-down-div">
             {/* <Link className="my-auto mx-3" to="/">
@@ -132,35 +138,62 @@ export const NavMenuComponent = ({ setLoggedIn }) => {
     window.confirm("logout?") && setLoggedIn(false);
     navigate("/");
   }
+
+  const { logOut } = useContext(UserContext);
   return (
-    <div
-      className="NavMenuComponent"
-      onClick={() => {
-        navMenuComponent
-          ? setNavMenuComponent(false)
-          : setNavMenuComponent(true);
-      }}
-    >
-      <NavProfilePicture
-        navMenuComponent={navMenuComponent}
-        setNavMenuComponent={setNavMenuComponent}
-      />{" "}
-      <BsCaretDownFill className="my-auto" />
-      <ul
-        className="dropdown-menu-ul"
-        style={
-          navMenuComponent ? { display: "inline-block" } : { display: "none" }
-        }
+    <>
+      {" "}
+      <div
+        className="NavMenuComponent"
+        onClick={() => {
+          navMenuComponent
+            ? setNavMenuComponent(false)
+            : setNavMenuComponent(true);
+        }}
       >
-        <li>Post</li>
-        <li>Profile</li>
-        <li>Favorite</li>
-        <hr />
-        <li onClick={() => logout()} className="logout">
-          Logout
-        </li>
-      </ul>
-    </div>
+        <NavProfilePicture
+          navMenuComponent={navMenuComponent}
+          setNavMenuComponent={setNavMenuComponent}
+        />{" "}
+        <BsCaretDownFill className="my-auto" />
+        <ul
+          className="dropdown-menu-ul"
+          style={
+            navMenuComponent ? { display: "inline-block" } : { display: "none" }
+          }
+        >
+          <li>
+            <Link to={"./dashboard/home"}>
+              <span className="me-2">
+                <BsHouse />
+              </span>
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link to={"./dashboard/profile"}>
+              <span className="me-2">
+                <BsPerson />
+              </span>
+              Profile
+            </Link>
+          </li>
+          <li>
+            <Link to={"./dashboard/notification"}>
+              <span className="me-2">
+                <BsBell />
+              </span>
+              Notification
+            </Link>
+          </li>
+
+          <hr />
+          <li onClick={() => logOut()} className="logout text-danger">
+            Logout
+          </li>
+        </ul>
+      </div>
+    </>
   );
 };
 
