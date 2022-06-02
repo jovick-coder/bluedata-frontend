@@ -111,7 +111,7 @@ font-size: 14px;
 }
 
 .DashboardActionCard .label-div{
-  z-index: 5;
+  /* z-index: ; */
   position: absolute;
   color: var(--btn-color-primary);
   /* border: solid; */
