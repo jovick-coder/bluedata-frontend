@@ -1,6 +1,6 @@
 import React from "react";
 
-function ModalComponent({ btnText, modalTitle, children }) {
+function ModalComponent({ btnText, modalTitle, children, modalId }) {
   return (
     <>
       {/* <!-- Button trigger modal --> */}
@@ -16,17 +16,20 @@ function ModalComponent({ btnText, modalTitle, children }) {
       {/* <!-- Modal --> */}
       <div
         className="modal fade mt-5"
-        id="staticBackdrop"
+        id={`${modalId}`}
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
+        // aria-labelledby={`${modalId}Label`}
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
+              <h5
+                className="modal-title"
+                // id={`${modalId}Label`}
+              >
                 {modalTitle}
               </h5>
               <button
