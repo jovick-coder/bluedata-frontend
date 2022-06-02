@@ -39,8 +39,8 @@ export function UserProvider({ children }) {
       return "Super Admin";
     }
   }
-  const apiUrl = "http://localhost:5000/api";
-  // const apiUrl = "https://blue-data-api.herokuapp.com/api";
+  // const apiUrl = "http://localhost:5000/api";
+  const apiUrl = "https://blue-data-api.herokuapp.com/api";
 
   useEffect(() => {
     if (!token || token === "") {
