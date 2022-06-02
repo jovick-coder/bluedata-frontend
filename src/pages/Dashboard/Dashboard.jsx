@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { DashboardSideNav } from "../../components/NavBar/NavBarComponent";
 import "./Dashboard.css";
@@ -6,7 +6,7 @@ import { UserContext } from "../../context/userContext";
 import { AuthorizeAction } from "../../components/Forms/FormsComponent";
 
 function Dashboard() {
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, getUserInfo } = useContext(UserContext);
   const [sideNavOpen, setSideNavOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -14,6 +14,9 @@ function Dashboard() {
     navigate("/");
   }
 
+  useEffect(() => {
+    // getUserInfo();
+  }, []);
   return (
     <div className="Dashboard">
       <input
