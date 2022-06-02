@@ -24,8 +24,23 @@ export function UserProvider({ children }) {
     const userPrivilege = decode.privilege;
     return userPrivilege;
   }
-  // const apiUrl = "http://localhost:5000/api";
-  const apiUrl = "https://blue-data-api.herokuapp.com/api";
+
+  function checkPrivilege(privilege) {
+    if (privilege === 1) {
+      return "User";
+    }
+    if (privilege === 2) {
+      return "Reseller";
+    }
+    if (privilege === 3) {
+      return "Admin";
+    }
+    if (privilege === 4) {
+      return "Super Admin";
+    }
+  }
+  const apiUrl = "http://localhost:5000/api";
+  // const apiUrl = "https://blue-data-api.herokuapp.com/api";
 
   useEffect(() => {
     if (!token || token === "") {
@@ -37,13 +52,13 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     // if(!token && token!== ''){
-    //   getUserInfo();
+    getUserInfo();
     // }
   }, []);
 
   const navigate = useNavigate();
   function logOut() {
-    if (window.confirm("You will be logged out of your account")) {
+    if (window.confirm("You will be logged out of your account !!!")) {
       localStorage.removeItem("telecomMerchantToken");
 
       setUserAccountInformation([]);
@@ -185,6 +200,7 @@ export function UserProvider({ children }) {
         authorizeAction,
         token,
         getUserPrivilege,
+        checkPrivilege,
       }}
     >
       {children}
