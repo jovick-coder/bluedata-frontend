@@ -11,7 +11,7 @@ function ProfilePage() {
   const [isUpdateProfile, setIseUpdateProfile] = useState(false);
   const { userInformation, getUserInfo } = useContext(UserContext);
   useEffect(() => {
-    getUserInfo();
+    // getUserInfo();
   }, []);
   return (
     <>
@@ -46,7 +46,7 @@ export function Profile({
     userInformation;
 
   useEffect(() => {
-    getUserInfo();
+    // getUserInfo();
   }, []);
   function checkPrivilege(privilege) {
     if (privilege === 1) {
@@ -251,7 +251,7 @@ export function UpdateProfile({
   // getUserInfo,
 }) {
   useEffect(() => {
-    getUserInfo();
+    // getUserInfo();
   }, []);
   const { setPopUpMessage } = useContext(PopUpMessageContext);
   const { token, getUserInfo } = useContext(UserContext);
