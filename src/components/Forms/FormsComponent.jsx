@@ -192,7 +192,11 @@ export function AuthorizeAction() {
   const { authorizeAction } = useContext(UserContext);
 
   return (
-    <ModalComponent btnText="UpGreed User" modalTitle="Authorize Action">
+    <ModalComponent
+      btnText="UpGreed User"
+      modalTitle="Authorize Action"
+      modalId="AuthorizeAction"
+    >
       <form
         action=""
         onSubmit={(e) => {
@@ -344,3 +348,138 @@ export function GoogleLoginButton() {
 
 //   return FaceBookS;
 // }
+
+export function AddNotificationForm() {
+  const [aUserNotification, setAUserNotification] = useState(false);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+  const { apiUrl, userInformation, checkPrivilege, token } =
+    useContext(UserContext);
+
+  // function checkPrivilege(privilege) {
+  //   if (privilege === 1) {
+  //     return "Users";
+  //   }
+  //   if (privilege === 2) {
+  //     return "Resellers";
+  //   }
+  //   if (privilege === 3) {
+  //     return "Admins";
+  //   }
+  //   if (privilege === 4) {
+  //     return "Super Admins";
+  //   }
+  // }
+
+  async function handelSubmit(e) {
+    e.preventDefault();
+
+    const formElement = e.target;
+    let messageError;
+    if (aUserNotification) {
+      messageError = "User ID is empty";
+    } else {
+      messageError = "Select A Category";
+    }
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: messageError,
+      });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+    if (formElement[1].value === "") {
+      formElement[1].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Notification Message is empty",
+      });
+      return;
+    }
+    let category;
+    if (aUserNotification) {
+      category = "Single User Notification";
+    } else {
+      if (formElement[0].value === "*") {
+        category = `General Notification`;
+      } else {
+        let userPrivilege = checkPrivilege(Number(formElement[0].value));
+        category = `${userPrivilege}s Notification`;
+      }
+    }
+    formElement[1].style.border = "solid #ddd 1px";
+    formElement[2].innerText = "Loading...";
+    formElement[2].setAttribute("disabled", true);
+    const { userName } = userInformation;
+    const sendBody = {
+      adminName: userName,
+      message: formElement[1].value,
+      privilege: formElement[0].value,
+      category: category,
+    };
+    // console.log(sendBody);
+    const axiosInstance = axios.create({
+      headers: {
+        Authorization: token,
+      },
+    });
+    try {
+      const resp = await axiosInstance.post(`${apiUrl}/notification`, sendBody);
+      if (resp.data.ok) {
+        setPopUpMessage({
+          messageType: "success",
+          message: ` Successfully set ${category}`,
+        });
+        formElement[2].innerText = "Send Notification";
+        formElement[2].removeAttribute("disabled");
+      }
+    } catch (error) {
+      // console.log("Error->", error.response.data);
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      formElement[2].innerText = "Send Notification";
+      formElement[2].removeAttribute("disabled");
+      formElement[2].style.border = "solid red 1px";
+    }
+  }
+  return (
+    <>
+      <div className="d-flex justify-content-between">
+        <b>Send Notification</b>
+        <span>
+          Single User{" "}
+          <input
+            type="checkbox"
+            onChange={() => setAUserNotification(!aUserNotification)}
+          />
+        </span>
+      </div>
+      <form action="" onSubmit={(e) => handelSubmit(e)}>
+        {aUserNotification ? (
+          <input className="form-control my-3" placeholder="User Id" />
+        ) : (
+          <select className="form-select mt-3">
+            <option value="">Send To</option>
+            <option value="*">General</option>
+            <option value="1">Users</option>
+            <option value="2">Resellers</option>
+            <option value="3">Admins</option>
+          </select>
+        )}
+        <textarea
+          type="text"
+          className="form-control my-3"
+          placeholder="Notification"
+          cols="10"
+          rows="3"
+        ></textarea>
+        <button className="button" type="submit">
+          Send Notification
+        </button>
+      </form>
+    </>
+  );
+}
