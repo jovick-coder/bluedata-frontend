@@ -2,15 +2,22 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import { UserContext } from "../../context/userContext";
-import { BsEyeFill } from "react-icons/bs";
+import {
+  BsEyeFill,
+  BsPlus,
+  BsPlusCircleDotted,
+  BsPlusCircleFill,
+} from "react-icons/bs";
 import "./NotificationPage.css";
+import ModalComponent from "../../components/Modal/ModalComponent";
+import { AddNotificationForm } from "../../components/Forms/FormsComponent";
 function NotificationPage() {
   const [notification, setNotification] = useState([]);
   useEffect(() => {
     getNotification();
   }, []);
   const token = localStorage.getItem("telecomMerchantToken");
-  const { apiUrl } = useContext(UserContext);
+  const { apiUrl, getUserPrivilege } = useContext(UserContext);
 
   async function getNotification() {
     try {
@@ -71,9 +78,31 @@ function NotificationPage() {
     }
   }
   // console.log(notification);
+
   return (
     <div className="NotificationPage pt-5">
+      {/* Add notification model */}
+      <ModalComponent modalTitle="Add Note" modalId={"AddNotification"}>
+        <AddNotificationForm />
+      </ModalComponent>
       <GroupCard>
+        {getUserPrivilege() >= 3 ? (
+          <>
+            <div className="header d-flex justify-content-between">
+              {/* <h3>New Notification</h3> */}
+              <button
+                className="button "
+                data-bs-toggle="modal"
+                data-bs-target="#AddNotification"
+              >
+                {" "}
+                <BsPlusCircleFill className="me-2 fs-4" />
+                Add Notification
+              </button>
+            </div>
+            <hr />
+          </>
+        ) : null}
         <div className="header d-flex justify-content-between">
           <h3>Notification</h3>
           <button className="button  btn-sm" onClick={() => markHasSeen("*")}>
@@ -97,11 +126,11 @@ function NotificationPage() {
                   // className={type === "+" ? "cr" : "dr"}
                 >
                   <span className="w-100 me-4">
-                    <sup className="d-flex mt-2 mb-0">
-                      <div className="figure me-2">
+                    <sup className="d-inline d-md-flex mt-2 mb-0 flex-wrap">
+                      <div className="figure me-2 my-2 ">
                         {adminName}, {privilege === 3 ? "Admin" : "Super Admin"}{" "}
                       </div>
-                      <div className="date">{getDate(date)}</div>
+                      <div className="date my-2 ">{getDate(date)}</div>
                     </sup>
                     <hr className="my-0" />
                     {message}
