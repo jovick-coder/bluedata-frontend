@@ -41,36 +41,36 @@ export function UserActionDropDown({ accountType, accountPrivilege }) {
     <ActionDropDownMenu>
       <li>
         <span
-          class="dropdown-item"
+          className="dropdown-item"
           data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
+          data-bs-target="#AuthorizeAction"
         >
           Delete this {accountType} Account
         </span>
       </li>
       <li>
         <span
-          class="dropdown-item"
+          className="dropdown-item"
           data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
+          data-bs-target="#AuthorizeAction"
         >
           Suspend this {accountType} Account
         </span>
       </li>
       <li>
         <span
-          class="dropdown-item"
+          className="dropdown-item"
           data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
+          data-bs-target="#AuthorizeAction"
         >
           Up Grade {accountType} to {UpgradeType(accountPrivilege)}
         </span>
       </li>
       <li>
         <span
-          class="dropdown-item"
+          className="dropdown-item"
           data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
+          data-bs-target="#AuthorizeAction"
         >
           Up Grade User Account
         </span>
