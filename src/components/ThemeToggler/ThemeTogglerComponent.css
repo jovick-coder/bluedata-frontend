@@ -1,22 +1,24 @@
 .toggle-theme {
   position: fixed;
-  right: 0;
-  bottom: 80px;
+  left: 0;
+  bottom: 20px;
   z-index: 3;
   color: var(--text-color-primary);
   background-color: var(--color-secondary);
   /* border-radius: 30px 0 0 30px; */
   padding: 5px 3px 5px 10px;
   border: var(--text-color) solid;
-  box-shadow: 1px 1px 5px black;
+  /* box-shadow: 1px 1px 5px black; */
+  font-size: 20px;
+  width: 55px;
 }
 
 .toggle-theme:hover {
   width: 100px;
   display: flex;
   align-items: center;
-}
-.toggle-theme:hover::after {
+} 
+ .toggle-theme:hover::after {
   content: " Night";
   padding-left: 3px;
 }
