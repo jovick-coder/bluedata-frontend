@@ -109,7 +109,7 @@ function HistoryPage() {
             <div className="notFound">No History Found</div>
           ) : (
             userHistories.map((history) => {
-              const { amount, date, type, _id } = history;
+              const { amount, date, type, _id, description } = history;
               return (
                 <li
                   key={_id}
@@ -122,7 +122,9 @@ function HistoryPage() {
                       <div className="date">{getDate(date)}</div>
                     </sup>
                     <hr className="my-0" />
-                    This is a {type === "+" ? "credit" : "debit"} Alert
+                    {description === ""
+                      ? `This is a ${type === "+" ? "credit" : "debit"} Alert`
+                      : description}
                   </span>
                   <button
                     className="button btn-danger btn-sm"
