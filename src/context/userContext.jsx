@@ -175,7 +175,8 @@ export function UserProvider({ children }) {
         formElement[1].removeAttribute("disabled");
         formElement[1].innerText = `Authorize Action`;
         formElement[0].value = "";
-        window.document.getElementById("closeModal").click();
+        // auto close modal box
+        window.document.getElementById("closeAuthorizeAction").click();
       }
     } catch (error) {
       console.log("Error->", error.response.data);

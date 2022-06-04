@@ -37,7 +37,7 @@ function ModalComponent({ btnText, modalTitle, children, modalId }) {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                id="closeModal"
+                id={`close${modalId}`}
               ></button>
             </div>
             <div className="modal-body">{children}</div>
