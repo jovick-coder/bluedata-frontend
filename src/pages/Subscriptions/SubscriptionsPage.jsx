@@ -6,47 +6,419 @@ import airtelLogo from ".././../assets/airtel.png";
 import mobileLogo from ".././../assets/9mobile.png";
 import "./SubscriptionsPage.css";
 import { PopUpMessageContext } from "../../context/PopUpMessageContext";
+import { UserContext } from "../../context/userContext";
+import axios from "axios";
 
 function SubscriptionsPage() {
+  const { apiUrl, token } = useContext(UserContext);
   const { setPopUpMessage } = useContext(PopUpMessageContext);
   const [network, setNetwork] = useState("");
   const [dataPlan, setDataPlan] = useState([]);
+  const [allDataPlanes, setAllDataPlanes] = useState([
+    {
+      Data_ID: 289,
+      Network: 1,
+      Plan_type: "SME",
+      Amount: 125,
+      Size: "500 MB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 290,
+      Network: 1,
+      Plan_type: "SME",
+      Amount: 250,
+      Size: "1.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 291,
+      Network: 1,
+      Plan_type: "SME",
+      Amount: 500,
+      Size: "2.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 292,
+      Network: 1,
+      Plan_type: "SME",
+      Amount: 750,
+      Size: "3.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 293,
+      Network: 1,
+      Plan_type: "SME",
+      Amount: 1250,
+      Size: "5.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 294,
+      Network: 1,
+      Plan_type: "SME",
+      Amount: 2500,
+      Size: "10.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 252,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 400,
+      Size: "1.3 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 253,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 800,
+      Size: "2.9 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 254,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 1275,
+      Size: "4.1 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 255,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 1600,
+      Size: "5.2 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 256,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 2000,
+      Size: "7.7 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 257,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 2550,
+      Size: "10.0 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 258,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 3280,
+      Size: "13.25 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 259,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 4250,
+      Size: "18.25 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 260,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 6800,
+      Size: "29.0 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 261,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 8000,
+      Size: "50.0 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 262,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 12750,
+      Size: "93.0 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 263,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 15300,
+      Size: "119.0 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 264,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 17000,
+      Size: "138.0 GB",
+      Validity: "	MONTHLY",
+    },
+    {
+      Data_ID: 295,
+      Network: 2,
+      Plan_type: "GIFTING",
+      Amount: 1200,
+      Size: "7.0 GB",
+      Validity: "	SPECIAL 1500 7 DAYS",
+    },
+    {
+      Data_ID: 312,
+      Network: 4,
+      Plan_type: "CORPORATE GIFTING",
+      Amount: 175,
+      Size: "500.0 MB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 313,
+      Network: 4,
+      Plan_type: "CORPORATE GIFTING",
+      Amount: 350,
+      Size: "1.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 314,
+      Network: 4,
+      Plan_type: "CORPORATE GIFTING",
+      Amount: 700,
+      Size: "2.0 GB",
+      Validity: "MONTHLY",
+    },
+    {
+      Data_ID: 315,
+      Network: 4,
+      Plan_type: "CORPORATE GIFTING",
+      Amount: 1750,
+      Size: "5.0 GB",
+      Validity: "MONTHLY",
+    },
+  ]);
 
   useEffect(() => {
-    if (network === "MTN") {
+    if (network === 1) {
       setDataPlan([
-        { plan: "MTN 500MB @150", value: "MTN 500MB" },
-        { plan: "MTN 1GB @300", value: "MTN 1GB" },
-        { plan: "MTN 2GB @600", value: "MTN 2GB" },
-        { plan: "MTN 3GB @1200", value: "MTN 3GB" },
+        {
+          Data_ID: 289,
+          Network: 1,
+          Plan_type: "SME",
+          Amount: 125,
+          Size: "500 MB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 290,
+          Network: 1,
+          Plan_type: "SME",
+          Amount: 250,
+          Size: "1.0 GB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 291,
+          Network: 1,
+          Plan_type: "SME",
+          Amount: 500,
+          Size: "2.0 GB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 292,
+          Network: 1,
+          Plan_type: "SME",
+          Amount: 750,
+          Size: "3.0 GB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 293,
+          Network: 1,
+          Plan_type: "SME",
+          Amount: 1250,
+          Size: "5.0 GB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 294,
+          Network: 1,
+          Plan_type: "SME",
+          Amount: 2500,
+          Size: "10.0 GB",
+          Validity: "MONTHLY",
+        },
       ]);
       return;
     }
-    if (network === "GLO") {
+    if (network === 2) {
       setDataPlan([
-        { plan: "GLO 500MB @200", value: "GLO 500MB" },
-        { plan: "GLO 1GB @400", value: "GLO 1GB" },
-        { plan: "GLO 2GB @800", value: "GLO 2GB" },
-        { plan: "GLO 3GB @1400", value: "GLO 3GB" },
+        {
+          Data_ID: 252,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 400,
+          Size: "1.3 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 253,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 800,
+          Size: "2.9 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 254,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 1275,
+          Size: "4.1 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 255,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 1600,
+          Size: "5.2 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 256,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 2000,
+          Size: "7.7 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 257,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 2550,
+          Size: "10.0 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 258,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 3280,
+          Size: "13.25 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 259,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 4250,
+          Size: "18.25 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 260,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 6800,
+          Size: "29.0 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 261,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 8000,
+          Size: "50.0 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 262,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 12750,
+          Size: "93.0 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 263,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 15300,
+          Size: "119.0 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 264,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 17000,
+          Size: "138.0 GB",
+          Validity: "	MONTHLY",
+        },
+        {
+          Data_ID: 295,
+          Network: 2,
+          Plan_type: "GIFTING",
+          Amount: 1200,
+          Size: "7.0 GB",
+          Validity: "	SPECIAL 1500 7 DAYS",
+        },
       ]);
       return;
     }
-    if (network === "Artel") {
+    if (network === 4) {
       setDataPlan([
-        { plan: "Artel 500MB @500", value: "Artel 500MB" },
-        { plan: "Artel 1GB @1000", value: "Artel 1GB" },
-        { plan: "Artel 2GB @2000", value: "Artel 2GB" },
-        { plan: "Artel 3GB @3000", value: "Artel 3GB" },
+        {
+          Data_ID: 312,
+          Network: 4,
+          Plan_type: "CORPORATE GIFTING",
+          Amount: 175,
+          Size: "500.0 MB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 313,
+          Network: 4,
+          Plan_type: "CORPORATE GIFTING",
+          Amount: 350,
+          Size: "1.0 GB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 314,
+          Network: 4,
+          Plan_type: "CORPORATE GIFTING",
+          Amount: 700,
+          Size: "2.0 GB",
+          Validity: "MONTHLY",
+        },
+        {
+          Data_ID: 315,
+          Network: 4,
+          Plan_type: "CORPORATE GIFTING",
+          Amount: 1750,
+          Size: "5.0 GB",
+          Validity: "MONTHLY",
+        },
       ]);
       return;
     }
-    if (network === "9Mobile") {
-      setDataPlan([
-        { plan: "9Mobile 500MB @550", value: "9mobile 500MB" },
-        { plan: "9Mobile 1GB @1200", value: "9mobile 1GB" },
-        { plan: "9Mobile 2GB @2400", value: "9mobile 2GB" },
-        { plan: "9Mobile 3GB @3600", value: "9mobile 3GB" },
-      ]);
+    if (network === 3) {
+      setDataPlan([]);
       return;
     }
     if (network !== "") {
@@ -58,23 +430,79 @@ function SubscriptionsPage() {
     }
   }, [network]);
 
-  function selectNetwork(network) {
-    // console.log(network);
-    setNetwork(network);
+  function getNetworkName(networkNumber) {
+    if (networkNumber === 1) {
+      return "MTN";
+    }
+    if (networkNumber === 2) {
+      return "GLO";
+    }
+    if (networkNumber === 3) {
+      return "9Mobile";
+    }
+    if (networkNumber === 4) {
+      return "Artel";
+    }
   }
-  function handelSubmit(e) {
+
+  function selectNetwork(network) {
+    if (network === "9Mobile") {
+      setPopUpMessage({
+        messageType: "error",
+        message: "9Mobile Currently not available",
+      });
+      return;
+    }
+    let Network_id;
+
+    if (network === "MTN") {
+      Network_id = 1;
+    }
+    if (network === "GLO") {
+      Network_id = 2;
+    }
+    if (network === "9Mobile") {
+      Network_id = 3;
+    }
+    if (network === "Artel") {
+      Network_id = 4;
+    }
+    // console.log(network);
+    setNetwork(Network_id);
+  }
+
+  function getDataObject(data_id) {
+    let objectId;
+    allDataPlanes.some(function (el, i) {
+      objectId = i;
+      return el.Data_ID === data_id;
+    });
+    return objectId;
+  }
+
+  async function handelSubmit(e) {
     e.preventDefault();
+    const url = `${apiUrl}/buySub`;
     const formElement = e.target;
+    if (network === "") {
+      setPopUpMessage({
+        messageType: "error",
+        message: "Network is not selected",
+      });
+      return;
+    }
 
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
       setPopUpMessage({
         messageType: "error",
-        message: "Network is not selected",
+        message: "Plan is not selected",
       });
       // setFormError({ error: true, message: "" });
       return;
     }
+    formElement[0].style.border = "solid #ddd 1px";
+
     formElement[0].style.border = "solid #ddd 1px";
     if (formElement[1].value === "") {
       formElement[1].style.border = "solid red 1px";
@@ -85,27 +513,57 @@ function SubscriptionsPage() {
       // setFormError({ error: true, message: "" });
       return;
     }
-    formElement[1].style.border = "solid #ddd 1px";
-    if (formElement[2].value === "") {
-      formElement[2].style.border = "solid red 1px";
+
+    if (formElement[1].value.toString().length < 11) {
+      formElement[1].style.border = "solid red 1px";
       setPopUpMessage({
         messageType: "error",
-        message: "Amount is empty",
+        message: "Invalid Number",
       });
-      // setFormError({ error: true, message: "" });
       return;
     }
-    // setFormError({ error: false, message: "" });
-    formElement[2].style.border = "solid #ddd 1px";
+    formElement[1].style.border = "solid #ddd 1px";
+
+    const objectId = getDataObject(parseInt(formElement[0].value));
+
     const sendBody = {
-      plan: formElement[0].value,
-      Number: parseInt(formElement[1].value),
-      amount: parseInt(formElement[2].value),
-      method: "-",
+      ...allDataPlanes[objectId],
+      Number: formElement[1].value,
+      network_name: getNetworkName(network),
     };
     console.log(sendBody);
-    // formElement[3].innerText = "Sending...";
-    // formElement[3].setAttribute("disabled", true);
+    formElement[2].innerText = "Sending...";
+    formElement[2].setAttribute("disabled", true);
+    try {
+      const resp = await axios.post(`${url}`, sendBody, {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(resp);
+      // if (resp.data.ok) {
+      setPopUpMessage({
+        messageType: "success",
+        message: "Transaction SuccessFul",
+      });
+
+      formElement[2].innerText = "Submit";
+      formElement[2].removeAttribute("disabled");
+      // }
+    } catch (error) {
+      // if (error.response.data.ok) {
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      formElement[2].innerText = "Submit";
+      formElement[2].removeAttribute("disabled");
+      formElement[2].style.border = "solid red 1px";
+      // }
+
+      console.log("error-> ", error);
+    }
   }
 
   return (
@@ -149,10 +607,14 @@ function SubscriptionsPage() {
               {network === "" ? (
                 <option value="">Select a Network</option>
               ) : (
-                <option value="">{`Select an ${network} Plan `}</option>
+                <option value="">{`Select an ${getNetworkName(
+                  network
+                )} Plan `}</option>
               )}
               {dataPlan.map((plan) => (
-                <option value={plan.value}>{plan.plan}</option>
+                <option value={plan.Data_ID}>
+                  ₦{plan.Amount}, {plan.Size} - {plan.Validity}
+                </option>
               ))}
             </select>
             <input
@@ -160,11 +622,7 @@ function SubscriptionsPage() {
               className="form-control my-2"
               placeholder="Number"
             />
-            <input
-              type="number"
-              className="form-control my-2"
-              placeholder="Amount"
-            />
+
             <button className="button" type="submit">
               {" "}
               Submit
