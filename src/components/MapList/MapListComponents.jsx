@@ -35,6 +35,7 @@ function MapListComponents({ users }) {
             <thead className="">
               <tr>
                 <th> # </th>
+                <th> ID </th>
                 <th> Name </th>
                 <th> Email </th>
                 <th> Number </th>
@@ -47,6 +48,7 @@ function MapListComponents({ users }) {
                 return (
                   <tr>
                     <td>{index + 1}</td>
+                    <td>{user._id}</td>
                     <td>{user.fullName}</td>
                     <td>{user.email}</td>
                     <td>{user.phoneNumber}</td>
