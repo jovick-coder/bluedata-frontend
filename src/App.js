@@ -19,6 +19,8 @@ import CustomersListPage from "./pages/CustomersListPage/CustomersListPage";
 import AdminListPage from "./pages/AdminListPage/AdminListPage";
 import ResellersListPage from "./pages/ResellersListPage/ResellersListPage";
 import PopUpMessageComponent from "./components/PopUpMessage/PopUpMessageComponent";
+import ApiHistoryPage from "./pages/ApiHistory/ApiHistoryPage";
+import APIDashboard from "./pages/APIDashboard/APIDashboard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,6 +45,8 @@ function App() {
           <Route path="resellers-list" element={<ResellersListPage />} />
           <Route path="customers-list" element={<CustomersListPage />} />
           <Route path="admin-list" element={<AdminListPage />} />
+          <Route path="api-dashboard" element={<APIDashboard />} />
+          <Route path="api-history" element={<ApiHistoryPage />} />
         </Route>
 
         <Route path="/404" element={<ErrorPage />} />

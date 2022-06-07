@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import "./FoundAccountPage.css";
 import { UserContext } from "../../context/userContext";
@@ -136,10 +136,10 @@ function FoundAccountPage() {
     `;
     messageBody = messageBody.split(" ").join("+");
     // console.log(messageBody);
-    // window.open(
-    //   `https://api.whatsapp.com/send/?phone=2348137297150&text=${messageBody}&app_absent=0`,
-    //   "_blank"
-    // );
+    window.open(
+      `https://api.whatsapp.com/send/?phone=2348137297150&text=${messageBody}&app_absent=0`,
+      "_blank"
+    );
 
     formElement[0].value = "";
     formElement[1].value = "";
@@ -163,7 +163,7 @@ function FoundAccountPage() {
       >
         <div>
           <h5>#1. Call Admin</h5>
-          <BsPhone /> 08137297150 <b>//</b>
+          <BsPhone /> 08137297150 <b>{"//"}</b>
           <BsPhone /> 08137297150
         </div>
         <hr />

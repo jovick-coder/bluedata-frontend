@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import LoadingComponent from "../Loading/LoadingComponent";
-import { LoaderBorderComponent } from "../Spinner/SpinnerComponent";
+// import { LoaderBorderComponent } from "../Spinner/SpinnerComponent";
 import "./PaginationComponent.css";
 
 function PaginationComponent({
@@ -86,10 +86,10 @@ function PaginationComponent({
       </>
     );
   }
-  useEffect(() => {
-    console.log(pages);
-    console.log(users);
-  }, [users]);
+  // useEffect(() => {
+  //   console.log(pages);
+  //   console.log(users);
+  // }, [users]);
 
   return (
     <div className="d-flex flex-wrap justify-content-between PaginationComponent">

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoaderBorderComponent } from "../components/Spinner/SpinnerComponent";
+// import { LoaderBorderComponent } from "../components/Spinner/SpinnerComponent";
 import { PopUpMessageContext } from "./PopUpMessageContext";
 
 export const UserContext = createContext();

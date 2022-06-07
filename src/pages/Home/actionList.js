@@ -1,17 +1,11 @@
 import { GiTwoCoins } from "react-icons/gi";
 import {
-  BsAward,
-  BsBellFill,
   BsCoin,
-  BsFillHddStackFill,
-  BsHouseFill,
   BsPeople,
   BsPerson,
-  BsPersonBadge,
   BsPersonBoundingBox,
   BsPersonCheck,
   BsPersonPlus,
-  BsPersonX,
   BsSimFill,
 } from "react-icons/bs";
 

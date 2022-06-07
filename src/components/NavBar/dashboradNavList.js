@@ -1,18 +1,19 @@
 import {
-  BsAward,
+  // BsAward,
   BsBellFill,
   BsCoin,
   BsFillHddStackFill,
   BsHouseFill,
   BsPeople,
   BsPerson,
-  BsPersonBadge,
+  // BsPersonBadge,
   BsPersonBoundingBox,
   BsPersonCheck,
   BsPersonPlus,
-  BsPersonX,
+  // BsPersonX,
   BsSimFill,
 } from "react-icons/bs";
+import { AiFillApi } from "react-icons/ai";
 
 export const userNavLinkObject = [
   {
@@ -73,6 +74,18 @@ export const userNavLinkObject = [
     name: "Admins List",
     icon: <BsPersonBoundingBox />,
     path: "/dashboard/admin-list",
+    userPrivilege: 4,
+  },
+  {
+    name: "API Dashboard",
+    icon: <AiFillApi />,
+    path: "/dashboard/Api-dashboard",
+    userPrivilege: 4,
+  },
+  {
+    name: "API History",
+    icon: <AiFillApi />,
+    path: "/dashboard/Api-history",
     userPrivilege: 4,
   },
 ];

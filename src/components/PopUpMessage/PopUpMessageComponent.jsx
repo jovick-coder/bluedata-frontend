@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  // ,
+  //  useEffect,
+  //   useState
+} from "react";
 import { BsX } from "react-icons/bs";
 import "./PopUpMessageComponent.css";
 import { PopUpMessageContext } from "../../context/PopUpMessageContext";

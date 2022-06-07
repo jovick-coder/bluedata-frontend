@@ -10,14 +10,10 @@ import {
   BsHouse,
   BsPerson,
 } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LoginForm, SignUpForm } from "../Forms/FormsComponent";
 import { UserContext } from "../../context/userContext";
-import {
-  userNavLinkObject,
-  adminNavLinkObject,
-  superAdminNavLinkObject,
-} from "./dashboradNavList";
+import { userNavLinkObject } from "./dashboradNavList";
 function NavBarComponent() {
   // function handelLogin() {
   //   // confirm("Logout?") navigate("/");
@@ -133,11 +129,11 @@ export const NavLinkComponent = ({ linkText, to }) => {
 
 export const NavMenuComponent = ({ setLoggedIn }) => {
   const [navMenuComponent, setNavMenuComponent] = useState(false);
-  const navigate = useNavigate();
-  function logout() {
-    window.confirm("logout?") && setLoggedIn(false);
-    navigate("/");
-  }
+  // const navigate = useNavigate();
+  // function logout() {
+  //   window.confirm("logout?") && setLoggedIn(false);
+  //   navigate("/");
+  // }
 
   const { logOut } = useContext(UserContext);
   return (

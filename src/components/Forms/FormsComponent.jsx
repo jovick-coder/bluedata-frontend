@@ -107,10 +107,10 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   const { setLoggedIn, apiUrl } = useContext(UserContext);
-  const [formError, setFormError] = useState({
-    error: false,
-    message: "",
-  });
+  // const [formError, setFormError] = useState({
+  //   error: false,
+  //   message: "",
+  // });
   const url = `${apiUrl}/user/login`;
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -170,9 +170,9 @@ export function LoginForm() {
     <>
       <form action="" onSubmit={(e) => handelSubmit(e)}>
         <h2 className="text-center fs-5 mt-0">Welcome to Telecom Merchant</h2>
-        {formError.error ? (
+        {/* {formError.error ? (
           <div className="alert alert-danger">{formError.message}</div>
-        ) : null}
+        ) : null} */}
         <input type="text" className="form-control" placeholder="Email" />
         <input
           type="password"
@@ -218,10 +218,10 @@ export function AuthorizeAction() {
 export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
   const { setPopUpMessage } = useContext(PopUpMessageContext);
 
-  const [formError, setFormError] = useState({
-    error: false,
-    message: "",
-  });
+  // const [formError, setFormError] = useState({
+  //   error: false,
+  //   message: "",
+  // });
   const { apiUrl } = useContext(UserContext);
 
   const url = `${apiUrl}/user/register`;
@@ -270,7 +270,7 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
     };
     console.log(sendBody);
     try {
-      const resp = await axios.post(url, sendBody);
+      // const resp = await axios.post(url, sendBody);
       formElement[3].innerText = "Successful";
       setSignInCardIsOpen(false);
       setLoginCardIsOpen(true);
@@ -292,9 +292,9 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
       {/* <LogoComponent /> */}
       <form action="" onSubmit={(e) => handelSubmit(e)}>
         <h2 className="text-center fs-5 mt-0">Welcome to Telecom Merchant</h2>
-        {formError.error ? (
+        {/* {formError.error ? (
           <div className="alert alert-danger">{formError.message}</div>
-        ) : null}
+        ) : null} */}
         <input type="text" className="form-control" placeholder="Email" />
         <input type="num" className="form-control" placeholder="Number" />
         <input

@@ -1,19 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
-import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import { UserContext } from "../../context/userContext";
-import axios from "axios";
-import ActionDropDownMenu, {
-  UserActionDropDown,
-} from "../../components/DropDownMenu/DropDownMenu";
+import { UserActionDropDown } from "../../components/DropDownMenu/DropDownMenu";
 import { UnAuthorizeAccess } from "../error_page/error_page.component";
 import { AdminContext } from "../../context/adminContext";
 
 function ResellersListPage() {
-  const [requestedUsers, setRequestedUsers] = useState("*");
+  // const [requestedUsers, setRequestedUsers] = useState("*");
   const [resellersList, setResellersList] = useState([]);
 
-  const { apiUrl, token, userPrivilege } = useContext(UserContext);
+  const { userPrivilege } = useContext(UserContext);
 
   const { resellers } = useContext(AdminContext);
 

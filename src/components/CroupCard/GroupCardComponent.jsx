@@ -1,6 +1,6 @@
 import React from "react";
 import "./GroupCardComponent.css";
-import { BsWallet } from "react-icons/bs";
+// import { BsWallet } from "react-icons/bs";
 
 const GroupCard = ({ children }) => {
   return <div className="main-card">{children}</div>;

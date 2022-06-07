@@ -12,7 +12,7 @@ function CustomersListPage() {
   // const token = localStorage.getItem("telecomMerchantToken");
   // const tokenArray = token.split(".");
   // const decode = JSON.parse(atob(tokenArray[1]));
-  const { apiUrl, getUserPrivilege } = useContext(UserContext);
+  const { getUserPrivilege } = useContext(UserContext);
 
   if (getUserPrivilege() < 2) {
     return (
