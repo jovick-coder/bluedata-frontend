@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import GoogleLogin from "react-google-login";
+// import GoogleLogin from "react-google-login";
 // import FacebookStrategy from 'passport-facebook'.sta
 // import { LogoComponent } from "../NavBar/NavBarComponent";
 // import MojoAuth from "mojoauth-web-sdk";
@@ -308,40 +308,40 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
   );
 }
 
-export function GoogleLoginButton() {
-  function responseSuccessGoogle(response) {
-    console.log(response);
-  }
-  function responseFailureGoogle(response) {
-    console.log(response);
-  }
-  //   gapi.client.init({
-  //     apiKey: API_KEY,
-  //     clientId: CLIENT_ID,
-  //     discoveryDocs: DISCOVERY_DOCS,
-  //     scope: SCOPES,
-  //     ux_mode: 'redirect'
-  //  }).then(function () {
-  //      ....
-  //  });
-  return (
-    // <>
-    //   <Script
-    //     src="https://accounts.google.com/gsi/client"
-    //     id="gsi-client"
-    //     async
-    //     defer
-    //   />
-    // </>
-    <GoogleLogin
-      clientId="90192338760-5po42gepdlg6akb893k0t0h2hn1tg54o.apps.googleusercontent.com"
-      buttonText="Login With Google"
-      onSuccess={responseSuccessGoogle}
-      onFailure={responseFailureGoogle}
-      cookiePolicy={"single_host_origin"}
-    />
-  );
-}
+// export function GoogleLoginButton() {
+//   function responseSuccessGoogle(response) {
+//     console.log(response);
+//   }
+//   function responseFailureGoogle(response) {
+//     console.log(response);
+//   }
+//   //   gapi.client.init({
+//   //     apiKey: API_KEY,
+//   //     clientId: CLIENT_ID,
+//   //     discoveryDocs: DISCOVERY_DOCS,
+//   //     scope: SCOPES,
+//   //     ux_mode: 'redirect'
+//   //  }).then(function () {
+//   //      ....
+//   //  });
+//   return (
+//     // <>
+//     //   <Script
+//     //     src="https://accounts.google.com/gsi/client"
+//     //     id="gsi-client"
+//     //     async
+//     //     defer
+//     //   />
+//     // </>
+//     <GoogleLogin
+//       clientId="90192338760-5po42gepdlg6akb893k0t0h2hn1tg54o.apps.googleusercontent.com"
+//       buttonText="Login With Google"
+//       onSuccess={responseSuccessGoogle}
+//       onFailure={responseFailureGoogle}
+//       cookiePolicy={"single_host_origin"}
+//     />
+//   );
+// }
 
 // export function FaceBookLoginButton() {
 //   // 2182381928591895
