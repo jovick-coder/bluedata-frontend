@@ -123,21 +123,21 @@ function FoundAccountPage() {
     }
     formElement[3].style.border = "solid #ddd 1px";
 
-    let messageBody = `Good day i Founded my account.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    \n  Account details, -> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    *AccountNumber:* \`\`\`${formElement[2].value}, \`\`\`++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    *AccountName:* \`\`\`${formElement[1].value}\`\`\`,++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    *Amount:*\`\`\`${formElement[3].value}\`\`\`++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-    Sent to your \`\`\`${formElement[0].value}\`\`\` Account.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-    Thanks,++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-    \`\`\`${userInformation.userName}\`\`\` ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    let messageBody = `Good day i Founded my account.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    \n  Account details, -> +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    *AccountNumber:* \`\`\`${formElement[2].value}, \`\`\`+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    *AccountName:* \`\`\`${formElement[1].value}\`\`\`,++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    *Amount:* \`\`\`${formElement[3].value}\`\`\`++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Sent to your \`\`\`${formElement[0].value}\`\`\` Account.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+    Thanks,++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    \`\`\`${userInformation.userName}\`\`\` +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     \`\`\`${userInformation._id}\`\`\` Seek for confirmation.
     
     `;
     messageBody = messageBody.split(" ").join("+");
     // console.log(messageBody);
     window.open(
-      `https://api.whatsapp.com/send/?phone=2348137297150&text=${messageBody}&app_absent=0`,
+      `https://api.whatsapp.com/send/?phone=2349034165800&text=${messageBody}&app_absent=0`,
       "_blank"
     );
 
@@ -163,7 +163,7 @@ function FoundAccountPage() {
       >
         <div>
           <h5>#1. Call Admin</h5>
-          <BsPhone /> 08137297150 <b>{"//"}</b>
+          <BsPhone /> 09034165800 <b>{"//"}</b>
           <BsPhone /> 08137297150
         </div>
         <hr />
@@ -176,12 +176,13 @@ function FoundAccountPage() {
           <sup>
             {" "}
             <b>Note:</b> This make use of whatsapp <br />
-            if you are on desktop and dont have whatsapp installed use web{" "}
+            if you are on desktop and don`t have whatsapp installed use web
+            Whatsapp.{" "}
           </sup>
-          <select name="" className="form-select my-2" id="">
-            <option value="">Select Receiver Bank </option>
+          <select name="" className="form-select my-2" id="" disabled>
+            {/* <option value="">Select Receiver Bank </option> */}
             <option value="Zenith">Zenith</option>
-            <option value="Opay">Opay</option>
+            {/* <option value="Opay">Opay</option> */}
           </select>
           <input
             type="text"
@@ -236,9 +237,9 @@ function FoundAccountPage() {
           <div className="form-div">
             <h5>Manual Transfer</h5>
             <div className="mt-4">
-              <b>Bank Name:</b> Zenith Bank <br />
-              <b>Account Name:</b> Josiah Victor <br />
-              <b>Account Number:</b> 2217407922 <br />
+              <b>Bank Name:</b> Access Bank <br />
+              <b>Account Name:</b> Paul Adeyemi <br />
+              <b>Account Number:</b> 1537354815 <br />
               <button
                 className="button"
                 data-bs-toggle="modal"
@@ -247,7 +248,8 @@ function FoundAccountPage() {
                 Request Confirmation
               </button>
             </div>
-            <div className="mt-4">
+            {/* Another account number */}
+            {/* <div className="mt-4">
               <b>Bank Name:</b> Opay Bank <br />
               <b>Account Name:</b> Josiah Victor <br />
               <b>Account Number:</b> 8137297150 <br />
@@ -258,7 +260,7 @@ function FoundAccountPage() {
               >
                 Request Confirmation
               </button>
-            </div>
+            </div> */}
           </div>
         )}
       </GroupCard>
