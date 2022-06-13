@@ -190,7 +190,42 @@ export function LoginForm() {
 
 export function AuthorizeAction() {
   const { authorizeAction } = useContext(UserContext);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+  async function handelSubmit(e) {
+    e.preventDefault();
+    const formElement = e.target;
 
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Password is empty",
+      });
+      // setFormError({ error: true, message: "Email is empty" });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+
+    formElement[1].innerText = `Loading...`;
+    formElement[1].setAttribute("disabled", true);
+
+    // console.log(resp.data.ok);
+    // if (resp.data.ok) {
+    const res = await authorizeAction(formElement[0].value);
+    // console.log(res);
+    if (res) {
+      formElement[1].removeAttribute("disabled");
+      formElement[1].innerText = `Authorize Action`;
+      formElement[0].value = "";
+      // auto close modal box
+      window.document.getElementById("closeAuthorizeAction").click();
+    } else {
+      // setFormError({ error: true, message: error.response.data.message });
+      formElement[1].innerText = "Try Agin";
+      formElement[1].removeAttribute("disabled");
+      formElement[1].style.border = "solid red 1px";
+    }
+  }
   return (
     <ModalComponent
       btnText="UpGreed User"
@@ -201,7 +236,7 @@ export function AuthorizeAction() {
         action=""
         onSubmit={(e) => {
           e.preventDefault();
-          authorizeAction(e);
+          handelSubmit(e);
         }}
       >
         <input
@@ -210,6 +245,69 @@ export function AuthorizeAction() {
           placeholder="password"
         />
         <button className="button mt-3">Authorize Action</button>
+      </form>
+    </ModalComponent>
+  );
+}
+export function RequestConfirmationAuthorizeAction() {
+  const { authorizeAction } = useContext(UserContext);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+  async function handelSubmit(e) {
+    e.preventDefault();
+    const formElement = e.target;
+
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Password is empty",
+      });
+      // setFormError({ error: true, message: "Email is empty" });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+
+    formElement[1].innerText = `Loading...`;
+    formElement[1].setAttribute("disabled", true);
+
+    // console.log(resp.data.ok);
+    // if (resp.data.ok) {
+    const res = await authorizeAction(formElement[0].value);
+    console.log(res);
+    if (res) {
+      formElement[1].removeAttribute("disabled");
+      formElement[1].innerText = `Authorize Action`;
+      formElement[0].value = "";
+      // auto close modal box
+      window.document
+        .getElementById("closeRequestConfirmationAuthorizeAction")
+        .click();
+    } else {
+      // setFormError({ error: true, message: error.response.data.message });
+      formElement[1].innerText = "Try Agin";
+      formElement[1].removeAttribute("disabled");
+      formElement[1].style.border = "solid red 1px";
+    }
+  }
+  return (
+    <ModalComponent
+      btnText="UpGreed User"
+      modalTitle="Authorize Confirmation"
+      modalId="RequestConfirmationAuthorizeAction"
+    >
+      <form
+        action=""
+        onSubmit={(e) => {
+          e.preventDefault();
+          handelSubmit(e);
+        }}
+      >
+        <input
+          type="password"
+          className="form-control"
+          placeholder="password"
+        />
+        <button className="button mt-3">Authorize Confirmation</button>
       </form>
     </ModalComponent>
   );
@@ -268,12 +366,23 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
       password: formElement[2].value,
       userName: "userName",
     };
-    console.log(sendBody);
+    // console.log(sendBody);
     try {
-      // const resp = await axios.post(url, sendBody);
-      formElement[3].innerText = "Successful";
-      setSignInCardIsOpen(false);
-      setLoginCardIsOpen(true);
+      const resp = await axios.post(url, sendBody);
+      // console.log(resp);
+      if (resp.data.ok) {
+        formElement[0].value = "";
+        formElement[1].value = "";
+        formElement[2].value = "";
+        formElement[3].innerText = "GET STARTED";
+        formElement[3].removeAttribute("disabled");
+        setPopUpMessage({
+          messageType: "success",
+          message: "Account Successfully Created",
+        });
+        setSignInCardIsOpen(false);
+        setLoginCardIsOpen(true);
+      }
     } catch (error) {
       // console.log("Error->", error.response.data);
       setPopUpMessage({
@@ -481,5 +590,160 @@ export function AddNotificationForm() {
         </button>
       </form>
     </>
+  );
+}
+
+export function FoundAccountForm({ _id, uId, amount, getRequest }) {
+  const { apiUrl, userInformation, getUserPrivilege, authorizeAction } =
+    useContext(UserContext);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+  const token = localStorage.getItem("telecomMerchantToken");
+  // const url = ``;
+  const handelFoundAccount = async (e) => {
+    e.preventDefault();
+    const formElement = e.target;
+
+    if (formElement[2].value === "") {
+      formElement[2].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Empty Admin Password",
+      });
+      return;
+    }
+
+    // // console.log(formElement[2].value);
+    // const adminCheck = await authorizeAction(formElement[2].value);
+    // console.log("adminCheck", adminCheck);
+
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "USer ID Required",
+      });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+    if (formElement[1].value === "") {
+      formElement[1].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Amount is empty",
+      });
+      return;
+    }
+    formElement[1].style.border = "solid #ddd 1px";
+    formElement[3].innerText = "Sending...";
+    formElement[3].setAttribute("disabled", true);
+    try {
+      const sendBody = {
+        email: userInformation.email,
+        password: formElement[2].value,
+      };
+      const response = await axios.post(`${apiUrl}/user/auth`, sendBody);
+      console.log("authorizeAction->", response.data.ok);
+      if (response.data.ok === false) {
+        setPopUpMessage({
+          messageType: "error",
+          message: "UnAuthorized Password",
+        });
+        return;
+      }
+      // console.log(formElement[0].value);
+      const foundSendBody = {
+        userId: formElement[0].value,
+        method: "+",
+        amount: parseInt(formElement[1].value),
+      };
+      const resp = await axios.put(`${apiUrl}/account`, foundSendBody, {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // console.log(resp);
+      if (resp.data.ok) {
+        if (_id) {
+          const axiosInstance = axios.create({
+            headers: {
+              Authorization: token,
+            },
+          });
+
+          // console.log("_id", _id);
+          const resp = await axiosInstance.put(
+            `${apiUrl}/request-confirmation/${_id}`
+          );
+        }
+        // console.log("request-confirmation", resp);
+        // if (resp.data.ok) {
+        window.document.getElementById("closeRequestConfirmation").click();
+        getRequest();
+        setPopUpMessage({
+          messageType: "success",
+          message: "Transaction SuccessFul",
+        });
+        // setFormMessage({ ok: true, message: "" });
+        formElement[3].innerText = "Submit";
+        formElement[3].removeAttribute("disabled");
+        formElement[3].style.border = "solid red 1px";
+        // }
+      }
+    } catch (error) {
+      // console.log("Error->", error.response.data);
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      // setFormError({ error: true, message:  });
+      formElement[3].innerText = "Submit";
+      formElement[3].removeAttribute("disabled");
+      formElement[3].style.border = "solid red 1px";
+    }
+  };
+
+  // console.log(uId);
+
+  return (
+    <form className="form mt-4" onSubmit={(e) => handelFoundAccount(e)}>
+      <h3>Admin found account</h3>
+
+      {uId ? (
+        <input
+          type="text"
+          className="form-control my-2"
+          placeholder="User ID"
+          value={uId}
+        />
+      ) : (
+        <input
+          type="text"
+          className="form-control my-2"
+          placeholder="User ID"
+        />
+      )}
+      {amount ? (
+        <input
+          type="text"
+          className="form-control my-2"
+          placeholder="User ID"
+          value={amount}
+        />
+      ) : (
+        <input type="text" className="form-control my-2" placeholder="Amount" />
+      )}
+      <input
+        type="password"
+        className="form-control my-2"
+        placeholder="Amin Password"
+      />
+
+      <button className="button" type="submit">
+        {" "}
+        Submit
+      </button>
+    </form>
   );
 }
