@@ -34,11 +34,11 @@ export function AdminProvider({ children }) {
         adminsRequest,
         resellersRequest,
       ]);
-      console.log(
-        usersResponse.data,
-        adminsResponse.data,
-        resellersResponse.data
-      );
+      // console.log(
+      //   usersResponse.data,
+      //   adminsResponse.data,
+      //   resellersResponse.data
+      // );
       setUsers(usersResponse.data.data);
       setAdmins(adminsResponse.data.data);
       setResellers(resellersResponse.data.data);

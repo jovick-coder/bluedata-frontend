@@ -531,7 +531,7 @@ function SubscriptionsPage() {
       Number: formElement[1].value,
       network_name: getNetworkName(network),
     };
-    console.log(sendBody);
+    // console.log(sendBody);
     formElement[2].innerText = "Sending...";
     formElement[2].setAttribute("disabled", true);
     try {
@@ -541,7 +541,7 @@ function SubscriptionsPage() {
           "Content-Type": "application/json",
         },
       });
-      console.log(resp);
+      // console.log(resp);
       // if (resp.data.ok) {
       setPopUpMessage({
         messageType: "success",

@@ -78,10 +78,10 @@ export function ContactUsForm() {
       return;
     }
     formElement[1].style.border = "solid #ddd 1px";
-    console.log({
-      email: formElement[0].value,
-      message: formElement[1].value,
-    });
+    // console.log({
+    //   email: formElement[0].value,
+    //   message: formElement[1].value,
+    // });
   };
   return (
     <>
@@ -593,7 +593,7 @@ export function AddNotificationForm() {
   );
 }
 
-export function FoundAccountForm({ _id, uId, amount, getRequest }) {
+export function FoundAccountForm({ getRequest, currentRequest }) {
   const { apiUrl, userInformation, getUserPrivilege, authorizeAction } =
     useContext(UserContext);
   const { setPopUpMessage } = useContext(PopUpMessageContext);
@@ -611,11 +611,6 @@ export function FoundAccountForm({ _id, uId, amount, getRequest }) {
       });
       return;
     }
-
-    // // console.log(formElement[2].value);
-    // const adminCheck = await authorizeAction(formElement[2].value);
-    // console.log("adminCheck", adminCheck);
-
     if (formElement[0].value === "") {
       formElement[0].style.border = "solid red 1px";
       setPopUpMessage({
@@ -642,7 +637,7 @@ export function FoundAccountForm({ _id, uId, amount, getRequest }) {
         password: formElement[2].value,
       };
       const response = await axios.post(`${apiUrl}/user/auth`, sendBody);
-      console.log("authorizeAction->", response.data.ok);
+      // console.log("authorizeAction->", response.data.ok);
       if (response.data.ok === false) {
         setPopUpMessage({
           messageType: "error",
@@ -665,18 +660,17 @@ export function FoundAccountForm({ _id, uId, amount, getRequest }) {
 
       // console.log(resp);
       if (resp.data.ok) {
-        if (_id) {
-          const axiosInstance = axios.create({
+        const sendBody = { ...currentRequest };
+        const resp = await axios.put(
+          `${apiUrl}/request-confirmation/${currentRequest._id}`,
+          sendBody,
+          {
             headers: {
               Authorization: token,
+              "Content-Type": "application/json",
             },
-          });
-
-          // console.log("_id", _id);
-          const resp = await axiosInstance.put(
-            `${apiUrl}/request-confirmation/${_id}`
-          );
-        }
+          }
+        );
         // console.log("request-confirmation", resp);
         // if (resp.data.ok) {
         window.document.getElementById("closeRequestConfirmation").click();
@@ -710,12 +704,12 @@ export function FoundAccountForm({ _id, uId, amount, getRequest }) {
     <form className="form mt-4" onSubmit={(e) => handelFoundAccount(e)}>
       <h3>Admin found account</h3>
 
-      {uId ? (
+      {currentRequest.uId ? (
         <input
           type="text"
           className="form-control my-2"
           placeholder="User ID"
-          value={uId}
+          value={currentRequest.uId}
         />
       ) : (
         <input
@@ -724,12 +718,12 @@ export function FoundAccountForm({ _id, uId, amount, getRequest }) {
           placeholder="User ID"
         />
       )}
-      {amount ? (
+      {currentRequest.amount ? (
         <input
           type="text"
           className="form-control my-2"
           placeholder="User ID"
-          value={amount}
+          value={currentRequest.amount}
         />
       ) : (
         <input type="text" className="form-control my-2" placeholder="Amount" />

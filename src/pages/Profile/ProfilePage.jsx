@@ -299,7 +299,7 @@ export function UpdateProfile({
       userName: updateUserName,
     };
 
-    console.log(sendBody);
+    // console.log(sendBody);
     formElement[4].innerText = "Updating Profile...";
     formElement[4].setAttribute("disabled", true);
     try {
@@ -313,7 +313,7 @@ export function UpdateProfile({
       // setFormMessage({ ok: true, message: "Update SuccessFul" });
 
       if (!resp.data.ok) {
-        console.log(resp);
+        // console.log(resp);
         formElement[4].innerText = "Update Profile";
         formElement[4].removeAttribute("disabled");
         formElement[4].style.border = "solid red 1px";

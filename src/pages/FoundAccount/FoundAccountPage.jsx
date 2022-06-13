@@ -230,7 +230,7 @@ function FoundAccountPage() {
         password: formElement[2].value,
       };
       const response = await axios.post(`${apiUrl}/user/auth`, sendBody);
-      console.log("authorizeAction->", response.data.ok);
+      // console.log("authorizeAction->", response.data.ok);
       if (response.data.ok === false) {
         setPopUpMessage({
           messageType: "error",

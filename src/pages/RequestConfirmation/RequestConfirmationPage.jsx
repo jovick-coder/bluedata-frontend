@@ -32,7 +32,7 @@ function RequestConfirmationPage() {
         },
       });
 
-      console.log(resp.data);
+      // console.log(resp.data);
       setRequestList(resp.data.data.reverse());
     } catch (err) {
       // Handle Error Here
