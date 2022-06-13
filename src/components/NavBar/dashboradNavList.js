@@ -10,6 +10,7 @@ import {
   BsPersonBoundingBox,
   BsPersonCheck,
   BsPersonPlus,
+  BsSave,
   // BsPersonX,
   BsSimFill,
 } from "react-icons/bs";
@@ -86,6 +87,12 @@ export const userNavLinkObject = [
     name: "API History",
     icon: <AiFillApi />,
     path: "/dashboard/Api-history",
+    userPrivilege: 4,
+  },
+  {
+    name: "Confirmation",
+    icon: <BsSave />,
+    path: "/dashboard/request-confirmation",
     userPrivilege: 4,
   },
 ];
