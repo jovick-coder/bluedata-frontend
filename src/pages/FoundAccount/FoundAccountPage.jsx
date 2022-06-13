@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import GroupCard from "../../components/CroupCard/GroupCardComponent";
 import "./FoundAccountPage.css";
 import { UserContext } from "../../context/userContext";
@@ -13,7 +13,7 @@ function FoundAccountPage() {
   const { setPopUpMessage } = useContext(PopUpMessageContext);
   const token = localStorage.getItem("telecomMerchantToken");
 
-  // const [] = useState();
+  const [adminSendRequest, setAdminSendRequest] = useState();
 
   // const url = `${apiUrl}/account`;
 
@@ -335,31 +335,47 @@ function FoundAccountPage() {
         </div>
         <hr />
 
-        {getUserPrivilege() === 4 ? (
-          <form className="form mt-4" onSubmit={(e) => handelFoundAccount(e)}>
+        {getUserPrivilege() === 4 && !adminSendRequest ? (
+          <form
+            className="form mt-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setPopUpMessage({
+                messageType: "error",
+                message:
+                  "this function is disabled \n if you want to fund a yourself send a request for record propose.\n super Admin.",
+              });
+              // remove when you are done fixing found user form
+              return;
+              handelFoundAccount(e);
+            }}
+          >
             <h3>Admin found account</h3>
-
             <input
               type="text"
               className="form-control my-2"
               placeholder="User ID"
             />
-
             <input
               type="text"
               className="form-control my-2"
               placeholder="Amount"
             />
-
             <input
               type="password"
               className="form-control my-2"
               placeholder="Amin Password"
             />
-
             <button className="button" type="submit">
               {" "}
               Submit
+            </button>{" "}
+            <br />
+            <button
+              className="button my-4"
+              onClick={() => setAdminSendRequest(!adminSendRequest)}
+            >
+              Send Request
             </button>
           </form>
         ) : (
@@ -391,6 +407,12 @@ function FoundAccountPage() {
                 Request Confirmation
               </button>
             </div> */}
+            <button
+              className="button my-4"
+              onClick={() => setAdminSendRequest(!adminSendRequest)}
+            >
+              Cancel Send Request
+            </button>
           </div>
         )}
       </GroupCard>
