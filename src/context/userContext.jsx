@@ -149,6 +149,13 @@ export function UserProvider({ children }) {
 
   // get account information
   async function authorizeAction(password) {
+    // message to indicate that this function is not yet supported
+    setPopUpMessage({
+      messageType: "error",
+      message:
+        "Action is currently disabled \n it will be allowed on the next update, \n thanks",
+    });
+    return;
     try {
       const sendBody = {
         email: userInformation.email,
@@ -156,7 +163,7 @@ export function UserProvider({ children }) {
       };
       const resp = await axios.post(`${apiUrl}/user/auth`, sendBody);
       console.log("authorizeAction->", resp.data.ok);
-      if (resp.data.ok) {
+      if (resp.data.ok === false) {
         setPopUpMessage({
           messageType: "error",
           message: "UnAuthorized Password",
