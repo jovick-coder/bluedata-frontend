@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 // import { LoaderBorderComponent } from "../components/Spinner/SpinnerComponent";
 import { PopUpMessageContext } from "./PopUpMessageContext";
 
+import moment from "moment";
+
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
@@ -39,8 +41,8 @@ export function UserProvider({ children }) {
       return "Super Admin";
     }
   }
-  // const apiUrl = "http://localhost:5000/api";
-  const apiUrl = "https://blue-data-api.herokuapp.com/api";
+  const apiUrl = "http://localhost:5000/api";
+  // const apiUrl = "https://blue-data-api.herokuapp.com/api";
 
   useEffect(() => {
     if (!token || token === "") {
@@ -146,45 +148,37 @@ export function UserProvider({ children }) {
   }
 
   // get account information
-  async function authorizeAction(e) {
-    // e.preventDefault();
-    e.preventDefault();
-    const formElement = e.target;
-
-    if (formElement[0].value === "") {
-      formElement[0].style.border = "solid red 1px";
-      setPopUpMessage({
-        messageType: "error",
-        message: "Password is empty",
-      });
-      // setFormError({ error: true, message: "Email is empty" });
-      return;
-    }
-    formElement[0].style.border = "solid #ddd 1px";
-
-    formElement[1].innerText = `Loading...`;
-    formElement[1].setAttribute("disabled", true);
-    const sendBody = {
-      email: userInformation.email,
-      password: formElement[0].value,
-    };
+  async function authorizeAction(password) {
     try {
+      const sendBody = {
+        email: userInformation.email,
+        password: password,
+      };
       const resp = await axios.post(`${apiUrl}/user/auth`, sendBody);
-      console.log(resp.data.ok);
+      console.log("authorizeAction->", resp.data.ok);
       if (resp.data.ok) {
-        formElement[1].removeAttribute("disabled");
-        formElement[1].innerText = `Authorize Action`;
-        formElement[0].value = "";
-        // auto close modal box
-        window.document.getElementById("closeAuthorizeAction").click();
+        setPopUpMessage({
+          messageType: "error",
+          message: "UnAuthorized Password",
+        });
+        return;
       }
+      return resp.data.ok;
     } catch (error) {
-      console.log("Error->", error.response.data);
-      // setFormError({ error: true, message: error.response.data.message });
-      formElement[1].innerText = "Try Agin";
-      formElement[1].removeAttribute("disabled");
-      formElement[1].style.border = "solid red 1px";
+      // console.log("Error->", error.response.data);
+      return error.response.data.ok;
     }
+  }
+  // decodeDate();
+  function decodeDate(date) {
+    // moment()
+    const dateArray = moment(date)
+      .format("ddd, MMM Do YYYY T h:mm:ss a")
+      .split("T");
+    // console.log(dateArray);
+    const timeOnly = dateArray[1].split("+");
+    // console.log(dateArray);
+    return [dateArray[0], timeOnly[0]];
   }
 
   return (
@@ -202,6 +196,7 @@ export function UserProvider({ children }) {
         token,
         getUserPrivilege,
         checkPrivilege,
+        decodeDate,
       }}
     >
       {children}
