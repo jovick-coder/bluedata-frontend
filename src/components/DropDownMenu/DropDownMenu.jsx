@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FoundAccountForm } from "../Forms/FormsComponent";
 import ModalComponent from "../Modal/ModalComponent";
+import axios from "axios";
+import { UserContext } from "../../context/userContext";
+import { PopUpMessageContext } from "../../context/PopUpMessageContext";
 
 function ActionDropDownMenu({ children }) {
   return (
@@ -84,13 +87,57 @@ export function UserActionDropDown({ accountType, accountPrivilege }) {
 // this will be an update latter in the future
 // users will have to input password to authorize the confirm command
 export function RequestConfirmationDropDown({ currentRequest, getRequest }) {
-  function deleteRequest() {
+  const { apiUrl, token, getUserPrivilege } = useContext(UserContext);
+  const { setPopUpMessage } = useContext(PopUpMessageContext);
+
+  async function deleteRequest() {
     // auto close modal box
     window.document
       .getElementById("RequestConfirmationAuthorizeAction")
       .click();
+
+    if (getUserPrivilege() < 4) {
+      setPopUpMessage({
+        messageType: "error",
+        message: "User Not An Admin",
+      });
+      return;
+    }
     if (window.confirm("This request will be deleted")) {
-      console.log("request deleted", currentRequest);
+      // console.log("request deleted", getUserPrivilege());
+      // console.log(currentRequest);
+      // return;
+      try {
+        const sendBody = { ...currentRequest };
+        const resp = await axios.delete(
+          `${apiUrl}/request-confirmation/${currentRequest._id}&${currentRequest.uId}`,
+          {
+            headers: {
+              Authorization: token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (resp.data.ok) {
+          setPopUpMessage({
+            messageType: "success",
+            message: "Request Deleted",
+          });
+          // call the function to update the request table
+          getRequest();
+        }
+        if (resp.data.ok === false) {
+          setPopUpMessage({
+            messageType: "error",
+            message: "Request Deleted was not successfully",
+          });
+          // call the function to update the request table
+          getRequest();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
   function ConfirmRequest() {
@@ -105,9 +152,7 @@ export function RequestConfirmationDropDown({ currentRequest, getRequest }) {
         modalId="RequestConfirmation"
       >
         <FoundAccountForm
-          _id={currentRequest._id}
-          uId={currentRequest.uId}
-          amount={currentRequest.amount}
+          currentRequest={currentRequest}
           getRequest={getRequest}
         />
       </ModalComponent>
