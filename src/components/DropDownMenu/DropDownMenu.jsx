@@ -1,4 +1,6 @@
 import React from "react";
+import { FoundAccountForm } from "../Forms/FormsComponent";
+import ModalComponent from "../Modal/ModalComponent";
 
 function ActionDropDownMenu({ children }) {
   return (
@@ -76,5 +78,65 @@ export function UserActionDropDown({ accountType, accountPrivilege }) {
         </span>
       </li>
     </ActionDropDownMenu>
+  );
+}
+
+// this will be an update latter in the future
+// users will have to input password to authorize the confirm command
+export function RequestConfirmationDropDown({ currentRequest, getRequest }) {
+  function deleteRequest() {
+    // auto close modal box
+    window.document
+      .getElementById("RequestConfirmationAuthorizeAction")
+      .click();
+    if (window.confirm("This request will be deleted")) {
+      console.log("request deleted", currentRequest);
+    }
+  }
+  function ConfirmRequest() {
+    // auto close modal box
+    window.document.getElementById("RequestConfirmation").click();
+  }
+
+  return (
+    <>
+      <ModalComponent
+        modalTitle="Request Confirmation"
+        modalId="RequestConfirmation"
+      >
+        <FoundAccountForm
+          _id={currentRequest._id}
+          uId={currentRequest.uId}
+          amount={currentRequest.amount}
+          getRequest={getRequest}
+        />
+      </ModalComponent>
+      <ActionDropDownMenu>
+        <li>
+          <span
+            className="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#RequestConfirmation"
+            onClick={() => {
+              ConfirmRequest();
+            }}
+          >
+            Confirm Request
+          </span>
+        </li>
+        <li>
+          <span
+            className="dropdown-item"
+            // data-bs-toggle="modal"
+            // data-bs-target="#RequestConfirmationAuthorizeAction"
+            onClick={() => {
+              deleteRequest();
+            }}
+          >
+            Delete Request
+          </span>
+        </li>
+      </ActionDropDownMenu>
+    </>
   );
 }
