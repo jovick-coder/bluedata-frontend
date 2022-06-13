@@ -17,7 +17,7 @@ function NotificationPage() {
     getNotification();
   }, []);
   const token = localStorage.getItem("telecomMerchantToken");
-  const { apiUrl, getUserPrivilege } = useContext(UserContext);
+  const { apiUrl, getUserPrivilege, decodeDate } = useContext(UserContext);
 
   async function getNotification() {
     try {
@@ -34,26 +34,6 @@ function NotificationPage() {
       console.error(err);
     }
   }
-  function getDate(date) {
-    const dateArray = date.split("T");
-    // console.log(dateArray);
-    return dateArray[0];
-  }
-
-  // function getAdminName(id){
-  //   try {
-  //     const resp = await axios.get(`${apiUrl}/userInfo/${decode.uId}`, {
-  //       headers: {
-  //         authorization: token,
-  //       },
-  //     });
-
-  //     resp.data.data
-  //   } catch (error) {
-  //     console.log("Error getting admin name", error);
-  //   }
-  // }
-
   async function markHasSeen(id) {
     // e.preventDefault();
     // const historyId = e.target.parentElement.getAttribute("data-id");
@@ -105,11 +85,11 @@ function NotificationPage() {
         ) : null}
         <div className="header d-flex justify-content-between">
           <h3>Notification</h3>
-          <button className="button  btn-sm" onClick={() => markHasSeen("*")}>
+          {/* <button className="button  btn-sm" onClick={() => markHasSeen("*")}>
             {" "}
             <BsEyeFill className="me-2" />
             Mark all has seen
-          </button>
+          </button> */}
         </div>
         <hr />
         <ul>
@@ -130,17 +110,19 @@ function NotificationPage() {
                       <div className="figure me-2 my-2 ">
                         {adminName}, {privilege === 3 ? "Admin" : "Super Admin"}{" "}
                       </div>
-                      <div className="date my-2 ">{getDate(date)}</div>
+                      <div className="date my-2 ">
+                        {decodeDate(date)[0]}, {decodeDate(date)[1]}
+                      </div>
                     </sup>
                     <hr className="my-0" />
                     {message}
                   </span>
-                  <button
+                  {/* <button
                     className="button btn-sm"
                     onClick={() => markHasSeen(_id)}
                   >
                     <BsEyeFill />
-                  </button>
+                  </button> */}
                 </li>
               );
             })
