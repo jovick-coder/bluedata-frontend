@@ -407,12 +407,14 @@ function FoundAccountPage() {
                 Request Confirmation
               </button>
             </div> */}
-            <button
-              className="button my-4"
-              onClick={() => setAdminSendRequest(!adminSendRequest)}
-            >
-              Cancel Send Request
-            </button>
+            {getUserPrivilege() === 4 ? (
+              <button
+                className="button my-4"
+                onClick={() => setAdminSendRequest(!adminSendRequest)}
+              >
+                Cancel Send Request
+              </button>
+            ) : null}
           </div>
         )}
       </GroupCard>
