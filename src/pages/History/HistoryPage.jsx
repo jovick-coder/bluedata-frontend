@@ -15,7 +15,7 @@ function HistoryPage() {
     getUserHistory();
   }, []);
   const token = localStorage.getItem("telecomMerchantToken");
-  const { apiUrl } = useContext(UserContext);
+  const { apiUrl, decodeDate } = useContext(UserContext);
   useEffect(() => {
     const timer = setTimeout(() => {
       setFormMessage({
@@ -43,8 +43,9 @@ function HistoryPage() {
   }
   function getDate(date) {
     const dateArray = date.split("T");
+    const timeOnly = dateArray[1].split(".");
     // console.log(dateArray);
-    return dateArray[0];
+    return [dateArray[0], timeOnly[0]];
   }
 
   async function deleteHistory(id) {
@@ -92,13 +93,13 @@ function HistoryPage() {
       <GroupCard>
         <div className="header d-flex justify-content-between">
           <h3>History</h3>
-          <button
+          {/* <button
             className="button btn-danger btn-sm"
             onClick={() => deleteHistory("*")}
           >
             {" "}
             <BsFillTrashFill /> Clear History
-          </button>
+          </button> */}
         </div>
         <hr />
         {formMessage.ok ? (
@@ -117,19 +118,21 @@ function HistoryPage() {
                   className={type === "+" ? "cr" : "dr"}
                 >
                   <span className="w-100 me-4">
-                    <sup className="d-flex mt-2 mb-0">
+                    <sup className="d-flex flex-wrap flex-colum mt-2 mb-0">
                       <div className="figure me-2">{amount}</div>
-                      <div className="date">{getDate(date)}</div>
+                      <div className="date">
+                        {decodeDate(date)[0]}, {decodeDate(date)[1]}
+                      </div>
                     </sup>
                     <hr className="my-0" />
                     {description === ""
                       ? `This is a ${type === "+" ? "credit" : "debit"} Alert`
                       : description}
                   </span>
-                  <button
+                  {/* <button
                     className="button btn-danger btn-sm"
                     onClick={() => deleteHistory(_id)}
-                  ></button>
+                  ></button> */}
                 </li>
               );
             })
