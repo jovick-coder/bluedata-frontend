@@ -6,6 +6,7 @@ import axios from "axios";
 import { PopUpMessageContext } from "../../context/PopUpMessageContext";
 import ModalComponent from "../../components/Modal/ModalComponent";
 import { BsPhone } from "react-icons/bs";
+import { FoundAccountForm } from "../../components/Forms/FormsComponent";
 
 function FoundAccountPage() {
   const { apiUrl, userInformation, getUserPrivilege } = useContext(UserContext);
@@ -14,75 +15,75 @@ function FoundAccountPage() {
 
   // const [] = useState();
 
-  const url = `${apiUrl}/account`;
+  // const url = `${apiUrl}/account`;
 
-  const handelFoundAccount = async (e) => {
-    e.preventDefault();
-    const formElement = e.target;
+  // const handelFoundAccount = async (e) => {
+  //   e.preventDefault();
+  //   const formElement = e.target;
 
-    if (formElement[0].value === "") {
-      formElement[0].style.border = "solid red 1px";
-      setPopUpMessage({
-        messageType: "error",
-        message: "USer ID Required",
-      });
-      return;
-    }
-    formElement[0].style.border = "solid #ddd 1px";
-    if (formElement[1].value === "") {
-      formElement[1].style.border = "solid red 1px";
-      setPopUpMessage({
-        messageType: "error",
-        message: "Amount is empty",
-      });
-      return;
-    }
-    formElement[1].style.border = "solid #ddd 1px";
-    formElement[2].innerText = "Sending...";
-    formElement[2].setAttribute("disabled", true);
-    const sendBody = {
-      userId: formElement[0].value,
-      method: "+",
-      amount: parseInt(formElement[1].value),
-    };
-    // console.log(sendBody, token);
-    try {
-      // const resp = await axios.post(url, sendBody,{
-      //   headers: {
-      //     authorization: token,
-      //   });
-      const resp = await axios.put(`${url}`, sendBody, {
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-      });
+  //   if (formElement[0].value === "") {
+  //     formElement[0].style.border = "solid red 1px";
+  //     setPopUpMessage({
+  //       messageType: "error",
+  //       message: "USer ID Required",
+  //     });
+  //     return;
+  //   }
+  //   formElement[0].style.border = "solid #ddd 1px";
+  //   if (formElement[1].value === "") {
+  //     formElement[1].style.border = "solid red 1px";
+  //     setPopUpMessage({
+  //       messageType: "error",
+  //       message: "Amount is empty",
+  //     });
+  //     return;
+  //   }
+  //   formElement[1].style.border = "solid #ddd 1px";
+  //   formElement[2].innerText = "Sending...";
+  //   formElement[2].setAttribute("disabled", true);
+  //   const sendBody = {
+  //     userId: formElement[0].value,
+  //     method: "+",
+  //     amount: parseInt(formElement[1].value),
+  //   };
+  //   // console.log(sendBody, token);
+  //   try {
+  //     // const resp = await axios.post(url, sendBody,{
+  //     //   headers: {
+  //     //     authorization: token,
+  //     //   });
+  //     const resp = await axios.put(`${url}`, sendBody, {
+  //       headers: {
+  //         Authorization: token,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-      console.log(resp);
-      if (resp.data.ok) {
-        setPopUpMessage({
-          messageType: "success",
-          message: "Transaction SuccessFul",
-        });
-        // setFormMessage({ ok: true, message: "" });
-        formElement[2].innerText = "Submit";
-        formElement[2].removeAttribute("disabled");
-        formElement[2].style.border = "solid red 1px";
-      }
-    } catch (error) {
-      // console.log("Error->", error.response.data);
-      setPopUpMessage({
-        messageType: "error",
-        message: error.response.data.message,
-      });
-      // setFormError({ error: true, message:  });
-      formElement[2].innerText = "Submit";
-      formElement[2].removeAttribute("disabled");
-      formElement[2].style.border = "solid red 1px";
-    }
-  };
+  //     console.log(resp);
+  //     if (resp.data.ok) {
+  //       setPopUpMessage({
+  //         messageType: "success",
+  //         message: "Transaction SuccessFul",
+  //       });
+  //       // setFormMessage({ ok: true, message: "" });
+  //       formElement[2].innerText = "Submit";
+  //       formElement[2].removeAttribute("disabled");
+  //       formElement[2].style.border = "solid red 1px";
+  //     }
+  //   } catch (error) {
+  //     // console.log("Error->", error.response.data);
+  //     setPopUpMessage({
+  //       messageType: "error",
+  //       message: error.response.data.message,
+  //     });
+  //     // setFormError({ error: true, message:  });
+  //     formElement[2].innerText = "Submit";
+  //     formElement[2].removeAttribute("disabled");
+  //     formElement[2].style.border = "solid red 1px";
+  //   }
+  // };
 
-  function handelSendQuickMessage(e) {
+  async function handelSendQuickMessage(e) {
     e.preventDefault();
     const formElement = e.target;
 
@@ -123,7 +124,33 @@ function FoundAccountPage() {
     }
     formElement[3].style.border = "solid #ddd 1px";
 
-    let messageBody = `Good day i Founded my account.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    const sendBody = {
+      uId: userInformation._id,
+      amount: formElement[3].value,
+      sName: userInformation.userName,
+      rBankName: formElement[0].value,
+      sAccountName: formElement[1].value,
+      sAccountNumber: formElement[2].value,
+    };
+    // console.log(sendBody);
+    const axiosInstance = axios.create({
+      headers: {
+        Authorization: token,
+      },
+    });
+    try {
+      const resp = await axiosInstance.post(
+        `${apiUrl}/request-confirmation`,
+        sendBody
+      );
+      console.log("responce", resp.data);
+      if (resp.data.ok) {
+        setPopUpMessage({
+          messageType: "success",
+          message: `Request for confirmation Successfully sent`,
+        });
+      }
+      let messageBody = `Good day i Founded my account.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     \n  Account details, -> +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     *AccountNumber:* \`\`\`${formElement[2].value}, \`\`\`+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     *AccountName:* \`\`\`${formElement[1].value}\`\`\`,++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -134,25 +161,123 @@ function FoundAccountPage() {
     \`\`\`${userInformation._id}\`\`\` Seek for confirmation.
     
     `;
-    messageBody = messageBody.split(" ").join("+");
-    // console.log(messageBody);
-    window.open(
-      `https://api.whatsapp.com/send/?phone=2349034165800&text=${messageBody}&app_absent=0`,
-      "_blank"
-    );
+      messageBody = messageBody.split(" ").join("+");
+      window.open(
+        `https://api.whatsapp.com/send/?phone=2349034165800&text=${messageBody}&app_absent=0`,
+        "_blank"
+      );
 
-    formElement[0].value = "";
-    formElement[1].value = "";
-    formElement[2].value = "";
-    formElement[3].value = "";
+      // formElement[0].value = "";
+      formElement[1].value = "";
+      formElement[2].value = "";
+      formElement[3].value = "";
 
-    window.document.getElementById("closeRequestConfirmation").click();
+      window.document.getElementById("closeRequestConfirmation").click();
 
-    // setPopUpMessage({
-    //   messageType: "error",
-    //   message: "Amount is empty",
-    // });
+      // setPopUpMessage({
+      //   messageType: "error",
+      //   message: "Amount is empty",
+      // });
+    } catch (error) {
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+    }
   }
+
+  const url = `${apiUrl}/account`;
+  const handelFoundAccount = async (e) => {
+    e.preventDefault();
+    const formElement = e.target;
+
+    if (formElement[2].value === "") {
+      formElement[2].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Empty Admin Password",
+      });
+      return;
+    }
+
+    // // console.log(formElement[2].value);
+    // const adminCheck = await authorizeAction(formElement[2].value);
+    // console.log("adminCheck", adminCheck);
+
+    if (formElement[0].value === "") {
+      formElement[0].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "USer ID Required",
+      });
+      return;
+    }
+    formElement[0].style.border = "solid #ddd 1px";
+    if (formElement[1].value === "") {
+      formElement[1].style.border = "solid red 1px";
+      setPopUpMessage({
+        messageType: "error",
+        message: "Amount is empty",
+      });
+      return;
+    }
+    formElement[1].style.border = "solid #ddd 1px";
+    formElement[3].innerText = "Sending...";
+    formElement[3].setAttribute("disabled", true);
+    try {
+      const sendBody = {
+        email: userInformation.email,
+        password: formElement[2].value,
+      };
+      const response = await axios.post(`${apiUrl}/user/auth`, sendBody);
+      console.log("authorizeAction->", response.data.ok);
+      if (response.data.ok === false) {
+        setPopUpMessage({
+          messageType: "error",
+          message: "UnAuthorized Password",
+        });
+        return;
+      }
+      // console.log(formElement[0].value);
+      const foundSendBody = {
+        userId: formElement[0].value,
+        method: "+",
+        amount: parseInt(formElement[1].value),
+      };
+      const resp = await axios.put(`${url}`, foundSendBody, {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // console.log(resp);
+      if (resp.data.ok) {
+        // console.log("request-confirmation", resp);
+        // if (resp.data.ok) {
+        // window.document.getElementById("closeRequestConfirmation").click();
+        setPopUpMessage({
+          messageType: "success",
+          message: "Transaction SuccessFul",
+        });
+        // setFormMessage({ ok: true, message: "" });
+        formElement[3].innerText = "Submit";
+        formElement[3].removeAttribute("disabled");
+        formElement[3].style.border = "solid red 1px";
+        // }
+      }
+    } catch (error) {
+      // console.log("Error->", error.response.data);
+      setPopUpMessage({
+        messageType: "error",
+        message: error.response.data.message,
+      });
+      // setFormError({ error: true, message:  });
+      formElement[3].innerText = "Submit";
+      formElement[3].removeAttribute("disabled");
+      formElement[3].style.border = "solid red 1px";
+    }
+  };
 
   return (
     <div className="FoundAccountPage mt-5">
@@ -213,27 +338,32 @@ function FoundAccountPage() {
         {getUserPrivilege() === 4 ? (
           <form className="form mt-4" onSubmit={(e) => handelFoundAccount(e)}>
             <h3>Admin found account</h3>
-            {/* <select name="" className="form-select my-2" id="">
-              <option value="">Select a method</option>
-              <option value="-">Debit</option>
-              <option value="+">Credit</option>
-            </select> */}
+
             <input
               type="text"
               className="form-control my-2"
               placeholder="User ID"
             />
+
             <input
-              type="number"
+              type="text"
               className="form-control my-2"
               placeholder="Amount"
             />
+
+            <input
+              type="password"
+              className="form-control my-2"
+              placeholder="Amin Password"
+            />
+
             <button className="button" type="submit">
               {" "}
               Submit
             </button>
           </form>
         ) : (
+          // <FoundAccountForm />
           <div className="form-div">
             <h5>Manual Transfer</h5>
             <div className="mt-4">
