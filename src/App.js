@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App" data-theme={theme} s>
       <NavBarComponent isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <ThemeTogglerComponent />
+      {/* <ThemeTogglerComponent /> */}
       <PopUpMessageComponent />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
