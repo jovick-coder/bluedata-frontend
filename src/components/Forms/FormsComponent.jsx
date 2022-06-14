@@ -173,7 +173,12 @@ export function LoginForm() {
         {/* {formError.error ? (
           <div className="alert alert-danger">{formError.message}</div>
         ) : null} */}
-        <input type="text" className="form-control" placeholder="Email" />
+        <input
+          type="email"
+          className="form-control"
+          placeholder="Email"
+          required
+        />
         <input
           type="password"
           className="form-control"
@@ -404,7 +409,12 @@ export function SignUpForm({ setLoginCardIsOpen, setSignInCardIsOpen }) {
         {/* {formError.error ? (
           <div className="alert alert-danger">{formError.message}</div>
         ) : null} */}
-        <input type="text" className="form-control" placeholder="Email" />
+        <input
+          type="email"
+          className="form-control"
+          placeholder="Email"
+          required
+        />
         <input type="num" className="form-control" placeholder="Number" />
         <input
           type="password"
