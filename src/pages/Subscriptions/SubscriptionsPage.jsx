@@ -10,7 +10,7 @@ import { UserContext } from "../../context/userContext";
 import axios from "axios";
 
 function SubscriptionsPage() {
-  const { apiUrl, token } = useContext(UserContext);
+  const { apiUrl } = useContext(UserContext);
   const { setPopUpMessage } = useContext(PopUpMessageContext);
   const [network, setNetwork] = useState("");
   const [dataPlan, setDataPlan] = useState([]);
@@ -483,6 +483,7 @@ function SubscriptionsPage() {
   async function handelSubmit(e) {
     e.preventDefault();
     const url = `${apiUrl}/buySub`;
+    const token = localStorage.getItem("telecomMerchantToken");
     const formElement = e.target;
     if (network === "") {
       setPopUpMessage({
