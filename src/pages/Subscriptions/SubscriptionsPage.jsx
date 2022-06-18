@@ -553,10 +553,10 @@ function SubscriptionsPage() {
       // }
     } catch (error) {
       // if (error.response.data.ok) {
-      console.log(error);
+      // console.log(error);
       setPopUpMessage({
         messageType: "error",
-        message: error.response.data.message,
+        message: error.message,
       });
       formElement[2].innerText = "Submit";
       formElement[2].removeAttribute("disabled");
