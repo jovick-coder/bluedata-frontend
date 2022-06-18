@@ -11,7 +11,7 @@ export function PopUpMessageProvider({ children }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setPopUpMessage({ messageType: "", message: "" });
-    }, 3000);
+    }, 6000);
     return () => clearTimeout(timer);
   }, [popUpMessage]);
 
