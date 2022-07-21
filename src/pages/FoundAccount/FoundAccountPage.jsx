@@ -306,7 +306,7 @@ function FoundAccountPage() {
           </sup>
           <select name="" className="form-select my-2" id="" disabled>
             {/* <option value="">Select Receiver Bank </option> */}
-            <option value="Zenith">Zenith</option>
+            <option value="Access">Access</option>
             {/* <option value="Opay">Opay</option> */}
           </select>
           <input
